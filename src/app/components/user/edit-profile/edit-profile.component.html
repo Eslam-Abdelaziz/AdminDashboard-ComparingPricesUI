@@ -1,0 +1,106 @@
+<div class="bg-light p-3 rounded container">
+    <h3>Profile</h3>
+    <form [formGroup]="registerForm" class="form-group" (ngSubmit)="handleForm()">
+        <div class="row">
+            <div class="fname col-md-6 d-flex align-items-center">
+                <label class="col-5 col-form-label label-large" for="fname">First Name</label>
+                <div class="col-7">
+                    <input type="text" id="fname" formControlName="firstName" class="form-control" />
+                    <div class="alert alert-danger mt-1" *ngIf="registerForm.get('firstName')?.errors && registerForm.get('firstName')?.touched">
+                        <p *ngIf="registerForm.get('firstName')?.getError('required')">First name is required</p>
+                        <p *ngIf="registerForm.get('firstName')?.getError('maxlength')">Max length is 20</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="fname col-md-6 d-flex align-items-center">
+                <label class="col-5 col-form-label label-large">Last Name</label>
+                <div class="col-7">
+                    <input type="text" formControlName="lastName" class="form-control" />
+                    <div class="alert alert-danger mt-1" *ngIf="registerForm.get('lastName')?.errors && registerForm.get('lastName')?.touched">
+                        <p *ngIf="registerForm.get('lastName')?.getError('required')">Last name is required</p>
+                        <p *ngIf="registerForm.get('lastName')?.getError('maxlength')">Max length is 20</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 d-flex align-items-center">
+                <label class="col-5 col-form-label label-large">User Name</label>
+                <div class="col-7">
+                    <input type="text" formControlName="userName" class="form-control" />
+                    <div class="alert alert-danger mt-1" *ngIf="registerForm.get('userName')?.errors && (registerForm.get('userName')?.touched || registerForm.get('userName')?.dirty)">
+                        <p *ngIf="registerForm.get('userName')?.getError('required')">User name is required</p>
+                        <p *ngIf="registerForm.get('userName')?.getError('maxlength')">Max length is 40</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 d-flex align-items-center">
+                <label class="col-5 col-form-label label-large">Country</label>
+                <div class="col-7">
+                    <select #countries class="form-control" formControlName="country" (change)="onCountryChange(countries.value)">
+                        <option *ngFor="let item of Counteries" [value]="item.name">{{ item.name }}</option>
+                    </select>
+                    <div class="alert alert-danger mt-1" *ngIf="registerForm.get('country')?.errors && registerForm.get('country')?.touched">
+                        <p *ngIf="registerForm.get('country')?.getError('required')">Country is required</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 d-flex align-items-center">
+                <label class="col-5 col-form-label label-large">Email</label>
+                <div class="col-7">
+                    <input type="text" formControlName="email" class="form-control" />
+                    <div class="alert alert-danger mt-1" *ngIf="registerForm.get('email')?.errors && (registerForm.get('email')?.touched || registerForm.get('email')?.dirty)">
+                        <p *ngIf="registerForm.get('email')?.getError('required')">Email is required</p>
+                        <p *ngIf="registerForm.get('email')?.getError('email')">Email is invalid</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 d-flex align-items-center">
+                <label class="col-5 col-form-label label-large">Gender</label>
+                <div class="col-7">
+                    <p-dropdown formControlName="gender" [options]="genderOptions" placeholder="Select a Gender" [editable]="true"></p-dropdown>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 d-flex align-items-center">
+                <label class="col-5 col-form-label label-large">Phone code</label>
+                <div class="col-7">
+                    <input type="text" formControlName="phoneCode" class="form-control" />
+                </div>
+            </div>
+
+            <div class="col-md-6 d-flex align-items-center">
+                <label class="col-5 col-form-label label-large">Phone</label>
+                <div class="col-7">
+                    <input #phCode type="tel" formControlName="phoneNumber" class="form-control" />
+                </div>
+            </div>
+        </div>
+
+        <div class="mb-2 row">
+            <div class="col-md-6 d-flex align-items-center">
+                <label for="dateOfBirth" class="col-5 col-form-label label-large">Date of birth</label>
+                <div class="col-7">
+                    <input formControlName="dateOfBirth" type="date" id="dateOfBirth" class="form-control" [max]="minDate">
+                </div>
+                <div class="alert alert-danger mt-1" *ngIf="registerForm.get('dateOfBirth')?.errors && registerForm.get('dateOfBirth')?.touched">
+                    <p *ngIf="registerForm.get('dateOfBirth')?.getError('required')">Date of birth is required</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12">
+            <button type="submit" [disabled]="registerForm.invalid" class="p-2 w-3 btn btn-success btn-block" style="display: block; margin: 0 auto; background-color: #42b72a; border-color: #42b72a; color: #fff; padding: 10px 0; font-size: 1rem;">Save</button>
+        </div>
+        <p *ngIf="messageError" class="alert alert-danger mt-2 text-center">{{ messageError }}</p>
+    </form>
+</div>

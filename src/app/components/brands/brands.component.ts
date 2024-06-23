@@ -16,7 +16,7 @@ import { MessageService } from 'primeng/api';
   selector: 'app-brands',
   standalone: true,
   imports: [CommonModule, HttpClientModule, TableModule, ButtonModule, DialogModule, InputTextModule, FormsModule, ToastModule, ToolbarModule],
-  providers:[MessageService],
+  providers: [MessageService],
   templateUrl: './brands.component.html',
   styleUrls: ['./brands.component.scss']
 })
@@ -26,20 +26,15 @@ export class BrandsComponent implements OnInit {
   isExpanded = false;
   loading = true;
 
-  // Dialog control variables
   brandDialog: boolean = false;
   deleteBrandDialog: boolean = false;
   deleteBrandsDialog: boolean = false;
 
-  brand: Brand = { id: 0, name_Local: '', name_Global: '', description_Local: '', description_Global: '', logo: null, categories: [] };
+  brand: Brand = { id: 0, name_Local: '', name_Global: '', description_Local: '', description_Global: '', logo: '', categories: [] };
   selectedBrands: Brand[] = [];
   submitted: boolean = false;
-deleteCategoriesDialog: any;
-category: any;
-deleteCategoryDialog: any;
-categoryDialog: any;
 
-  constructor(private brandService: BrandService) {}
+  constructor(private brandService: BrandService, private messageService: MessageService) {}
 
   ngOnInit() {
     this.loadData();
@@ -70,7 +65,7 @@ categoryDialog: any;
   }
 
   openNew() {
-    this.brand = { id: 0, name_Local: '', name_Global: '', description_Local: '', description_Global: '', logo: null, categories: [] };
+    this.brand = { id: 0, name_Local: '', name_Global: '', description_Local: '', description_Global: '', logo: '', categories: [] };
     this.submitted = false;
     this.brandDialog = true;
   }
@@ -87,8 +82,15 @@ categoryDialog: any;
 
   confirmDelete() {
     this.deleteBrandDialog = false;
-    this.brandService.deleteBrand(this.brand.id).subscribe(() => {
-      this.loadData();
+    this.brandService.deleteBrand(this.brand.id).subscribe({
+      next: () => {
+        this.loadData();
+        this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Brand Deleted', life: 3000 });
+      },
+      error: (err) => {
+        console.error(err);
+        this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Failed to Delete Brand', life: 3000 });
+      }
     });
   }
 
@@ -98,29 +100,38 @@ categoryDialog: any;
 
   confirmDeleteSelected() {
     this.deleteBrandsDialog = false;
-    this.selectedBrands.forEach(brand => {
-      this.brandService.deleteBrand(brand.id).subscribe(() => {
-        this.loadData();
-      });
+    const deleteRequests = this.selectedBrands.map(brand =>
+      this.brandService.deleteBrand(brand.id).toPromise()
+    );
+
+    Promise.all(deleteRequests).then(() => {
+      this.loadData();
+      this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Selected Brands Deleted', life: 3000 });
+    }).catch(error => {
+      console.error(error);
+      this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Failed to Delete Selected Brands', life: 3000 });
+    }).finally(() => {
+      this.selectedBrands = [];
     });
-    this.selectedBrands = [];
   }
 
   saveBrand() {
-    debugger;
     this.submitted = true;
     if (this.brand.name_Local.trim()) {
       if (this.brand.id) {
-        this.brandService.updateBrand(this.brand).subscribe(() => {
-          this.loadData();
-        });
-      } else {
-        this.brandService.addBrand(this.brand).subscribe(() => {
-          this.loadData();
+        this.brandService.updateBrand(this.brand).subscribe({
+          next: () => {
+            this.loadData();
+            this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Brand Updated', life: 3000 });
+          },
+          error: (err) => {
+            console.error(err);
+            this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Failed to Update Brand', life: 3000 });
+          }
         });
       }
       this.brandDialog = false;
-    this.brand = { id: 0, name_Local: '', name_Global: '', description_Local: '', description_Global: '', logo: null, categories: [] };
+      this.brand = { id: 0, name_Local: '', name_Global: '', description_Local: '', description_Global: '', logo: '', categories: [] };
     }
   }
 

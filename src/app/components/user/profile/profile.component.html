@@ -1,0 +1,92 @@
+    <div class="bg-light p-3 rounded">
+        <h3>Profile</h3>
+        <form>
+        <div class="row">
+            <div class="fname row mb-3 col-6 d-flex align-items-center">
+            <label class="col-5 col-form-label label-large" for="fname">First Name</label>
+            <div class="col-7">
+                <input type="text" id="fname" pInputText [disabled]="true" [(ngModel)]="user.firstName" name="firstName" class="form-control"/>
+            </div>
+            </div>
+            <div class="fname row mb-3 col-6 d-flex align-items-center">
+            <label class="col-5 col-form-label label-large">Last Name</label>
+            <div class="col-7">
+                <input type="text" pInputText [disabled]="true" [(ngModel)]="user.lastName" name="lastname" class="form-control"/>
+            </div>
+            </div>
+        </div>
+
+        <div class="row ">
+            <label class="col-2 col-form-label label-large">User Name</label>
+            <div class="col-7 email">
+                <input type="text" pInputText [disabled]="true" [(ngModel)]="user.userName" name="username" class="form-control"/>
+            </div>
+        </div>
+
+        <div class="row ">
+            <label class="col-2 col-form-label label-large">Email</label>
+            <div class="col-7 email">
+                <input type="text" pInputText [disabled]="true" [(ngModel)]="user.email" name="Email" class="form-control"/>
+            </div>
+        </div>
+
+        <div class="row">
+
+            <div class="row mb-3 col-6 d-flex align-items-center">
+                <label class="col-5 col-form-label label-large">Country</label>
+                <div class="col-7 ">
+                    <input type="text" pInputText [disabled]="true" [(ngModel)]="user.country" name="Country" class="form-control"/>
+                </div>
+            </div>
+
+            <!-- <div class="row  mb-3 col-6 d-flex align-items-center">
+                <label class="col-5 col-form-label label-large">Gender</label>
+                <div class="col-7">
+                    <p-dropdown
+                        [(ngModel)]="selectedGender"
+                        [options]="genderOptions"
+                        placeholder="Select Gender"
+                        name="gender"
+                        class="email">
+                    </p-dropdown>
+                </div>
+            </div> -->
+
+            <div class="row mb-3 col-6 d-flex align-items-center">
+                <label class="col-5 col-form-label label-large">Gender</label>
+                <div class="col-7 ">
+                    <input type="tel" pInputText [disabled]="true" [(ngModel)]="user.gender" name="Gender" class="form-control"/>
+                </div>
+            </div>
+
+            <div class="row">
+
+                <div class="row mb-3 col-6 d-flex align-items-center">
+                    <label class="col-5 col-form-label label-large">Phone code</label>
+                    <div class="col-7 ">
+                        <input type="text" pInputText [disabled]="true" [(ngModel)]="user.phoneCode" name="Phonecode" class="form-control"/>
+                    </div>
+                </div>
+
+                <div class="row mb-3 col-6 d-flex align-items-center">
+                    <label class="col-5 col-form-label label-large">Phone</label>
+                    <div class="col-7 ">
+                        <input type="tel" pInputText [disabled]="true" [(ngModel)]="user.phoneNumber" name="Phone" class="form-control"/>
+                    </div>
+                </div>
+
+                <div class="col-5">
+                <button class="btn btn-success" (click)="goToEdit()">Edit</button>
+
+                </div>
+
+
+                </div>
+
+        </div>
+
+
+
+
+        </form>
+    </div>

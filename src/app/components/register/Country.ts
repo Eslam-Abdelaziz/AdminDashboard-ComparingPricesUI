@@ -515,11 +515,6 @@ export let CountryJson = [
   "code": "IM"
   },
   {
-  "name": "Israel",
-  "dial_code": "+972",
-  "code": "IL"
-  },
-  {
   "name": "Italy",
   "dial_code": "+39",
   "code": "IT"

@@ -29,6 +29,12 @@ export class ProductService {
     return this.http.post(this.confirmProductUrl, data);
   }
 
+  getProductCount() {
+    return this.http.get<number>('http://localhost:5066/api/Product/Count')
+    .toPromise()
+    .then(res => res as number);
+  }
+
     getProductsSmall() {
         return this.http.get<any>('assets/demo/data/products-small.json')
             .toPromise()

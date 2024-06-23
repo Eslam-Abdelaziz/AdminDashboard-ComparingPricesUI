@@ -24,6 +24,7 @@ import { BrandProductsCountDTO } from '../../models/Brand';
 @Component({
     selector: 'app-dashboard',
     templateUrl: './dashboard.component.html',
+    //styleUrls: ['./dashboard.component.css'], // Added CSS file path
     standalone: true,
     imports: [
         CommonModule,
@@ -227,6 +228,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
                     }
                 },
                 y: {
+                    beginAtZero: true,
                     beginAtZero: true,
                     ticks: {
                         color: textColorSecondary

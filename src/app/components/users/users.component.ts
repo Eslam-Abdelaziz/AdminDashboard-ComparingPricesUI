@@ -21,7 +21,8 @@
     @Component({
     selector: 'app-users',
     standalone: true,
-    imports: [ CrudRoutingModule,
+    imports: [ 
+        // CrudRoutingModule,
         TableModule,
         FileUploadModule,
         FormsModule,

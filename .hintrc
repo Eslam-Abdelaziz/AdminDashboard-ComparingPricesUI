@@ -24,17 +24,13 @@
       }
     ],
     "typescript-config/strict": "off",
-    "axe/aria": [
-      "default",
-      {
-        "aria-allowed-attr": "off"
-      }
-    ],
     "axe/forms": [
       "default",
       {
-        "label": "off"
+        "label": "off",
+        "select-name": "off"
       }
-    ]
+    ],
+    "button-type": "off"
   }
 }
