@@ -44,7 +44,7 @@ export class ProductService {
 
 
     getProductCount() {
-        return this.http.get<number>(`${this.apiUrl}/Category/Count`)
+        return this.http.get<number>(`${this.apiUrl}/Product/Count`)
             .toPromise()
             .then(res => res as number);
     }
