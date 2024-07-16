@@ -31,7 +31,7 @@ export class SearchService {
         pageNum?:number;
         pageSize?:number;
     }): Observable<Brand> {
-        
+
         let params = new HttpParams().set('searchValue', param.searchQuery);
 
         if (param.catId != null) {
