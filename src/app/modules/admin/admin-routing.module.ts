@@ -6,6 +6,7 @@ import { AddProductComponent } from '../../components/ProductDashboard/add-produ
 import { ReviewProductComponent } from '../../components/ProductDashboard/review-product/review-product.component';
 import { ConfirmProductComponent } from '../../components/ProductDashboard/confirm-product/confirm-product.component';
 import { ProductImagesComponent } from '../../components/ProductDashboard/product-images/product-images.component';
+import { AdsComponent } from 'src/app/components/Ads/ads.component';
 
 const routes: Routes = [
   {
@@ -25,6 +26,8 @@ const routes: Routes = [
           { path: 'images', component: ProductImagesComponent },
         ],
       },
+      {path:"ads",component:AdsComponent}
+      ,
       { path: 'categories', loadChildren: () => import('../../components/category/category-routing.module').then(m => m.CategoryRoutingModule) },
     //   { path: 'brands', loadChildren: () => import('../../components/brands/brands-routing.module').then(m => m.BrandsRoutingModule) },
       { path: 'users', loadChildren: () => import('../../components/users/user-routing.module').then(m => m.UserRoutingModule) },
