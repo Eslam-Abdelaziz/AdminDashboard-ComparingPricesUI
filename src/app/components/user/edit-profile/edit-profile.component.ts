@@ -9,6 +9,7 @@ import { User } from 'src/app/models/User';
 import { AuthService } from 'src/app/services/auth.service';
 import { UsersService } from 'src/app/services/users.service';
 import { CountryJson } from '../../register/Country';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 @Component({
@@ -19,7 +20,8 @@ import { CountryJson } from '../../register/Country';
     FormsModule,
     DropdownModule,
     ReactiveFormsModule,
-    CommonModule
+    CommonModule,
+    TranslateModule
   ],
   templateUrl: './edit-profile.component.html',
   styleUrls: ['./edit-profile.component.scss']

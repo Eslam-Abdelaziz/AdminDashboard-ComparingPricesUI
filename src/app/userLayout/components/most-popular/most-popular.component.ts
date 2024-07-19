@@ -11,6 +11,7 @@ import { UsersService } from 'src/app/services/users.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
     selector: 'most-popular',
@@ -23,7 +24,8 @@ import { ToastModule } from 'primeng/toast';
         HttpClientModule,
         CarouselModule,
         ButtonModule,
-        ToastModule
+        ToastModule,
+        TranslateModule
     ]
 })
 export class MostPopularComponent implements OnInit {

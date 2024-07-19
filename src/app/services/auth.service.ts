@@ -39,6 +39,7 @@ export class AuthService implements OnInit {
 
   logout() {
     localStorage.removeItem('UserToken');
-    this.router.navigate(['/login']);
+    window.location.href = '/home';
+   // this.router.navigate(['/home']);
   }
 }

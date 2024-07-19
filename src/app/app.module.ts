@@ -12,19 +12,35 @@ import { notfoundComponent } from './components/not-found/not-found.component';
 // import { NodeService } from './demo/service/node.service';
 // import { PhotoService } from './demo/service/photo.service';
 import { userLayoutComponent } from './userLayout/user.layout.component';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import {
     HashLocationStrategy,
     LocationStrategy,
     PathLocationStrategy,
 } from '@angular/common';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+
+function HttpLoaderFactory(http: HttpClient) {
+    return new TranslateHttpLoader(http);
+  }
+
 
 @NgModule({
     declarations: [AppComponent],
     imports: [
         AppRoutingModule,
+        HttpClientModule,
         AppLayoutModule,
         userLayoutComponent,
         notfoundComponent,
+        TranslateModule.forRoot({
+            loader: {
+              provide: TranslateLoader,
+              useFactory: HttpLoaderFactory,
+              deps: [HttpClient],
+            },
+          })
     ],
     providers: [
         { provide: LocationStrategy, useClass: HashLocationStrategy },

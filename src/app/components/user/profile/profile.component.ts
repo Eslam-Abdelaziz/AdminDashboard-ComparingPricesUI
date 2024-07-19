@@ -9,6 +9,7 @@ import { UsersService } from 'src/app/services/users.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { User } from 'src/app/models/User';
 import { ActivatedRoute, Router } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 @Component({
@@ -17,7 +18,8 @@ import { ActivatedRoute, Router } from '@angular/router';
   imports: [
     InputTextModule,
     FormsModule,
-    DropdownModule
+    DropdownModule,
+    TranslateModule,
 
   ],
   templateUrl: './profile.component.html',

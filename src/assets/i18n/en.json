@@ -1,0 +1,132 @@
+{
+    "Header": {
+        "Search": "Search for product",
+        "Explore": "Explore Products",
+        "Categories": "All Categories",
+        "Featured": "Featured",
+        "Popular": "Most Popular",
+        "Viewed": "Most Viewed"
+    },
+    "Footer": {
+        "Description": "PriceBee is your go-to platform for comparing prices of a wide range of products. Whether you're looking for the best deals on rental cars in Cairo or exploring other consumer goods",
+        "Country": "Our Countries",
+        "EG": "Egypt",
+        "SA": "Saudi Arabia",
+        "Company": "Company",
+        "About": "About Us",
+        "Contact": "Contact Us",
+        "Support": "Support",
+        "Privacy": "Privacy",
+        "Terms": "Terms & Conditions"
+    },
+    "Home": {
+        "Featured": "Featured Products",
+        "Products": "products",
+        "Popular": "Most Popular",
+        "See All": "See All"
+    },
+    "Profile": {
+        "Profile": "Profile",
+        "Favorites": "Favorites",
+        "History": "History",
+        "Alerts": "Alerts",
+        "Logout": "Logout",
+        "FirstName": "Fisrt Name",
+        "LastName": "Last Name",
+        "UserName": "User Name",
+        "Email": "Email",
+        "Country": "Country",
+        "Gender": "Gender",
+        "PhoneCode": "Phone Code",
+        "PhoneNumber": "Phone Number",
+        "Edit": "Edit",
+        "DOB": "Date of Birth",
+        "Save": "Save"
+    },
+    "About": {
+        "AboutUs": "About Us",
+        "Description": "<p>PriceBee is your one-stop price comparison site in the Middle East where you will find thousands of products from hundreds of online shops, all in one place. On PriceBee you can search for products in a wide variety of categories including but not limited to electronics, home appliances, apparel and many more, and compare prices to find the best deal available in the market and save money. You can also be sure that you're buying at the right time with our price trends feature which allows you to set price alerts for the products that you're interested in, saving you even more money.<br /><br />Please check back frequently for new products as we are constantly expanding our list of online shops. Stay tuned for new exciting product categories to be added. You can follow us on Facebook and Twitter to stay updated on the latest trends and PriceBee.com news. With PriceBee.com, search, compare and save.<br /><br />If you have an online store, then visit our <a href=\"/en/vendors\">online merchants section</a> to know more about our services and to list your products on PriceBee. For any other inquiries, you can send us a message using our <a href=\"/en/contact\">online contact form</a>.<br /><br />The website www.PriceBee.com is managed and owned by PriceBee FZ LLC.</p>"
+    },
+    "Privacy": {
+        "PrivacyPolicy": {
+            "PrivacyPolicy": "Privacy Policy",
+            "Description": "<p> Thank you for accessing the <a href=\"http://PriceBee.com\">PriceBee.com</a> website (\"Site\"). We respect your privacy and want to protect your personal information. To learn more, please read this Privacy Policy.<br /> This Privacy Policy explains how we collect, use and (under certain conditions) disclose your personal information. This Privacy Policy also explains the steps we have taken to secure your personal information. Finally, this Privacy Policy explains your options regarding the collection, use and disclosure of your personal information. By visiting the Site directly or through another site, you accept the practices described in this Policy.<br /> Data protection is a matter of trust and your privacy is important to us. We shall therefore only use your name and other information which relates to you in the manner set out in this Privacy Policy. We will only collect information where it is necessary for us to do so and we will only collect information if it is relevant to our dealings with you.<br /> We will only keep your information for as long as we are either required to by law or as is relevant for the purposes for which it was collected.<br /> You can visit the Site and browse without having to provide personal details. During your visit to the Site you remain anonymous and at no time can we identify you unless you have an account on the Site and log on with your user name and password. </p> <p> The Website Policies and Terms &amp; Conditions may be changed or updated occasionally to meet the requirements and standards. Therefore the Customers’ are encouraged to frequently visit these sections in order to be updated about the changes on the website. Modifications will be effective on the day they are posted. </p>"
+        },
+        "DataCollect": {
+            "DataCollect": " Data that we collect",
+            "Description": "We may collect personal information including, but not limited to, your title, name, gender, date of birth, email address, telephone number, mobile number, fax number. We will use the information you provide to enable us to better provide you with the services and information offered through our website and which you request. Further, we will use the information you provide to administer your account with us; audit the downloading of data from our website; improve the layout and/or content of the pages of our website and customize them for users; identify visitors on our website; carry out research on our users' demographics; send you information we think you may find useful or which you have requested from us, including information about our products and services, provided you have indicated that you have not objected to being contacted for these purposes. Subject to obtaining your consent we may contact you by email with details of other products and services. If you prefer not to receive any marketing communications from us, you can opt out at any time. All credit/debit cards details and personally identifiable information will NOT be stored, sold, shared, rented or leased to any third parties."
+        },
+        "PersonalInfo": {
+            "PersonalInfo": "Other uses of your personal informationn",
+            "Description": "We may use your personal information for opinion and market research. Your details are anonymous and will only be used for statistical purposes. You can choose to opt out of this at any time. Any answers to surveys or opinion polls we may ask you to complete will not be forwarded on to third parties. Disclosing your email address is only necessary if you would like to take part in competitions. We save the answers to our surveys separately from your email address.<br />We may also send you other information about us, the Site, our other websites, our products, sales promotions, our newsletters, anything relating to other companies in our group or our business partners. If you would prefer not to receive any of this additional information as detailed in this paragraph (or any part of it) please click the 'unsubscribe' link in any email that we send to you. Within 7 working days (days which are neither (i) a Friday nor Saturday, nor (ii) a public holiday anywhere in the Egypt) of receipt of your instruction we will cease to send you information as requested. If your instruction is unclear we will contact you for clarification.<br />We may further anonymize data about users of the Site generally and use it for various purposes, including ascertaining the general location of the users and usage of certain aspects of the Site or a link contained in an email to those registered to receive them, and supplying that anonymized data to third parties such as publishers. However, that anonymized data will not be capable of identifying you personally."
+        },
+        "Competitions": {
+            "Competitions": "Competitions",
+            "Description": "For any competition we use the data to notify winners and advertise our offers. You can find more details where applicable in our participation terms for the respective competition."
+        },
+        "ThirdParties": {
+            "ThirdParties": "Third Parties and Links",
+            "Description": "<p> We may pass your details to partners to help us with any of our uses of your data set out in our Privacy Policy. For example, we may use third parties to analyze data and to provide us with marketing assistance. We may transfer our databases containing your personal information if we sell our business or part of it. Other than as set out in this Privacy Policy, we shall NOT sell or disclose your personal data to third parties without obtaining your prior consent unless this is necessary for the purposes set out in this Privacy Policy or unless we are required to do so by law. The Site may contain advertising of third parties and links to other sites or frames of other sites. Please be aware that we are not responsible for the privacy practices or content of those third parties or other sites, nor for any third party to whom we transfer your data in accordance with our Privacy Policy. </p> <p> Some of the advertisements you see on the Site are selected and delivered by third parties, such as ad networks, advertising agencies, advertisers, and audience segment providers. These third parties may collect information about you and your online activities, either on the Site or on other websites, through cookies, web beacons, and other technologies in an effort to understand your interests and deliver to you advertisements that are tailored to your interests. Please remember that we do not have access to, or control over, the information these third parties may collect. The information practices of these third parties are not covered by this privacy policy. </p> <p> PriceBee uses Google API Services to provide users with content related to products. For more information about Google privacy policy visit <a target=\"_blank\" href=\"https://policies.google.com/privacy\">https://policies.google.com/privacy</a>. </p>"
+        },
+        "SocialUsage": {
+            "SocialMedia": "Social Media Data Collection and Usage",
+            "Description": "If users login with their social media accounts. Only the email and the name of the users will be collected by PriceBee, and used to log in the user to their account. Users then can update their additional personal information from their profile page."
+        },
+        "SocialDeletion": {
+            "SocialMedia": "Social Media Data Deletion",
+            "Description": "To delete all your user data, please contact us through our <a class=\"blue\" target=\"_blank\" href=\"https://PriceBee.com/en/contact\">contact page</a>. Enter your name and the the email linked to your social media account. Enter \"Delete My Account\" in the subject field. Enter your comments or any additional details in the Message section. Then click submit. Our team will review the information and will issue an account deletion request. The account will get deleted within 24 hours and you will receive a confirmation from PriceBee that all the related account details have been deleted, and no further action is needed."
+        },
+        "Cookies": {
+            "Cookies": "Cookies",
+            "Description": "The acceptance of cookies is not a requirement for visiting the Site. Cookies are tiny text files which identify your computer to our server as a unique user when you visit certain pages on the Site and they are stored by your Internet browser on your computer's hard drive. Cookies can be used to recognize your Internet Protocol address, saving you time while you are on, or want to enter, the Site. Your browser can be set to not accept cookies, but this would restrict your use of the Site. Please accept our assurance that our use of cookies does not contain any personal or private details and are free from viruses. If you want to find out more information about cookies, go to <a href=\"http://www.allaboutcookies.org\">http://www.allaboutcookies.org</a> or to find out about removing them from your browser, go to <a href=\"http://www.allaboutcookies.org/manage-cookies/index.html\">http://www.allaboutcookies.org/manage-cookies/index.html</a>. This website uses Google Analytics, a web analytics service provided by Google, Inc. (\"Google\"). Google Analytics uses cookies, which are text files placed on your computer, to help the website analyze how users use the site. The information generated by the cookie about your use of the website (including your IP address) will be transmitted to and stored by Google on servers in the United States. Google will use this information for the purpose of evaluating your use of the website, compiling reports on website activity for website operators and providing other services relating to website activity and internet usage. Google may also transfer this information to third parties where required to do so by law, or where such third parties process the information on Google's behalf. Google will not associate your IP address with any other data held by Google. You may refuse the use of cookies by selecting the appropriate settings on your browser, however please note that if you do this you may not be able to use the full functionality of this website. By using this website, you consent to the processing of data about you by Google in the manner and for the purposes set out above."
+        },
+        "Security": {
+            "Security": "Security",
+            "Description": "We have in place appropriate technical and security measures to prevent unauthorized or unlawful access to or accidental loss of or destruction or damage to your information. When we collect data through the Site, we collect your personal details on a secure server. We use firewalls on our servers. We maintain physical, electronic and procedural safeguards in connection with the collection, storage and disclosure of your information. You are responsible for protecting against unauthorized access to your password and to your computer."
+        },
+        "Rights": {
+            "YourRights": "Your Rights",
+            "Description": "If you are concerned about your data you have the right to request access to the personal data which we may hold or process about you. You have the right to require us to correct any inaccuracies in your data free of charge. At any stage you also have the right to ask us to stop using your personal data for direct marketing purposes."
+        }
+    },
+    "TermsAndConditions": {
+        "Header": "Terms and Conditions",
+        "INTRODUCTION": {
+            "title": "INTRODUCTION",
+            "content": "Welcome to the <a href=\"http://PriceBee.com\">PriceBee.com</a> website (the \"Site\"). These terms and conditions (\"Terms and Conditions\") apply to the Site, and all of its divisions, subsidiaries, and affiliate operated Internet sites which reference these Terms and Conditions.<br> By accessing the Site, you confirm your understanding of the Terms and Conditions. If you do not agree to these Terms and Conditions of use, you shall not use this website. The Site reserves the right, to change, modify, add, or remove portions of these Terms and Conditions of use at any time. Changes will be effective when posted on the Site with no other notice provided. Please check these Terms and Conditions of use regularly for updates. Your continued use of the Site following the posting of changes to these Terms and Conditions of use constitutes your acceptance of those changes."
+        },
+        "USE_OF_THE_SITE": {
+            "title": "USE OF THE SITE",
+            "content": "<p>You are either at least 18 years of age or are accessing the Site under the supervision of a parent or legal guardian.<br /> We grant you a non-transferable and revocable license to use the Site, under the Terms and Conditions described, for the purpose of consulting information provided on the Site. Commercial use or use on behalf of any third party is prohibited, except as explicitly permitted by us in advance. Any breach of these Terms and Conditions shall result in the immediate revocation of the license granted in this paragraph without notice to you.<br /> Content provided on this site is solely for informational purposes. Product representations expressed on this Site are those of the vendor and are not made by us. Submissions or opinions expressed on this Site are those of the individual posting such content and may not reflect our opinions.<br /> Certain services and related features that may be made available on the Site may require registration or subscription. Should you choose to register or subscribe for any such services or related features, you agree to provide accurate and current information about yourself, and to promptly update such information if there are any changes. Every user of the Site is solely responsible for keeping passwords and other account identifiers safe and secure. The account owner is entirely responsible for all activities that occur under such password or account. Furthermore, you must notify us of any unauthorized use of your password or account. The Site shall not be responsible or liable, directly or indirectly, in any way for any loss or damage of any kind incurred as a result of, or in connection with, your failure to comply with this section.<br /> During the registration process you agree to receive promotional emails from the Site. You can subsequently opt out of receiving such promotional e-mails by clicking on the link at the bottom of any promotional email.</p><p>Any dispute or claim arising out of or in connection with this website shall be governed and construed in accordance with the laws of UAE. United Arab of Emirates is our country of domicile. Minors under the age of 18 shall are prohibited to register as a User of this website and are not allowed to transact or use the website. If you make a payment for our products or services on our website, the details you are asked to submit will be provided directly to our payment provider via a secured connection. The cardholder must retain a copy of transaction records and Merchant policies and rules.</p><p>Refunds will be done only through the Original Mode of Payment. We accept payments online using Visa and MasterCard credit/debit card in AED (or any other agreed currency).</p><p>PriceBee uses YouTube API Services to provide users with videos of product reviews. No user data is used to get these videos. By using PriceBee, users are agreeing to be bound by the YouTube Terms of Service (<a target=\"_blank\" href=\"https://www.youtube.com/t/terms\">https://www.youtube.com/t/terms</a>).</p>"
+        },
+        "USER_SUBMISSIONS": {
+            "title": "USER SUBMISSIONS",
+            "content": "Anything that you submit to the Site and/or provide to us, including but not limited to, questions, reviews, comments, and suggestions (collectively, \"Submissions\") will become our sole and exclusive property and shall not be returned to you. In addition to the rights applicable to any Submission, when you post comments or reviews to the Site, you also grant us the right to use the name that you submit, in connection with such review, comment, or other content. You shall not use a false e-mail address, pretend to be someone other than yourself or otherwise mislead us or third parties as to the origin of any Submissions. We may, but shall not be obligated to, remove or edit any Submissions."
+        },
+        "MERCHANTS": {
+            "title": "MERCHANTS",
+            "content": "The Site shall provide information on a best effort basis. However, the Site shall have no liability for the accuracy of the information it provides and cannot be held liable for any third-party claims or losses of any damages. In particular, as a merchant that partners with the Site, you acknowledge that the information including but not limited to prices, images, brand names, product names and delivery information may at times not be accurate."
+        },
+        "TRADEMARKS_AND_COPYRIGHTS": {
+            "title": "TRADEMARKS AND COPYRIGHTS",
+            "content": "All intellectual property rights, whether registered or unregistered, in the Site, information content on the Site and all the website design, including, but not limited to, text, graphics, software, photos, video, music, sound, and their selection and arrangement, and all software compilations, underlying source code and software shall remain our property. The entire contents of the Site also are protected by copyright as a collective work under Egypt copyright laws and international conventions. All rights are reserved."
+        },
+        "APPLICABLE_LAW_AND_JURISDICTION": {
+            "title": "APPLICABLE LAW AND JURISDICTION",
+            "content": "These Terms and Conditions shall be interpreted and governed by the laws in force in Egypt. Subject to the Arbitration section below, each party hereby agrees to submit to the jurisdiction of the courts of Egypt and to waive any objections based upon venue.<br>(Website) will NOT deal or provide any services or products to any of OFAC (Office of Foreign Assets Control) sanctions countries in accordance with the law of UAE”."
+        },
+        "ARBITRATION": {
+            "title": "ARBITRATION",
+            "content": "Any controversy, claim or dispute arising out of or relating to these Terms and Conditions will be referred to and finally settled by private and confidential binding arbitration before a single arbitrator held in Egypt in English and governed by Egypt law pursuant to the Rules of Commercial Conciliation and Arbitration of 1994 (Egypt), as amended, replaced or re-enacted from time to time. The arbitrator shall be a person who is legally trained and who has experience in the information technology field in Egypt and is independent of either party. Notwithstanding the foregoing, the Site reserves the right to pursue the protection of intellectual property rights and confidential information through injunctive or other equitable relief through the courts."
+        },
+        "TERMINATION": {
+            "title": "TERMINATION",
+            "content": "In addition to any other legal or equitable remedies, we may, without prior notice to you, immediately terminate the Terms and Conditions or revoke any or all of your rights granted under the Terms and Conditions. Upon any termination of this Agreement, you shall immediately cease all access to and use of the Site and we shall, in addition to any other legal or equitable remedies, immediately revoke all password(s) and account identification issued to you and deny your access to and use of this Site in whole or in part. Any termination of this agreement shall not affect the respective rights and obligations (including without limitation, payment obligations) of the parties arising before the date of termination. You furthermore agree that the Site shall not be liable to you or to any other person as a result of any such suspension or termination. If you are dissatisfied with the Site or with any terms, conditions, rules, policies or guidelines, your sole and exclusive remedy is to discontinue using the Site."
+        },
+        "CANCELLATION_AND_REPLACEMENT_POLICY": {
+            "title": "CANCELLATION & REPLACEMENT POLICY",
+            "content": "Stores may cancel their listing agreement with the Site at any point in time by sending an email to their respective account manager. Cancellation will be effective within 48 hours of receipt of the email."
+        }
+    },
+    "Contact": "<div class=\"my-2\"><h1>How can we help you today?</h1><p>Feel free to contact us directly if you have any enquires regarding accomodation, we would love to have you stay with us.<br /><br />Simply fill in your personal data and let us get in touch with you. <br />Normally, the support team answers within one business day, so that you don't have to wait. Or call us directly from the phone.</p></div><div class=\"my-2\"><h3>Contact Us</h3><p>Address <br /><span>1234 Main Street, Mansoura, Egypt</span></p><p>Phone <br /><span>+20 110 260 0266</span></p><p>Email <br /><span>abdullah.moahmed99&#64;gmail.com</span></p></div>"
+}

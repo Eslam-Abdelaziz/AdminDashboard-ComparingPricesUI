@@ -10,6 +10,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { MessageService } from 'primeng/api';
 import { Router } from '@angular/router';
 import { ToastModule } from 'primeng/toast';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
     selector: 'featured-product',
@@ -22,7 +23,8 @@ import { ToastModule } from 'primeng/toast';
         HttpClientModule,
         CarouselModule,
         ButtonModule,
-        ToastModule
+        ToastModule,
+        TranslateModule
     ]
 })
 export class FeaturedProductComponent implements OnInit {
@@ -71,7 +73,12 @@ export class FeaturedProductComponent implements OnInit {
     // }
 
     seeAll() {
+
+       
+        console.log('See all button clicked');
+
         this._router.navigate([`\serach\products`]);
+
     }
 
     getDetails(productID: number) {

@@ -3,8 +3,8 @@
     <div class="col-12">
         <div class="card">
             <div class="d-flex justify-content-between">
-                <h5>Featured Products</h5>
-                <button class="see-all-button" (click)="seeAll()">See all</button>
+                <h5>{{"Home.Featured"| translate}}</h5>
+                <button class="see-all-button" (click)="seeAll()">{{"Home.See All" | translate}}</button>
             </div>
             <p-carousel [value]="products" [numVisible]="5" [numScroll]="3" [circular]="false"
                 [responsiveOptions]="carouselResponsiveOptions">

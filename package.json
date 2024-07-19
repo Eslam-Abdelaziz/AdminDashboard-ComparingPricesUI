@@ -26,6 +26,8 @@
         "@fullcalendar/daygrid": "^6.0.3",
         "@fullcalendar/interaction": "^6.0.3",
         "@fullcalendar/timegrid": "^6.0.3",
+        "@ngx-translate/core": "^15.0.0",
+        "@ngx-translate/http-loader": "^8.0.0",
         "bootstrap": "^5.3.3",
         "chart.js": "^3.3.2",
         "jwt-decode": "^4.0.0",

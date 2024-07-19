@@ -1,20 +1,7 @@
-<div class="grid p-fluid">
+<div class="grid p-fluid" [dir]="lang == 'en' ? 'ltr' : 'rtl'">
     <div class="col-12">
-        <div class="card">
-            <div class="my-2">
-                <h1>How can we help you today?</h1>
-                <p>Feel free to contact us directly if you have any enquires regarding
-                    accomodation, we would love to have you stay with us.</p>
-                <p>Simply fill in your personal data and let us get in touch with you. <br>
-                    Normally, the support team answers within one business day, so
-                    that you don't have to wait. Or call us directly from the phone.</p>
-            </div>
-            <div class="my-2">
-                <h3>Contact Us</h3>
-                <p>Address <br> <span>1234 Main Street, Mansoura, Egypt</span>  </p>
-                <p>Phone <br><span>+20 110 260 0266</span></p>
-                <p>Email <br> <span>abdullah.moahmed99&#64;gmail.com</span></p>
-            </div>
+        <div class="card" [innerHTML]="'Contact'|translate">
+
         </div>
     </div>
 </div>

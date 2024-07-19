@@ -1,23 +1,9 @@
-<div class="grid p-fluid">
+<div class="grid p-fluid" [dir]="lang=='en'?'ltr':'rtl'">
     <div class="col-12">
         <div class="card">
             <div class="my-2">
-                <h1>About Us</h1>
-                <p>PriceBee is your one-stop price comparison site in the Middle East where you will find thousands of
-                    products from hundreds of online shops, all in one place. On PriceBee you can search for products in
-                    a wide variety of categories including but not limited to electronics, home appliances, apparel and
-                    many more, and compare prices to find the best deal available in the market and save money. You can
-                    also be sure that you're buying at the right time with our price trends feature which allows you to
-                    set price alerts for the products that you're interested in, saving you even more money. </p>
-                <p>Please check back frequently for new products as we are constantly expanding our list of online
-                    shops. Stay tuned for new exciting product categories to be added. You can follow us on Facebook and
-                    Twitter to stay updated on the latest trends and PriceBee.com news. With PriceBee.com, search,
-                    compare
-                    and save. </p>
-                <p>If you have an online store, then visit our <a href="/en/vendors">online merchants section</a> to
-                    know more about our services and to list your products on PriceBee. For any other inquiries, you can
-                    send us a message using our <a href="/en/contact">online contact form</a></p>
-                <p>The website www.PriceBee.com is managed and owned by PriceBee FZ LLC.</p>
+                <h1>{{ "About.AboutUs" | translate }}</h1>
+                <p [innerHTML]="'About.Description' | translate"></p>
             </div>
         </div>
     </div>

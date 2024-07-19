@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { CarouselModule } from 'primeng/carousel';
+import { TranslateModule } from '@ngx-translate/core';
 import { ButtonModule } from 'primeng/button';
 import { HomeProductService } from '../../../../app/services/home-product.service';
 import { FeaturedProduct } from '../../../../app/models/featuredProduct';
@@ -10,7 +11,7 @@ import { UsersService } from 'src/app/services/users.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
-
+import { TranslateService } from '@ngx-translate/core';
 @Component({
     selector: 'app-home-product',
     templateUrl: './home-product.component.html',
@@ -22,6 +23,7 @@ import { ToastModule } from 'primeng/toast';
         HttpClientModule,
         CarouselModule,
         ButtonModule,
+        TranslateModule,
         ToastModule
     ]
 })
@@ -51,7 +53,10 @@ export class HomeProductComponent implements OnInit {
     isAuthanciated: boolean=false
     constructor(private homeProductService: HomeProductService, private _router: Router,
         private usersService: UsersService, private authServ: AuthService,
-        private messageService: MessageService) { }
+        private messageService: MessageService) {
+
+
+         }
 
     ngOnInit() {
 

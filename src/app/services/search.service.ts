@@ -9,17 +9,20 @@ import {
     throwError,
 } from 'rxjs';
 import { Category } from '../models/category';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
     providedIn: 'root',
 })
 export class SearchService {
+    baseUrl: string = environment.api;
     private searchQuerySubject = new BehaviorSubject<string>('');
     currentSearchQuery$ = this.searchQuerySubject.asObservable();
     constructor(private http: HttpClient) {}
-    getSearchData(
-        param: {
-        searchQuery: string;
+
+    getSearchData(param: {
+        searchQuery?: string;
+
         catId?: number;
         subCatId?: number;
         brandId?: number;
@@ -28,16 +31,20 @@ export class SearchService {
         domainID?: number;
         isFeatured?: boolean;
         sortedBy?: number;
-        pageNum?:number;
-        pageSize?:number;
+        pageNum?: number;
+        pageSize?: number;
     }): Observable<Brand> {
-        
-        let params = new HttpParams().set('searchValue', param.searchQuery);
+
+        let params = new HttpParams();
+        if (param.searchQuery) {
+            params = params.set('searchValue', param.searchQuery);
+        }
+
 
         if (param.catId != null) {
             params = params.set('categoryID', param.catId);
         }
-        if(param.pageNum != null){
+        if (param.pageNum != null) {
             params = params.set('pageNumber', param.pageNum);
         }
         if (param.subCatId != null) {

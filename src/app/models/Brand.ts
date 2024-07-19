@@ -1,6 +1,7 @@
 export interface Brand {
     numberOfResults:number;
     numberOfPages:number;
+    mostMaxPrice:number;
     resultPaginated:{
 
         product_Id: number;

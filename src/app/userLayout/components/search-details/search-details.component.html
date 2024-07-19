@@ -1,4 +1,5 @@
 <!-- slider -->
+
 <p-sidebar [(visible)]="sidebarVisible">
     <div>
         <div class="mb-3">
@@ -6,228 +7,7 @@
                 inputId="ny"
                 [value]="'d'"
                 (onChange)="isSponserChecked=true;
-            sponser = !sponser;
-            getAllSearchRes({
-                        searchParam: searchValue? searchValue:null,
-                        isFeatured: isSponserChecked?sponser:null,
-                        minPrice: rangeValues?.value?.[0] ?? null ,
-                        maxPrice: rangeValues?.value?.[1] ?? null,
-                        categoryID: selectedCategory?.value['id'] ?? null,
-                        sortedBy: selectedSort?.value['value'] ?? null,
-                        domainID: selectedDomain?.value ?? null,
-                        subCatId: selectedSubCategory?.value['id'] ?? null,
-                        brandId: selectedBrand?.value ?? null,
-                        pageNumber:pageNumber,
-                        pageSize:10,
 
-                    })"
-            />
-            <label for="ny" class="ps-2">Sponsered</label>
-        </div>
-        <p-divider />
-        <div class="search-filter bg-white">
-            <p-dropdown
-                [formControl]="selectedCategory"
-                [options]="categoryOptions"
-                optionLabel="name_Global"
-                placeholder="Category"
-                (onChange)="
-                    getAllSubcategory();
-                    getAllBrands();
-                    getAllSearchRes({
-                        searchParam: searchValue,
-                        isFeatured: isSponserChecked?sponser:null,
-                        minPrice: rangeValues?.value?.[0] ?? null ,
-                        maxPrice: rangeValues?.value?.[1] ?? null,
-                        categoryID: selectedCategory?.value['id'] ?? null,
-                        sortedBy: selectedSort?.value['value'] ?? null,
-                        domainID: selectedDomain?.value ?? null,
-                        subCatId: selectedSubCategory?.value['id'] ?? null,
-                        brandId: selectedBrand?.value ?? null,
-                        pageNumber:pageNumber,
-                        pageSize:10,
-
-                    })
-                "
-            />
-        </div>
-        <p-divider />
-        <div class="search-filter bg-white">
-            <p-dropdown
-                [ngClass]="{ 'd-none': !selectedCategory.value }"
-                [formControl]="selectedSubCategory"
-                [options]="subCategoryOptions"
-                optionLabel="name_Global"
-                placeholder="Subcategory"
-                (onChange)="
-                    getAllSearchRes({
-                        searchParam: searchValue,
-                        isFeatured: isSponserChecked?sponser:null,
-                        minPrice: rangeValues?.value?.[0] ?? null ,
-                        maxPrice: rangeValues?.value?.[1] ?? null,
-                        categoryID: selectedCategory?.value['id'] ?? null,
-                        sortedBy: selectedSort?.value['value'] ?? null,
-                        domainID: selectedDomain?.value ?? null,
-                        subCatId: selectedSubCategory?.value['id'] ?? null,
-                        brandId: selectedBrand?.value ?? null,
-                        pageNumber:pageNumber,
-                        pageSize:10,
-
-                    })
-                "
-            />
-        </div>
-        <p-divider />
-        <div class="search-filter bg-white">
-            <p-multiSelect
-                [options]="brandsOptions"
-                [formControl]="selectedBrand"
-                placeholder="Brands"
-                optionLabel="name_Global"
-                showHeader="false"
-                [ngClass]="{ 'd-none': !selectedCategory.value }"
-                (onChange)="getAllSearchRes({
-                      searchParam: searchValue,
-                        isFeatured: isSponserChecked?sponser:null,
-                        minPrice: rangeValues?.value?.[0] ?? null ,
-                        maxPrice: rangeValues?.value?.[1] ?? null,
-                        categoryID: selectedCategory?.value['id'] ?? null,
-                        sortedBy: selectedSort?.value['value'] ?? null,
-                        domainID: selectedDomain?.value ?? null,
-                        subCatId: selectedSubCategory?.value['id'] ?? null,
-                        brandId: selectedBrand?.value ?? null,
-                        pageNumber:pageNumber,
-                        pageSize:10,
-                })"
-            />
-        </div>
-        <p-divider />
-        <div class="search-filter bg-white">
-            <p-multiSelect
-                [options]="domainOptions"
-                [formControl]="selectedDomain"
-                placeholder="Domain"
-                showHeader="false"
-                optionLabel="name_Global"
-                (onChange)="
-                    getAllSearchRes({
-                        searchParam: searchValue,
-                        isFeatured: isSponserChecked?sponser:null,
-                        minPrice: rangeValues?.value?.[0] ?? null ,
-                        maxPrice: rangeValues?.value?.[1] ?? null,
-                        categoryID: selectedCategory?.value['id'] ?? null,
-                        sortedBy: selectedSort?.value['value'] ?? null,
-                        domainID: selectedDomain?.value ?? null,
-                        subCatId: selectedSubCategory?.value['id'] ?? null,
-                        brandId: selectedBrand?.value ?? null,
-                        pageNumber:pageNumber,
-                        pageSize:10,
-
-                    })
-                "
-            />
-        </div>
-        <p-divider />
-
-        <div class="search-filter bg-white">
-            <p-dropdown
-                [formControl]="selectedSort"
-                [options]="sortOptions"
-                optionLabel="name"
-                placeholder="Sort By"
-                (onChange)="
-                    getAllSearchRes({
-                        searchParam: searchValue,
-                        isFeatured: isSponserChecked?sponser:null,
-                        minPrice: rangeValues?.value?.[0] ?? null ,
-                        maxPrice: rangeValues?.value?.[1] ?? null,
-                        categoryID: selectedCategory?.value['id'] ?? null,
-                        sortedBy: selectedSort?.value['value'] ?? null,
-                        domainID: selectedDomain?.value ?? null,
-                        subCatId: selectedSubCategory?.value['id'] ?? null,
-                        brandId: selectedBrand?.value ?? null,
-                        pageNumber:pageNumber,
-                        pageSize:10,
-
-                    })
-                "
-            />
-        </div>
-        <p-divider />
-
-        <div class="search-filter bg-white overflow-hidden mt-4">
-            <p-slider
-                [formControl]="rangeValues"
-                [range]="true"
-                styleClass="m-2"
-                min="0"
-                max="10000"
-            />
-            <div
-                class="d-flex mt-3 justify-content-between gap-2 align-items-center"
-            >
-                <input
-                    type="text"
-                    min="1000"
-                    max="10000"
-                    class="w-100"
-                    type="number"
-                    [(ngModel)]="rangeValues.value[0]"
-                    (ngModelChange)="updateSlider($event, 0)"
-                    placeholder="min price"
-                />
-                <input
-                    type="text"
-                    min="1000"
-                    max="10000"
-                    class="w-100"
-                    type="number"
-                    placeholder="max price"
-                    [(ngModel)]="rangeValues.value[1]"
-                    (ngModelChange)="updateSlider($event, 1)"
-                />
-                <i
-                    class="pi pi-search"
-                    style="font-size: 1.3rem; cursor: pointer"
-                    (click)="
-                        getAllSearchRes({
-                            searchParam: searchValue,
-                        isFeatured: isSponserChecked?sponser:null,
-                        minPrice: rangeValues?.value?.[0] ?? null ,
-                        maxPrice: rangeValues?.value?.[1] ?? null,
-                        categoryID: selectedCategory?.value['id'] ?? null,
-                        sortedBy: selectedSort?.value['value'] ?? null,
-                        domainID: selectedDomain?.value ?? null,
-                        subCatId: selectedSubCategory?.value['id'] ?? null,
-                        brandId: selectedBrand?.value ?? null,
-                        pageNumber:pageNumber,
-                        pageSize:10,
-
-                        })
-                    "
-                ></i>
-            </div>
-        </div>
-        <p-divider />
-    </div>
-</p-sidebar>
-
-<p-button
-    (click)="sidebarVisible = true"
-    icon="pi pi-arrow-right"
-    class="d-md-none"
-/>
-<!-- slider -->
-<!-- ///////////////////////////////////////////////////// -->
-
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-2 col-md-3 d-none d-md-block">
-            <div class="mb-3">
-                <p-checkbox
-                    inputId="ny"
-                    [value]="'d'"
-                    (onChange)="isSponserChecked=true;
                 sponser = !sponser;
                 getAllSearchRes({
                             searchParam: searchValue,
@@ -242,18 +22,19 @@
                             pageNumber:pageNumber,
                             pageSize:10,
 
+
                         })"
-                />
-                <label for="ny" class="ps-2">Sponsered</label>
-            </div>
-            <p-divider />
-            <div class="search-filter bg-white">
-                <p-dropdown
-                    [formControl]="selectedCategory"
-                    [options]="categoryOptions"
-                    optionLabel="name_Global"
-                    placeholder="Category"
-                    (onChange)="
+            />
+            <label for="ny" class="ps-2">Sponsered</label>
+        </div>
+        <p-divider />
+        <div class="search-filter bg-white">
+            <p-dropdown
+                [formControl]="selectedCategory"
+                [options]="categoryOptions"
+                optionLabel="name_Global"
+                placeholder="Category"
+                (onChange)="
                         getAllSubcategory();
                         getAllBrands();
                         getAllSearchRes({
@@ -271,17 +52,17 @@
 
                         })
                     "
-                />
-            </div>
-            <p-divider />
-            <div class="search-filter bg-white">
-                <p-dropdown
-                    [ngClass]="{ 'd-none': !selectedCategory.value }"
-                    [formControl]="selectedSubCategory"
-                    [options]="subCategoryOptions"
-                    optionLabel="name_Global"
-                    placeholder="Subcategory"
-                    (onChange)="
+            />
+        </div>
+        <p-divider />
+        <div class="search-filter bg-white">
+            <p-dropdown
+                [ngClass]="{ 'd-none': !selectedCategory.value }"
+                [formControl]="selectedSubCategory"
+                [options]="subCategoryOptions"
+                optionLabel="name_Global"
+                placeholder="Subcategory"
+                (onChange)="
                         getAllSearchRes({
                             searchParam: searchValue,
                             isFeatured: isSponserChecked?sponser:null,
@@ -297,18 +78,18 @@
 
                         })
                     "
-                />
-            </div>
-            <p-divider />
-            <div class="search-filter bg-white">
-                <p-multiSelect
-                    [options]="brandsOptions"
-                    [formControl]="selectedBrand"
-                    placeholder="Brands"
-                    optionLabel="name_Global"
-                    showHeader="false"
-                    [ngClass]="{ 'd-none': !selectedCategory.value }"
-                    (onChange)="getAllSearchRes({
+            />
+        </div>
+        <p-divider />
+        <div class="search-filter bg-white">
+            <p-multiSelect
+                [options]="brandsOptions"
+                [formControl]="selectedBrand"
+                placeholder="Brands"
+                optionLabel="name_Global"
+                showHeader="false"
+                [ngClass]="{ 'd-none': !selectedCategory.value }"
+                (onChange)="getAllSearchRes({
                           searchParam: searchValue,
                             isFeatured: isSponserChecked?sponser:null,
                             minPrice: rangeValues?.value?.[0] ?? null ,
@@ -321,17 +102,17 @@
                             pageNumber:pageNumber,
                             pageSize:10,
                     })"
-                />
-            </div>
-            <p-divider />
-            <div class="search-filter bg-white">
-                <p-multiSelect
-                    [options]="domainOptions"
-                    [formControl]="selectedDomain"
-                    placeholder="Domain"
-                    showHeader="false"
-                    optionLabel="name_Global"
-                    (onChange)="
+            />
+        </div>
+        <p-divider />
+        <div class="search-filter bg-white">
+            <p-multiSelect
+                [options]="domainOptions"
+                [formControl]="selectedDomain"
+                placeholder="Domain"
+                showHeader="false"
+                optionLabel="name_Global"
+                (onChange)="
                         getAllSearchRes({
                             searchParam: searchValue,
                             isFeatured: isSponserChecked?sponser:null,
@@ -347,17 +128,17 @@
 
                         })
                     "
-                />
-            </div>
-            <p-divider />
+            />
+        </div>
+        <p-divider />
 
-            <div class="search-filter bg-white">
-                <p-dropdown
-                    [formControl]="selectedSort"
-                    [options]="sortOptions"
-                    optionLabel="name"
-                    placeholder="Sort By"
-                    (onChange)="
+        <div class="search-filter bg-white">
+            <p-dropdown
+                [formControl]="selectedSort"
+                [options]="sortOptions"
+                optionLabel="name"
+                placeholder="Sort By"
+                (onChange)="
                         getAllSearchRes({
                             searchParam: searchValue,
                             isFeatured: isSponserChecked?sponser:null,
@@ -373,21 +154,22 @@
 
                         })
                     "
-                />
-            </div>
-            <p-divider />
+            />
+        </div>
+        <p-divider />
 
-            <div class="search-filter bg-white overflow-hidden mt-4">
-                <p-slider
-                    [formControl]="rangeValues"
-                    [range]="true"
-                    styleClass="m-2"
-                    min="0"
-                    max="10000"
-                />
-                <div
-                    class="d-flex mt-3 justify-content-between gap-2 align-items-center"
-                >
+        <div class="search-filter bg-white overflow-hidden mt-4">
+            <p-slider
+                [formControl]="rangeValues"
+                [range]="true"
+                styleClass="m-2"
+                min="0"
+                max="10000"
+            />
+            <div
+                class="d-flex mt-3 justify-content-between gap-2 align-items-center flex-column"
+            >
+                <div class="d-flex gap-2">
                     <input
                         type="text"
                         min="1000"
@@ -408,53 +190,346 @@
                         [(ngModel)]="rangeValues.value[1]"
                         (ngModelChange)="updateSlider($event, 1)"
                     />
+                </div>
+                <button
+                    class="btn btn-sm btn-outline-success flex-grow-1 d-block w-75"
+                    (click)="
+                    getAllSearchRes({
+                        searchParam: searchValue,
+                    isFeatured: isSponserChecked?sponser:null,
+                    minPrice: rangeValues?.value?.[0] ?? null ,
+                    maxPrice: rangeValues?.value?.[1] ?? null,
+                    categoryID: selectedCategory?.value['id'] ?? null,
+                    sortedBy: selectedSort?.value['value'] ?? null,
+                    domainID: selectedDomain?.value ?? null,
+                    subCatId: selectedSubCategory?.value['id'] ?? null,
+                    brandId: selectedBrand?.value ?? null,
+                    pageNumber:pageNumber,
+                    pageSize:10,
+
+                    })
+                "
+                >
+                    <p class="d-inline-block m-0 fs-5">Search</p>
                     <i
                         class="pi pi-search"
                         style="font-size: 1.3rem; cursor: pointer"
-                        (click)="
+                    ></i>
+                </button>
+            </div>
+        </div>
+        <p-divider />
+        <div class="card">
+            <div class="d-flex justify-content-between">
+                <h5>Google Ads</h5>
+            </div>
+            <div class="p-fluid">
+                <ins
+                    class="adsbygoogle"
+                    style="display: block"
+                    data-ad-client="ca-pub-3940256099942544"
+                    data-ad-slot="8320222746"
+                    data-ad-format="auto"
+                    data-full-width-responsive="true"
+                ></ins>
+                <img
+                    src="https://images.raidboxes.io/raidboxes.io/uploads/2021/01/Google-Kampagne-raidboxes.png"
+                    alt="Google Ads"
+                    class="p-1"
+                    style="width: 100%; height: 300px; display: block"
+                />
+            </div>
+        </div>
+    </div>
+</p-sidebar>
+
+<p-button
+    (click)="sidebarVisible = true"
+    icon="pi pi-arrow-right"
+    class="d-md-none"
+/>
+<!-- slider -->
+<!-- ///////////////////////////////////////////////////// -->
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-2 col-md-3 d-none d-md-block">
+            <div class="mb-3">
+                <p-checkbox
+                    inputId="ny"
+                    [value]="'d'"
+                    (onChange)="isSponserChecked=true;
+                    sponser = !sponser;
+                    getAllSearchRes({
+                                searchParam: searchValue,
+                                isFeatured: isSponserChecked?sponser:null,
+                                minPrice: rangeValues?.value?.[0] ?? null ,
+                                maxPrice: rangeValues?.value?.[1] ?? null,
+                                categoryID: selectedCategory?.value['id'] ?? null,
+                                sortedBy: selectedSort?.value['value'] ?? null,
+                                domainID: selectedDomain?.value ?? null,
+                                subCatId: selectedSubCategory?.value['id'] ?? null,
+                                brandId: selectedBrand?.value ?? null,
+                                pageNumber:pageNumber,
+                                pageSize:10,
+
+                            })"
+                />
+                <label for="ny" class="ps-2">Sponsered</label>
+            </div>
+            <p-divider />
+            <div class="search-filter bg-white">
+                <p-dropdown
+                    [formControl]="selectedCategory"
+                    [options]="categoryOptions"
+                    optionLabel="name_Global"
+                    placeholder="Category"
+                    (onChange)="
+                            getAllSubcategory();
+                            getAllBrands();
                             getAllSearchRes({
                                 searchParam: searchValue,
-                            isFeatured: isSponserChecked?sponser:null,
-                            minPrice: rangeValues?.value?.[0] ?? null ,
-                            maxPrice: rangeValues?.value?.[1] ?? null,
-                            categoryID: selectedCategory?.value['id'] ?? null,
-                            sortedBy: selectedSort?.value['value'] ?? null,
-                            domainID: selectedDomain?.value ?? null,
-                            subCatId: selectedSubCategory?.value['id'] ?? null,
-                            brandId: selectedBrand?.value ?? null,
-                            pageNumber:pageNumber,
-                            pageSize:10,
+                                isFeatured: isSponserChecked?sponser:null,
+                                minPrice: rangeValues?.value?.[0] ?? null ,
+                                maxPrice: rangeValues?.value?.[1] ?? null,
+                                categoryID: selectedCategory?.value['id'] ?? null,
+                                sortedBy: selectedSort?.value['value'] ?? null,
+                                domainID: selectedDomain?.value ?? null,
+                                subCatId: selectedSubCategory?.value['id'] ?? null,
+                                brandId: selectedBrand?.value ?? null,
+                                pageNumber:pageNumber,
+                                pageSize:10,
 
                             })
                         "
-                    ></i>
+                />
+            </div>
+            <p-divider />
+            <div class="search-filter bg-white">
+                <p-dropdown
+                    [formControl]="selectedSubCategory"
+                    [options]="subCategoryOptions"
+                    optionLabel="name_Global"
+                    placeholder="Subcategory"
+                    (onChange)="
+                            getAllSearchRes({
+                                searchParam: searchValue,
+                                isFeatured: isSponserChecked?sponser:null,
+                                minPrice: rangeValues?.value?.[0] ?? null ,
+                                maxPrice: rangeValues?.value?.[1] ?? null,
+                                categoryID: selectedCategory?.value['id'] ?? null,
+                                sortedBy: selectedSort?.value['value'] ?? null,
+                                domainID: selectedDomain?.value ?? null,
+                                subCatId: selectedSubCategory?.value['id'] ?? null,
+                                brandId: selectedBrand?.value ?? null,
+                                pageNumber:pageNumber,
+                                pageSize:10,
+
+                            })
+                        "
+                />
+            </div>
+            <p-divider />
+            <div class="search-filter bg-white">
+                <p-multiSelect
+                    [options]="brandsOptions"
+                    [formControl]="selectedBrand"
+                    placeholder="Brands"
+                    optionLabel="name_Global"
+                    showHeader="false"
+                    (onChange)="getAllSearchRes({
+                              searchParam: searchValue,
+                                isFeatured: isSponserChecked?sponser:null,
+                                minPrice: rangeValues?.value?.[0] ?? null ,
+                                maxPrice: rangeValues?.value?.[1] ?? null,
+                                categoryID: selectedCategory?.value['id'] ?? null,
+                                sortedBy: selectedSort?.value['value'] ?? null,
+                                domainID: selectedDomain?.value ?? null,
+                                subCatId: selectedSubCategory?.value['id'] ?? null,
+                                brandId: selectedBrand?.value ?? null,
+                                pageNumber:pageNumber,
+                                pageSize:10,
+                        })"
+                />
+            </div>
+            <p-divider />
+            <div class="search-filter bg-white">
+                <p-multiSelect
+                    [options]="domainOptions"
+                    [formControl]="selectedDomain"
+                    placeholder="Domain"
+                    showHeader="false"
+                    optionLabel="name_Global"
+                    (onChange)="
+                            getAllSearchRes({
+                                searchParam: searchValue,
+                                isFeatured: isSponserChecked?sponser:null,
+                                minPrice: rangeValues?.value?.[0] ?? null ,
+                                maxPrice: rangeValues?.value?.[1] ?? null,
+                                categoryID: selectedCategory?.value['id'] ?? null,
+                                sortedBy: selectedSort?.value['value'] ?? null,
+                                domainID: selectedDomain?.value ?? null,
+                                subCatId: selectedSubCategory?.value['id'] ?? null,
+                                brandId: selectedBrand?.value ?? null,
+                                pageNumber:pageNumber,
+                                pageSize:10,
+
+                            })
+                        "
+                />
+            </div>
+            <p-divider />
+
+            <div class="search-filter bg-white">
+                <p-dropdown
+                    [formControl]="selectedSort"
+                    [options]="sortOptions"
+                    optionLabel="name"
+                    placeholder="Sort By"
+                    (onChange)="
+                            getAllSearchRes({
+                                searchParam: searchValue,
+                                isFeatured: isSponserChecked?sponser:null,
+                                minPrice: rangeValues?.value?.[0] ?? null ,
+                                maxPrice: rangeValues?.value?.[1] ?? null,
+                                categoryID: selectedCategory?.value['id'] ?? null,
+                                sortedBy: selectedSort?.value['value'] ?? null,
+                                domainID: selectedDomain?.value ?? null,
+                                subCatId: selectedSubCategory?.value['id'] ?? null,
+                                brandId: selectedBrand?.value ?? null,
+                                pageNumber:pageNumber,
+                                pageSize:10,
+
+                            })
+                        "
+                />
+            </div>
+            <p-divider />
+
+            <div class="search-filter bg-white overflow-hidden mt-4">
+                <p-slider
+                    [formControl]="rangeValues"
+                    [range]="true"
+                    styleClass="m-2"
+                    min="0"
+                    [max]="searchResult?.mostMaxPrice"
+                />
+                <div
+                    class="d-flex mt-3 justify-content-between gap-2 align-items-center flex-column"
+                >
+                    <div class="d-flex gap-2">
+                        <input
+                            type="text"
+
+                            class="w-100"
+                            type="number"
+                            [(ngModel)]="rangeValues.value[0]"
+                            (ngModelChange)="updateSlider($event, 0)"
+                            placeholder="min price"
+                        />
+                        <input
+                            type="text"
+
+                            [max]="searchResult?.mostMaxPrice"
+                            class="w-100"
+                            type="number"
+                            placeholder="max price"
+                            [(ngModel)]="rangeValues.value[1]"
+                            (ngModelChange)="updateSlider($event, 1)"
+                        />
+                    </div>
+                    <button
+                        class="btn btn-sm btn-outline-success flex-grow-1 d-block w-75"
+                        [disabled]="!rangeValues.value[0] || !rangeValues.value[1]"
+                        (click)="
+                    getAllSearchRes({
+                        searchParam: searchValue,
+                    isFeatured: isSponserChecked?sponser:null,
+                    minPrice: rangeValues?.value?.[0] ?? null ,
+                    maxPrice: rangeValues?.value?.[1] ?? null,
+                    categoryID: selectedCategory?.value['id'] ?? null,
+                    sortedBy: selectedSort?.value['value'] ?? null,
+                    domainID: selectedDomain?.value ?? null,
+                    subCatId: selectedSubCategory?.value['id'] ?? null,
+                    brandId: selectedBrand?.value ?? null,
+                    pageNumber:pageNumber,
+                    pageSize:10,
+
+                    })
+                "
+                    >
+                        <p class="d-inline-block m-0 fs-5">Search</p>
+                        <i
+                            class="pi pi-search"
+                            style="font-size: 1.3rem; cursor: pointer"
+                        ></i>
+                    </button>
                 </div>
             </div>
             <p-divider />
+            <div class="card">
+                <div class="d-flex justify-content-between">
+                    <h5>Google Ads</h5>
+                </div>
+                <div class="p-fluid">
+                    <ins
+                        class="adsbygoogle"
+                        style="display: block"
+                        data-ad-client="ca-pub-3940256099942544"
+                        data-ad-slot="8320222746"
+                        data-ad-format="auto"
+                        data-full-width-responsive="true"
+                    ></ins>
+                    <img
+                        src="https://images.raidboxes.io/raidboxes.io/uploads/2021/01/Google-Kampagne-raidboxes.png"
+                        alt="Google Ads"
+                        class="p-1"
+                        style="width: 100%; height: 300px; display: block"
+                    />
+                </div>
+            </div>
         </div>
         <div class="col-10 col-md-9">
+            <div class="card">
+                <div class="d-flex justify-content-between">
+                    <h5>Google Ads</h5>
+                </div>
+                <div class="p-fluid">
+                    <ins
+                        class="adsbygoogle"
+                        style="display: block"
+                        data-ad-client="ca-pub-3940256099942544"
+                        data-ad-slot="8320222746"
+                        data-ad-format="auto"
+                        data-full-width-responsive="true"
+                    ></ins>
+                    <img
+                        src="https://images.raidboxes.io/raidboxes.io/uploads/2021/01/Google-Kampagne-raidboxes.png"
+                        alt="Google Ads"
+                        class="p-1"
+                        style="width: 100%; height: 300px; display: block"
+                    />
+                </div>
+            </div>
             <p class="ms-3 text-decoration-underline">
                 <span class="fw-bold fs-5">{{ searchValue }}</span> | results
                 from {{ searchResult?.resultPaginated?.length }} stores
             </p>
             @for(item of searchResult?.resultPaginated;track item){
-            <div class="search-result p-2">
+            <div class="search-result p-2 position-relative">
                 @defer{
-                <div
-                    class="row position-relative align-items-center g-2 justify-content-between"
-                >
-                    <i
-                        class="pi position-absolute end-0 top-0 text-end"
-                        [ngClass]="{
-                            'pi-heart': fav == false,
-                            'pi-heart-fill': fav == true
-                        }"
-                        (click)="changeFav(item.product_Id)"
-                        style="font-size: 1.5rem"
-                    ></i>
-                    <div class="col-12 col-md-6 text-center text-md-start">
+
+                <i
+                    class="pi position-absolute end-0 text-end d-inline-block"
+                    [ngClass]="{'pi-heart-fill ': item.isFavorite, 'pi-heart': !item.isFavorite}"
+                    (click)="addToFav(item.product_Id,$event)"
+                    style="font-size: 1.5rem; top: -15px"
+                ></i>
+
+                <div class="row align-items-center g-2 justify-content-between">
+                    <div class="col-12 col-md-5 text-center text-md-start">
                         <div
-                            class="d-flex align-items-center gap-2 justify-content-center"
+                            class="d-flex align-items-center gap-2 justify-content-between"
                         >
                             <img
                                 src="{{ item.productImageDTOs[0]?.image }}"
@@ -464,8 +539,14 @@
                             />
 
                             <div class="product-info">
-                                <p class="fs-5">
-                                    {{ item.product_Name_Global }}
+                                <p
+                                    class="fs-5"
+                                    tooltipEvent="hover"
+                                    [pTooltip]="item.product_Name_Global"
+                                >
+                                    {{
+                                        item.product_Name_Global | truncate : 10
+                                    }}
                                 </p>
                                 <p-rating
                                     [(ngModel)]="item.averageRating"
@@ -473,23 +554,24 @@
                                     [cancel]="false"
                                 />
                                 <span class="ps-2 mb-3">{{
-                                    item.averageRating
+                                    item.averageRating | number : "1.0-1"
                                 }}</span>
                                 <p class="fs-4 text-primary fw-medium">
                                     {{ item.mostMinimumPrice }} SAR
                                 </p>
                                 <!-- <p class="text-black-50">
-                                    from
-                                    <span class="fw-bold">{{
-                                        item.minPriceBrandName
-                                    }}</span>
-                                </p> -->
+                                        from
+                                        <span class="fw-bold">{{
+                                            item.minPriceBrandName
+                                        }}</span>
+                                    </p> -->
                             </div>
                         </div>
                     </div>
-                    <div class="col-12 col-md-6">
+                    <div class="col-12 col-md-7">
                         <div class="d-flex flex-column align-items-end gap-3">
-                            @for(link of item.productLinkDTOs;track link){
+                            @for(link of item.productLinkDTOs.slice(0,3);track
+                            link){
                             <div
                                 class="d-flex gap-3 align-items-center justify-content-between"
                             >
