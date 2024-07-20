@@ -7,81 +7,81 @@ import { Country } from '../../models/Country';
 import { RouterLink, Router } from '@angular/router';
 
 @Component({
-  selector: 'app-register',
-  standalone: true,
-  templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css'],
-  imports: [ReactiveFormsModule, CommonModule, FormsModule, RouterLink]
+    selector: 'app-register',
+    standalone: true,
+    templateUrl: './register.component.html',
+    styleUrls: ['./register.component.css'],
+    imports: [ReactiveFormsModule, CommonModule, FormsModule, RouterLink]
 })
 
 export class RegisterComponent implements OnInit {
-  StrongPasswordRegx: RegExp = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[^a-zA-Z0-9]).{12,}$/;
-  EmailRegex: RegExp = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
-  Counteries: Country[] = [];
-  countryCode: string = '';
-  messageError: string =''
-  show: boolean = false;
-  minDate: string;
+    StrongPasswordRegx: RegExp = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[^a-zA-Z0-9]).{12,}$/;
+    EmailRegex: RegExp = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+    Counteries: Country[] = [];
+    countryCode: string = '';
+    messageError: string = ''
+    show: boolean = false;
+    minDate: string;
 
 
 
-  registerForm: FormGroup = new FormGroup({
-    userName: new FormControl(null, [Validators.required, Validators.maxLength(40)]),
-    password: new FormControl(null, [Validators.required, Validators.pattern(this.StrongPasswordRegx)]),
-    firstName: new FormControl(null, [Validators.required, Validators.maxLength(20)]),
-    lastName: new FormControl(null, [Validators.required, Validators.maxLength(20)]),
-    email: new FormControl(null, [Validators.required, Validators.email]),
-    gender: new FormControl(null, [Validators.required, Validators.maxLength(10)]),
-    country: new FormControl(null, [Validators.required, Validators.maxLength(30)]),
-    phoneCode: new FormControl(null),
-    phoneNumber: new FormControl(null, [Validators.pattern(/^1[1205][0-9]{8}$/)]),
-    image: new FormControl(null),
-    dateOfBirth: new FormControl(null)
-  });
+    registerForm: FormGroup = new FormGroup({
+        userName: new FormControl(null, [Validators.required, Validators.maxLength(40)]),
+        password: new FormControl(null, [Validators.required, Validators.pattern(this.StrongPasswordRegx)]),
+        firstName: new FormControl(null, [Validators.required, Validators.maxLength(20)]),
+        lastName: new FormControl(null, [Validators.required, Validators.maxLength(20)]),
+        email: new FormControl(null, [Validators.required, Validators.email]),
+        gender: new FormControl(null, [Validators.required, Validators.maxLength(10)]),
+        country: new FormControl(null, [Validators.required, Validators.maxLength(30)]),
+        phoneCode: new FormControl(null),
+        phoneNumber: new FormControl(null, [Validators.pattern(/^1[1205][0-9]{8}$/)]),
+        image: new FormControl(null),
+        dateOfBirth: new FormControl(null)
+    });
 
-  constructor(private authService: AuthService, private _router: Router) {
+    constructor(private authService: AuthService, private _router: Router) {
 
-    const _today = new Date();
-    const thirteenYearsAgo = new Date(_today.setFullYear(_today.getFullYear() - 13));
-    this.minDate = thirteenYearsAgo.toISOString().split('T')[0];const today = new Date();
+        const _today = new Date();
+        const thirteenYearsAgo = new Date(_today.setFullYear(_today.getFullYear() - 13));
+        this.minDate = thirteenYearsAgo.toISOString().split('T')[0]; const today = new Date();
 
-  }
+    }
 
-  ngOnInit(): void {
-    let countryString = JSON.stringify(CountryJson);
-    this.Counteries = JSON.parse(countryString) as Country[];
-    //console.log(this.Counteries);
-  }
+    ngOnInit(): void {
+        let countryString = JSON.stringify(CountryJson);
+        this.Counteries = JSON.parse(countryString) as Country[];
+        //console.log(this.Counteries);
+    }
 
-  handleForm() {
-    if (this.registerForm.valid) {
-      this.authService.Register(this.registerForm.value).subscribe({
-        next: (response) => {
-          this._router.navigate(['/login'], { state: { email: this.registerForm.value.email, password: this.registerForm.value.password } });
-          //console.log(response);
-          this.authService.Email =this.registerForm.value.email
-          this.authService.Password =this.registerForm.value.password
-          //console.log(this.authService.Email)
-        },
-        error: (err) => {
-          //console.log(err);
-          //console.log(err.error)
-          this.messageError=err.error
+    handleForm() {
+        if (this.registerForm.valid) {
+            this.authService.Register(this.registerForm.value).subscribe({
+                next: (response) => {
+                    this._router.navigate(['/login'], { state: { email: this.registerForm.value.email, password: this.registerForm.value.password } });
+                    //console.log(response);
+                    this.authService.Email = this.registerForm.value.email
+                    this.authService.Password = this.registerForm.value.password
+                    //console.log(this.authService.Email)
+                },
+                error: (err) => {
+                    //console.log(err);
+                    //console.log(err.error)
+                    this.messageError = err.error
+                }
+            });
         }
-      });
     }
-  }
 
-  onCountrySelected(value: string) {
-    const selectedCountry = this.Counteries.find(a => a.name == value);
-    if (selectedCountry) {
-      this.countryCode = selectedCountry.dial_code;
-      this.registerForm.get('country')?.setValue(selectedCountry.name);
-      this.registerForm.get('phoneCode')?.setValue(selectedCountry.dial_code);
+    onCountrySelected(value: string) {
+        const selectedCountry = this.Counteries.find(a => a.name == value);
+        if (selectedCountry) {
+            this.countryCode = selectedCountry.dial_code;
+            this.registerForm.get('country')?.setValue(selectedCountry.name);
+            this.registerForm.get('phoneCode')?.setValue(selectedCountry.dial_code);
+        }
     }
-  }
 
-  password() {
-    this.show = !this.show;
-}
+    password() {
+        this.show = !this.show;
+    }
 }

@@ -90,7 +90,7 @@
                 showHeader="false"
                 [ngClass]="{ 'd-none': !selectedCategory.value }"
                 (onChange)="getAllSearchRes({
-                          searchParam: searchValue,
+                            searchParam: searchValue,
                             isFeatured: isSponserChecked?sponser:null,
                             minPrice: rangeValues?.value?.[0] ?? null ,
                             maxPrice: rangeValues?.value?.[1] ?? null,
