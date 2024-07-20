@@ -3,14 +3,11 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { CarouselModule } from 'primeng/carousel';
 import { ButtonModule } from 'primeng/button';
-import { ProductService } from '../../../../app/services/featuredProduct.service';
-import { FeaturedProduct } from '../../../../app/models/featuredProduct';
-import { UsersService } from 'src/app/services/users.service';
-import { AuthService } from 'src/app/services/auth.service';
+import { FeaturedProductService } from '../../../../app/services/featuredProduct.service';
 import { MessageService } from 'primeng/api';
-import { Router } from '@angular/router';
 import { ToastModule } from 'primeng/toast';
 import { TranslateModule } from '@ngx-translate/core';
+import { PaidAd } from 'src/app/models/paidAd';
 
 @Component({
     selector: 'featured-product',
@@ -28,7 +25,9 @@ import { TranslateModule } from '@ngx-translate/core';
     ]
 })
 export class FeaturedProductComponent implements OnInit {
-    products: FeaturedProduct[] = [];
+
+    products: PaidAd[] = [];
+
     @ViewChild('favIcon', { static: false }) favIcon!: ElementRef;
     isAuthanciated: boolean = false
     Userid: string = '';
@@ -50,17 +49,12 @@ export class FeaturedProductComponent implements OnInit {
         }
     ];
 
-    constructor(private productService: ProductService, private _router: Router,
-        private usersService: UsersService, private authServ: AuthService,
-        private messageService: MessageService) { }
+    constructor(private productService: FeaturedProductService) { }
 
     ngOnInit() {
         this.isAuthanciated = localStorage.getItem('UserToken') != null ? true : false
-        this.productService.getProducts(1).subscribe((data: FeaturedProduct[]) => {
+        this.productService.getProducts().subscribe((data: PaidAd[]) => {
             this.products = data;
-            // this.products.forEach(product => {
-            //     product.isFavorite = false;  // Add isFavorite property initially set to false
-            // });
         });
     }
 
@@ -68,78 +62,8 @@ export class FeaturedProductComponent implements OnInit {
         (event.target as HTMLImageElement).src = './assets/layout/images/default-product-image.png';
     }
 
-    // toggleFavorite(product: Product) {
-    //     product.isFavorite = !product.isFavorite;
-    // }
-
-    seeAll() {
-
-       
-        console.log('See all button clicked');
-
-        this._router.navigate([`\serach\products`]);
-
-    }
-
-    getDetails(productID: number) {
-        // if (this.authServ.GetUserData().roles.includes("Admin") || this.authServ.GetUserData().roles.includes("SuperAdmin")) {
-        //     return
-        // }
-        this._router.navigate([`productDetails/${productID}`]);
-        this.usersService.AddHistoryProduct(this.Userid, productID).subscribe({
-            next: (data) => {
-                //console.log(data);
-            },
-            error: (err) => {
-                //console.log(err);
-            },
-        });
-    }
-
-    addToFav(product: FeaturedProduct, event: Event) {
-        event.stopPropagation();
-        console.log(this.isAuthanciated)
-        if (this.isAuthanciated) {
-            this.Userid = this.authServ.GetUserData().uid;
-            if (this.authServ.GetUserData().roles.includes("Admin") || this.authServ.GetUserData().roles.includes("SuperAdmin")) {
-                this.messageService.add({ severity: 'error', summary: '', detail: `you are not User`, life: 3000 });
-                return
-            }
-            this.usersService.AddFavouriteProduct(this.Userid, product.productId).subscribe({
-                next: (data) => {
-                    console.log(data);
-                    if (data === "Already Exists") {
-                        this.messageService.add({ severity: 'error', summary: '', detail: `${data}`, life: 3000 });
-                    } else {
-
-                        this.messageService.add({ severity: 'success', summary: 'Successful', detail: `${data}`, life: 3000 });
-                        product.isFavorite = true;
-                        console.log(product.isFavorite)
-                        //this.updateFavIcon(product);
-                    }
-                },
-                error: (err) => {
-                    this.messageService.add({ severity: 'error', summary: 'error', detail: `${err.message}`, life: 3000 });
-                    // console.log(err);
-                },
-            });
-        } else {
-            this._router.navigate([`login`]);
-        }
-    }
-
-    updateFavIcon(product: FeaturedProduct) {
-        if (product.isFavorite) {
-            this.favIcon.nativeElement.classList.add('pi-heart-fill', 'text-red');
-            this.favIcon.nativeElement.classList.remove('pi-heart');
-        } else {
-            this.favIcon.nativeElement.classList.add('pi-heart');
-            this.favIcon.nativeElement.classList.remove('pi-heart-fill', 'text-red');
-        }
-    }
-
-    STOP(event: Event) {
-        event.stopPropagation();
+    getDetails(productLink: string) {
+        window.open(productLink, '_blank');
     }
 
 }

@@ -9,5 +9,4 @@ export interface PaidAd {
     startDate: string; // Representing DateOnly as a string
     endDate: string;   // Representing DateOnly as a string
     days: number;
-  }
-  
+}
