@@ -4,31 +4,24 @@
         <div class="card">
             <div class="d-flex justify-content-between">
                 <h5>{{"Home.Featured"| translate}}</h5>
-                <button class="see-all-button" (click)="seeAll()">{{"Home.See All" | translate}}</button>
             </div>
             <p-carousel [value]="products" [numVisible]="5" [numScroll]="3" [circular]="false"
                 [responsiveOptions]="carouselResponsiveOptions">
-                <ng-template let-product pTemplate="item">
-                    <div class="border-round m-2 text-center p-2" style="border: 1px solid var(--surface-d); cursor: pointer;" (click)="getDetails(product.productId)">
-                        <div class="favorite-icon float-end " (click)="addToFav(product, $event)">
-                            <i [ngClass]="{'pi pi-heart-fill': product.isFavorite, 'pi pi-heart': !product.isFavorite}"></i>
-                        </div>
+                <ng-template let-product pTemplate="item" [height]="300">
+                    <div class="border-round m-2 text-center p-2"
+                        style="border: 1px solid var(--surface-d); cursor: pointer;"
+                        (click)="getDetails(product.productLink)"  > 
                         <div class="my-3">
-                            <img [src]="product.images || './assets/layout/images/default-product-image.png' " [alt]="product.productName_Global" class="product-img shadow-4" width="50%" (error)="onImageError($event)" />
+                            <img [src]="product.productImage || './assets/layout/images/default-product-image.png' "
+                                [alt]="product.productName" class="product-img shadow-4" [width]="150" [height]="150"
+                                (error)="onImageError($event)" />
                         </div>
                         <div>
-                            <h5 class="mb-1">{{product.productName_Global}}</h5>
-                            <h6 class="mt-0 mb-2 price">SAR {{product.minPrice}}</h6>
-                            <h7 class="mb-2">Compare {{product.domainCount}} online shops</h7>
-                            <div class="links" *ngFor="let link of product.links">
-                                <a [href]="link.productLink" target="_blank" class="link-row" (click)="STOP($event)">
-                                    <img [src]="link.domainLogo" [alt]="link.domainName" class="logo" />
-                                    <div class="link-info">
-                                        <h6 class="domain-name my-0">{{link.domainName}}</h6>
-                                        <h4 class="domainPrice my-0">SAR {{link.price}}</h4>
-                                    </div>
-                                    <i class="pi pi-chevron-right"></i>
-                                </a>
+                            <h5 class="mb-1">{{product.productName}}</h5>
+                            <h6 class="mt-0 mb-2 price">SAR {{product.productPrice}}</h6>
+                            <img [src]="product.productLink | FavIcon" [alt]="product.productLink | domainName" class="logo" />
+                            <div class="link-info">
+                                <h6 class="domain-name my-0">{{product.productLink | domainName}}</h6>
                             </div>
                         </div>
                     </div>

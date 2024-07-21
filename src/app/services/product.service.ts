@@ -11,11 +11,6 @@ export class ProductService {
     constructor(private http: HttpClient) { }
     apiUrl: string = environment.api;
 
-    //private getAllProductsUrl: string = 'http://localhost:5066/api/CombinedProduct';
-    //private confirmProductUrl: string = 'http://localhost:5066/api/confirm-product';
-    // private deleteProductUrl: string = 'http://localhost:5066/api/CombinedProduct/';
-    //private bulkDeleteUrl: string = 'http://localhost:5066/api/CombinedProduct/bulk-delete';
-
     private productData: any;
 
     getAllProducts(): Observable<any> {

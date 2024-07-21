@@ -1,116 +1,112 @@
-<div class="grid">
-    <div class="col-12 lg:col-6 xl:col-3">
+<div class="row">
+    <div class="col-12 col-lg-6 col-xl-3">
         <div class="card mb-0">
-            <div class="flex justify-content-between mb-3">
+            <div class="d-flex justify-content-between mb-3">
                 <div>
-                    <span class="block text-500 font-medium mb-3">Products</span>
-                    <div class="text-900 font-medium text-xl">{{productCount}}</div>
+                    <span class="d-block text-secondary mb-2" style="font-size: 0.875rem;">Products</span>
+                    <div class="text-dark" style="font-size: 1.25rem;">{{productCount}}</div>
                 </div>
-                <div class="flex align-items-center justify-content-center bg-blue-100 border-round" [ngStyle]="{width: '2.5rem', height: '2.5rem'}">
-                    <i class="pi pi-box text-blue-500 text-3xl"></i> <!-- Made icon bigger -->
+                <div class="d-flex align-items-center justify-content-center bg-primary-100 rounded-circle" style="width: 2rem; height: 2rem;">
+                    <i class="pi pi-box text-primary-500" style="font-size: 1.5rem;"></i>
                 </div>
             </div>
-            <span class="text-500">Total products available</span> <!-- Added content -->
+            <span class="text-secondary" style="font-size: 0.75rem;">Total products available</span>
         </div>
     </div>
-    <div class="col-12 lg:col-6 xl:col-3">
+    <div class="col-12 col-lg-6 col-xl-3">
         <div class="card mb-0">
-            <div class="flex justify-content-between mb-3">
+            <div class="d-flex justify-content-between mb-3">
                 <div>
-                    <span class="block text-500 font-medium mb-3">Brands</span>
-                    <div class="text-900 font-medium text-xl">{{BrandCount}}</div>
+                    <span class="d-block text-secondary mb-2" style="font-size: 0.875rem;">Brands</span>
+                    <div class="text-dark" style="font-size: 1.25rem;">{{BrandCount}}</div>
                 </div>
-                <div class="flex align-items-center justify-content-center bg-orange-100 border-round" [ngStyle]="{width: '2.5rem', height: '2.5rem'}">
-                    <i class="pi pi-tags text-orange-500 text-3xl"></i> <!-- Made icon bigger -->
+                <div class="d-flex align-items-center justify-content-center bg-warning-100 rounded-circle" style="width: 2rem; height: 2rem;">
+                    <i class="pi pi-tags text-warning-500" style="font-size: 1.5rem;"></i>
                 </div>
             </div>
-            <span class="text-500">Brands in your portfolio</span> <!-- Added content -->
+            <span class="text-secondary" style="font-size: 0.75rem;">Brands in your portfolio</span>
         </div>
     </div>
-    <div class="col-12 lg:col-6 xl:col-3">
+    <div class="col-12 col-lg-6 col-xl-3">
         <div class="card mb-0">
-            <div class="flex justify-content-between mb-3">
+            <div class="d-flex justify-content-between mb-3">
                 <div>
-                    <span class="block text-500 font-medium mb-3">Visitors</span>
-                    <div class="text-900 font-medium text-xl">{{userCount}}</div>
+                    <span class="d-block text-secondary mb-2" style="font-size: 0.875rem;">Visitors</span>
+                    <div class="text-dark" style="font-size: 1.25rem;">{{userCount}}</div>
                 </div>
-                <div class="flex align-items-center justify-content-center bg-cyan-100 border-round" [ngStyle]="{width: '2.5rem', height: '2.5rem'}">
-                    <i class="pi pi-users text-cyan-500 text-3xl"></i> <!-- Made icon bigger -->
+                <div class="d-flex align-items-center justify-content-center bg-info-100 rounded-circle" style="width: 2rem; height: 2rem;">
+                    <i class="pi pi-users text-info-500" style="font-size: 1.5rem;"></i>
                 </div>
             </div>
-            <span class="text-500">Active customer accounts</span> <!-- Added content -->
+            <span class="text-secondary" style="font-size: 0.75rem;">Active customer accounts</span>
         </div>
     </div>
-    <div class="col-12 lg:col-6 xl:col-3">
+    <div class="col-12 col-lg-6 col-xl-3">
         <div class="card mb-0">
-            <div class="flex justify-content-between mb-3">
+            <div class="d-flex justify-content-between mb-3">
                 <div>
-                    <span class="block text-500 font-medium mb-3">Categories</span>
-                    <div class="text-900 font-medium text-xl">{{categoryCount}}</div>
+                    <span class="d-block text-secondary mb-2" style="font-size: 0.875rem;">Categories</span>
+                    <div class="text-dark" style="font-size: 1.25rem;">{{categoryCount}}</div>
                 </div>
-                <div class="flex align-items-center justify-content-center bg-purple-100 border-round" [ngStyle]="{width: '2.5rem', height: '2.5rem'}">
-                    <i class="pi pi-sitemap text-purple-500 text-3xl"></i> <!-- Made icon bigger -->
+                <div class="d-flex align-items-center justify-content-center bg-secondary-100 rounded-circle" style="width: 2rem; height: 2rem;">
+                    <i class="pi pi-sitemap text-secondary-500" style="font-size: 1.5rem;"></i>
                 </div>
             </div>
-            <span class="text-500">Product categories listed</span> <!-- Added content -->
-        </div>
-    </div>
-
-    <div class="col-12 lg:col-6 xl:col-3">
-        <div class="card mb-0">
-            <div class="flex justify-content-between mb-3">
-                <div>
-                    <span class="block text-500 font-medium mb-3">Subcategories</span>
-                    <div class="text-900 font-medium text-xl">{{subCategoryCount}}</div>
-                </div>
-                <div class="flex align-items-center justify-content-center bg-green-100 border-round" [ngStyle]="{width: '2.5rem', height: '2.5rem'}">
-                    <i class="pi pi-tags text-green-500 text-3xl"></i> <!-- Icon for subcategories -->
-                </div>
-            </div>
-            <span class="text-500">Subcategories within categories</span>
+            <span class="text-secondary" style="font-size: 0.75rem;">Product categories listed</span>
         </div>
     </div>
 
-    <div class="col-12 lg:col-6 xl:col-3">
+    <div class="col-12 col-lg-6 col-xl-3">
         <div class="card mb-0">
-            <div class="flex justify-content-between mb-3">
+            <div class="d-flex justify-content-between mb-3">
                 <div>
-                    <span class="block text-500 font-medium mb-3">Domains</span>
-                    <div class="text-900 font-medium text-xl">{{domainCount}}</div>
+                    <span class="d-block text-secondary mb-2" style="font-size: 0.875rem;">Subcategories</span>
+                    <div class="text-dark" style="font-size: 1.25rem;">{{subCategoryCount}}</div>
                 </div>
-                <div class="flex align-items-center justify-content-center bg-blue-100 border-round" [ngStyle]="{width: '2.5rem', height: '2.5rem'}">
-                    <i class="pi pi-globe text-blue-500 text-3xl"></i> <!-- Made icon bigger -->
+                <div class="d-flex align-items-center justify-content-center bg-success-100 rounded-circle" style="width: 2rem; height: 2rem;">
+                    <i class="pi pi-tags text-success-500" style="font-size: 1.5rem;"></i>
                 </div>
             </div>
-            <span class="text-500">Operational business domains</span> <!-- Added content -->
+            <span class="text-secondary" style="font-size: 0.75rem;">Subcategories within categories</span>
+        </div>
+    </div>
+
+    <div class="col-12 col-lg-6 col-xl-3">
+        <div class="card mb-0">
+            <div class="d-flex justify-content-between mb-3">
+                <div>
+                    <span class="d-block text-secondary mb-2" style="font-size: 0.875rem;">Domains</span>
+                    <div class="text-dark" style="font-size: 1.25rem;">{{domainCount}}</div>
+                </div>
+                <div class="d-flex align-items-center justify-content-center bg-primary-100 rounded-circle" style="width: 2rem; height: 2rem;">
+                    <i class="pi pi-globe text-primary-500" style="font-size: 1.5rem;"></i>
+                </div>
+            </div>
+            <span class="text-secondary" style="font-size: 0.75rem;">Operational business domains</span>
         </div>
     </div>
 </div>
 
 <!-- Charts Section -->
-<!-- Charts Section -->
-<div class="grid">
-    <div class="col-12 xl:col-6">
+<div class="row">
+    <div class="col-12 col-xl-6">
         <div class="card">
-            <h5>Brand Products Overview</h5>
+            <h5 style="font-size: 1rem;">Brand Products Overview</h5>
             <p-chart class="dashboard-chart" type="line" [data]="chartData" [options]="chartOptions"></p-chart>
         </div>
         <div class="card">
-            <h5>User Growth Over Time</h5>
-            <!-- Changed type to "doughnut" for a hollow pie chart -->
+            <h5 style="font-size: 1rem;">User Growth Over Time</h5>
             <p-chart class="dashboard-chart" type="doughnut" [data]="userChartData" [options]="userChartOptions"></p-chart>
         </div>
-
     </div>
-    <div class="col-12 xl:col-6">
+    <div class="col-12 col-xl-6">
         <div class="card">
-            <h5>Category Brands Overview</h5>
+            <h5 style="font-size: 1rem;">Category Brands Overview</h5>
             <p-chart class="dashboard-chart" type="pie" [data]="categoryChartData" [options]="categoryChartOptions"></p-chart>
         </div>
         <div class="card">
-            <h5>Domain Products Overview</h5>
+            <h5 style="font-size: 1rem;">Domain Products Overview</h5>
             <p-chart class="dashboard-chart" type="bar" [data]="domainChartData" [options]="domainChartOptions"></p-chart>
         </div>
     </div>
 </div>
-

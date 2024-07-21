@@ -1,16 +1,20 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { FeaturedProduct } from '../models/featuredProduct';
 import { environment } from 'src/environments/environment';
+import { PaidAd } from '../models/paidAd';
 
 @Injectable({
     providedIn: 'root'
 })
-export class ProductService {
-    apiUrl : string = environment.api + '/CombinedProduct/featured';
+
+export class FeaturedProductService {
+    apiUrl : string = environment.api + '/PaidAd';
+
     constructor(private http: HttpClient) {}
-    getProducts(page: number): Observable<FeaturedProduct[]> {
-        return this.http.get<FeaturedProduct[]>(`${this.apiUrl}?page=${page}`);
+
+    getProducts(): Observable<PaidAd[]> {
+        return this.http.get<PaidAd[]>(`${this.apiUrl}`);
     }
+
 }

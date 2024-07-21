@@ -1,0 +1,142 @@
+<div class="grid">
+    <div class="col-12">
+        <div class="card px-6 py-6">
+            <p-toast></p-toast>
+            <p-toolbar styleClass="mb-4">
+                <ng-template pTemplate="left">
+                    <div class="my-2">
+                        <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success mr-2"
+                            (click)="openAdDialog()"></button>
+                        <button pButton pRipple label="Delete" icon="pi pi-trash" class="p-button-danger"
+                            (click)="deleteSelectedAds()" [disabled]="!selectedAds || !selectedAds.length"></button>
+                    </div>
+                </ng-template>
+            </p-toolbar>
+            <p-table #dt [value]="ads" [expandedRowKeys]="expandedRows" responsiveLayout="scroll" [rows]="10"
+                [paginator]="true" [rowsPerPageOptions]="rowsPerPageOptions" [showCurrentPageReport]="true"
+                currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                [(selection)]="selectedAds" selectionMode="multiple" [rowHover]="true" dataKey="id"
+                [globalFilterFields]="['contact', 'productName', 'productLink']">
+                <ng-template pTemplate="caption">
+                    <div class="flex flex-column md:flex-row md:justify-content-between md:align-items-center">
+                        <span class="block mt-2 md:mt-0 p-input-icon-left">
+                            <i class="pi pi-search"></i>
+                            <input pInputText type="text" (input)="onGlobalFilter(dt, $event)" placeholder="Search..."
+                                class="w-full sm:w-auto" />
+                        </span>
+                    </div>
+                </ng-template>
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th pSortableColumn="contact">Contact<p-sortIcon field="contact"></p-sortIcon></th>
+                        <th pSortableColumn="cost">Cost<p-sortIcon field="cost"></p-sortIcon></th>
+                        <th pSortableColumn="startDate">Start Date<p-sortIcon field="startDate"></p-sortIcon></th>
+                        <th pSortableColumn="endDate">End Date<p-sortIcon field="endDate"></p-sortIcon></th>
+                        <th pSortableColumn="productName">Product Name<p-sortIcon field="productName"></p-sortIcon></th>
+                        <th>Image</th>
+                        <th pSortableColumn="productPrice">Price<p-sortIcon field="productPrice"></p-sortIcon></th>
+                        <th pSortableColumn="productLink">URL<p-sortIcon field="productLink"></p-sortIcon></th>
+                        <th>Actions</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-ad let-expanded="expanded">
+                    <tr>
+                        <td>{{ ad.contact }}</td>
+                        <td>{{ ad.cost | currency:'USD' }}</td>
+                        <td>{{ ad.startDate }}</td>
+                        <td>{{ ad.endDate }}</td>
+                        <td>{{ ad.productName }}</td>
+                        <td>
+                            <div *ngIf="ad.productImage">
+                                <img [src]="ad.productImage" [alt]="ad.productName" width="100" class="shadow-4" />
+                            </div>
+                            <div *ngIf="!ad.productImage">
+                                <i class="pi pi-image" style="font-size: 3rem;"></i>
+                            </div>
+                        </td>
+                        <td>{{ ad.productPrice | currency:'USD' }}</td>
+                        <td><a [href]="ad.productLink" target="_blank">{{ ad.productLink }}</a></td>
+                        <td>
+                            <div class="flex">
+                                <button pButton pRipple icon="pi pi-pencil"
+                                    class="p-button-rounded p-button-success mr-2" (click)="openAdDialog(ad)"></button>
+                                <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning"
+                                    (click)="deleteAdDialogShow(ad)"></button>
+                            </div>
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table>
+            <p-dialog [(visible)]="deleteAdDialog" header="Confirm" [modal]="true" [style]="{width: '450px'}">
+                <div class="flex align-items-center justify-content-center">
+                    <i class="pi pi-exclamation-triangle mr-3" style="font-size: 2rem"></i>
+                    <span>Are you sure you want to delete <b>{{ ad.productName }}</b>?</span>
+                </div>
+                <ng-template pTemplate="footer">
+                    <button pButton pRipple icon="pi pi-times" class="p-button-text" label="No"
+                        (click)="hideDialog()"></button>
+                    <button pButton pRipple icon="pi pi-check" class="p-button-text" label="Yes"
+                        (click)="confirmDelete()"></button>
+                </ng-template>
+            </p-dialog>
+        </div>
+    </div>
+
+    <!-- Add/Edit Dialog -->
+    <p-dialog [(visible)]="adDialog" header="Ad Details" [modal]="true" [style]="{ width: '450px' }">
+        <form [formGroup]="adForm" (ngSubmit)="saveAd()" class="ad-form">
+            <div class="field">
+                <label for="productName">Product Name</label>
+                <input id="productName" formControlName="productName" pInputText />
+                <div *ngIf="adForm.get('productName').invalid && adForm.get('productName').touched"
+                    class="error-message">Product Name is required.</div>
+            </div>
+            <div class="field">
+                <label for="contact">Contact</label>
+                <input id="contact" formControlName="contact" pInputText />
+                <div *ngIf="adForm.get('contact').invalid && adForm.get('contact').touched" class="error-message">
+                    Contact is required.</div>
+            </div>
+            <div class="field">
+                <label for="cost">Cost</label>
+                <input id="cost" formControlName="cost" pInputText type="number" />
+                <div *ngIf="adForm.get('cost').invalid && adForm.get('cost').touched" class="error-message">Cost is
+                    required.</div>
+            </div>
+            <div class="field">
+                <label for="productPrice">Price</label>
+                <input id="productPrice" formControlName="productPrice" pInputText type="number" />
+                <div *ngIf="adForm.get('productPrice').invalid && adForm.get('productPrice').touched"
+                    class="error-message">Price is required.</div>
+            </div>
+            <div class="field">
+                <label for="productImage">Product Image URL</label>
+                <input id="productImage" formControlName="productImage" pInputText />
+            </div>
+            <div class="field">
+                <label for="productLink">Product Link</label>
+                <input id="productLink" formControlName="productLink" pInputText />
+                <div *ngIf="adForm.get('productLink').invalid && adForm.get('productLink').touched"
+                    class="error-message">Valid URL is required.</div>
+            </div>
+            <div class="field">
+                <label for="startDate">Start Date</label>
+                <input id="startDate" formControlName="startDate" type="date" pInputText />
+                <div *ngIf="adForm.get('startDate').invalid && adForm.get('startDate').touched" class="error-message">
+                    Start Date is required.</div>
+            </div>
+            <div class="field">
+                <label for="days">Number of Days</label>
+                <input id="days" formControlName="days" pInputText type="number" />
+                <div *ngIf="adForm.get('days').invalid && adForm.get('days').touched" class="error-message">Number of
+                    Days is required and must be at least 1.</div>
+            </div>
+            <div class="dialog-footer">
+                <button pButton pRipple icon="pi pi-times" label="Cancel" (click)="hideAdDialog()"></button>
+                <button pButton pRipple icon="pi pi-check" label="Save" type="submit"
+                    [disabled]="adForm.invalid"></button>
+            </div>
+        </form>
+    </p-dialog>
+
+</div>
