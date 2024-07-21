@@ -7,7 +7,6 @@
                 inputId="ny"
                 [value]="'d'"
                 (onChange)="isSponserChecked=true;
-
                 sponser = !sponser;
                 getAllSearchRes({
                             searchParam: searchValue,
@@ -22,7 +21,6 @@
                             pageNumber:pageNumber,
                             pageSize:10,
 
-
                         })"
             />
             <label for="ny" class="ps-2">Sponsered</label>
@@ -31,7 +29,7 @@
         <div class="search-filter bg-white">
             <p-dropdown
                 [formControl]="selectedCategory"
-                [options]="categoryOptions"
+                [options]="searchResult?.resultCategories"
                 optionLabel="name_Global"
                 placeholder="Category"
                 (onChange)="
@@ -57,7 +55,6 @@
         <p-divider />
         <div class="search-filter bg-white">
             <p-dropdown
-                [ngClass]="{ 'd-none': !selectedCategory.value }"
                 [formControl]="selectedSubCategory"
                 [options]="subCategoryOptions"
                 optionLabel="name_Global"
@@ -88,7 +85,6 @@
                 placeholder="Brands"
                 optionLabel="name_Global"
                 showHeader="false"
-                [ngClass]="{ 'd-none': !selectedCategory.value }"
                 (onChange)="getAllSearchRes({
                             searchParam: searchValue,
                             isFeatured: isSponserChecked?sponser:null,
@@ -164,7 +160,7 @@
                 [range]="true"
                 styleClass="m-2"
                 min="0"
-                max="10000"
+                [max]="searchResult?.mostMaxPrice"
             />
             <div
                 class="d-flex mt-3 justify-content-between gap-2 align-items-center flex-column"
@@ -172,8 +168,6 @@
                 <div class="d-flex gap-2">
                     <input
                         type="text"
-                        min="1000"
-                        max="10000"
                         class="w-100"
                         type="number"
                         [(ngModel)]="rangeValues.value[0]"
@@ -182,8 +176,7 @@
                     />
                     <input
                         type="text"
-                        min="1000"
-                        max="10000"
+                        [max]="searchResult?.mostMaxPrice"
                         class="w-100"
                         type="number"
                         placeholder="max price"
@@ -193,22 +186,25 @@
                 </div>
                 <button
                     class="btn btn-sm btn-outline-success flex-grow-1 d-block w-75"
+                    [disabled]="
+                        !rangeValues.value[0] || !rangeValues.value[1]
+                    "
                     (click)="
-                    getAllSearchRes({
-                        searchParam: searchValue,
-                    isFeatured: isSponserChecked?sponser:null,
-                    minPrice: rangeValues?.value?.[0] ?? null ,
-                    maxPrice: rangeValues?.value?.[1] ?? null,
-                    categoryID: selectedCategory?.value['id'] ?? null,
-                    sortedBy: selectedSort?.value['value'] ?? null,
-                    domainID: selectedDomain?.value ?? null,
-                    subCatId: selectedSubCategory?.value['id'] ?? null,
-                    brandId: selectedBrand?.value ?? null,
-                    pageNumber:pageNumber,
-                    pageSize:10,
+                getAllSearchRes({
+                    searchParam: searchValue,
+                isFeatured: isSponserChecked?sponser:null,
+                minPrice: rangeValues?.value?.[0] ?? null ,
+                maxPrice: rangeValues?.value?.[1] ?? null,
+                categoryID: selectedCategory?.value['id'] ?? null,
+                sortedBy: selectedSort?.value['value'] ?? null,
+                domainID: selectedDomain?.value ?? null,
+                subCatId: selectedSubCategory?.value['id'] ?? null,
+                brandId: selectedBrand?.value ?? null,
+                pageNumber:pageNumber,
+                pageSize:10,
 
-                    })
-                "
+                })
+            "
                 >
                     <p class="d-inline-block m-0 fs-5">Search</p>
                     <i
@@ -250,6 +246,7 @@
 />
 <!-- slider -->
 <!-- ///////////////////////////////////////////////////// -->
+<p-toast></p-toast>
 
 <div class="container">
     <div class="row justify-content-center">
@@ -281,7 +278,7 @@
             <div class="search-filter bg-white">
                 <p-dropdown
                     [formControl]="selectedCategory"
-                    [options]="categoryOptions"
+                    [options]="searchResult?.resultCategories"
                     optionLabel="name_Global"
                     placeholder="Category"
                     (onChange)="
@@ -420,7 +417,6 @@
                     <div class="d-flex gap-2">
                         <input
                             type="text"
-
                             class="w-100"
                             type="number"
                             [(ngModel)]="rangeValues.value[0]"
@@ -429,7 +425,6 @@
                         />
                         <input
                             type="text"
-
                             [max]="searchResult?.mostMaxPrice"
                             class="w-100"
                             type="number"
@@ -440,7 +435,9 @@
                     </div>
                     <button
                         class="btn btn-sm btn-outline-success flex-grow-1 d-block w-75"
-                        [disabled]="!rangeValues.value[0] || !rangeValues.value[1]"
+                        [disabled]="
+                            !rangeValues.value[0] || !rangeValues.value[1]
+                        "
                         (click)="
                     getAllSearchRes({
                         searchParam: searchValue,
@@ -520,10 +517,10 @@
                 @defer{
 
                 <i
-                    class="pi position-absolute end-0 text-end d-inline-block"
-                    [ngClass]="{'pi-heart-fill ': item.isFavorite, 'pi-heart': !item.isFavorite}"
+                    class="pi  position-absolute end-0 text-end d-inline-block cursor-pointer"
                     (click)="addToFav(item.product_Id,$event)"
                     style="font-size: 1.5rem; top: -15px"
+                    [ngClass]="{'pi-heart-fill':isFavorite(item.product_Id)==true,'pi-heart':isFavorite(item.product_Id)==false}"
                 ></i>
 
                 <div class="row align-items-center g-2 justify-content-between">
@@ -557,14 +554,9 @@
                                     item.averageRating | number : "1.0-1"
                                 }}</span>
                                 <p class="fs-4 text-primary fw-medium">
-                                    {{ item.mostMinimumPrice }} SAR
+                                  <span class="fs-6 fw-light text-black-50">Minimum</span> {{ item.mostMinimumPrice }} SAR
                                 </p>
-                                <!-- <p class="text-black-50">
-                                        from
-                                        <span class="fw-bold">{{
-                                            item.minPriceBrandName
-                                        }}</span>
-                                    </p> -->
+                                <p>{{item.productLinkDTOs?.length}} stores</p>
                             </div>
                         </div>
                     </div>

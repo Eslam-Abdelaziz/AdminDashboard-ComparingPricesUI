@@ -1,9 +1,29 @@
 export interface Brand {
-    numberOfResults:number;
-    numberOfPages:number;
-    mostMaxPrice:number;
-    resultPaginated:{
-
+    numberOfResults: number;
+    numberOfPages: number;
+    mostMaxPrice: number;
+    resultCategories: {
+        id: number;
+        name_Local: string;
+        name_Global: string;
+        brands: {
+            id: number;
+            name_Local: string;
+            name_Global: string;
+            description_Local: string;
+            description_Global: string;
+            logo: string;
+            logoUrl: string;
+            categoryId: number;
+        }[];
+        subCategories: {
+            id: number;
+            name_Local: string;
+            name_Global: string;
+            categoryId: number;
+        }[];
+    }[];
+    resultPaginated: {
         product_Id: number;
         product_Name_Local: string;
         product_Name_Global: string;
@@ -65,5 +85,5 @@ export interface Brand {
                 logo: string;
             };
         }[];
-    }[]
+    }[];
 }

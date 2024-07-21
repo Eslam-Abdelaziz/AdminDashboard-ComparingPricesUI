@@ -86,7 +86,7 @@ export class UsersService {
     }
 
     RemoveFavProduct(UserId: string, ProductID: number): Observable<any> {
-        const url = `${this.apiUrl}RemoveFavProduct?id=${ProductID}&Userid=${UserId}`;
+        const url = `${this.apiUrl}DeleteFavProduct?id=${ProductID}&Userid=${UserId}`;
         return this.httpclient.delete(url, { responseType: 'text' });
     }
 
@@ -107,5 +107,5 @@ export class UsersService {
             .toPromise()
             .then(data => data as DataSummary[]);
     }
-    
+
 }

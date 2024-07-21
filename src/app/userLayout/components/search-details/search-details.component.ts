@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { PanelMenuModule } from 'primeng/panelmenu';
 import { TooltipModule } from 'primeng/tooltip';
 import { MultiSelectModule } from 'primeng/multiselect';
@@ -23,9 +23,12 @@ import { notfoundComponent } from '../../../components/not-found/not-found.compo
 import { AuthService } from 'src/app/services/auth.service';
 import { MessageService } from 'primeng/api';
 import { UsersService } from 'src/app/services/users.service';
+import { ToastModule } from 'primeng/toast';
+import { FavoriteService } from 'src/app/services/favorite.service';
 @Component({
     selector: 'app-search-details',
     standalone: true,
+    providers: [MessageService],
     imports: [
         TruncatePipe,
         PanelMenuModule,
@@ -44,20 +47,20 @@ import { UsersService } from 'src/app/services/users.service';
         DropdownModule,
         PaginatorModule,
         TooltipModule,
+        ToastModule,
         notfoundComponent,
     ],
     templateUrl: './search-details.component.html',
     styleUrl: './search-details.component.scss',
 })
-export class SearchDetailsComponent {
-    foo() {}
-    @ViewChild('favIcon', { static: false }) favIcon!: ElementRef;
+export class SearchDetailsComponent implements OnInit {
     pageNumber: number;
     first: number = 1;
     rows: number = 10;
     categoryOptions = [];
     subCategoryOptions = [];
     brandsOptions = [];
+    FavoriteItems = [];
     domainOptions = [];
     sortOptions = [
         { name: 'None', value: 0 },
@@ -78,7 +81,7 @@ export class SearchDetailsComponent {
     selectedSubCategory = new FormControl('');
     selectedCategory = new FormControl('');
     selectedDomain = new FormControl('');
-    searchResult!: Brand;
+    searchResult: Brand;
     searchValue: string = '';
     isAuthanciated: boolean = false;
     Userid: string = '';
@@ -87,10 +90,13 @@ export class SearchDetailsComponent {
         private search: SearchService,
         private activatedRoute: ActivatedRoute,
         private router: Router,
-        // private messageService: MessageService,
-        private usersService: UsersService
+        private messageService: MessageService,
+        private favoriteServ: FavoriteService
     ) {}
     ngOnInit() {
+        this.Userid = this.authServ.GetUserData().uid;
+        this.getAllFav();
+        console.log(this.Userid);
         this.searchValue = this.activatedRoute.snapshot.queryParams['q'];
         this.pageNumber = +this.activatedRoute.snapshot.queryParams['page'];
         this.getAllSearchRes({ searchParam: this.searchValue });
@@ -101,7 +107,7 @@ export class SearchDetailsComponent {
             }
         });
         this.getAllDomains();
-        this.getAllCat();
+
         this.getAllBrands();
         this.getAllSubcategory();
         this.isAuthanciated =
@@ -115,17 +121,20 @@ export class SearchDetailsComponent {
         });
     }
     getAllCat() {
-        this.search.getCategories().subscribe({
-            next: (data: Category[]) => {
-                this.categoryOptions = data;
-            },
-        });
+        this.categoryOptions = this.searchResult?.resultCategories;
     }
     getAllSubcategory() {
-        this.subCategoryOptions = this.selectedCategory.value['subCategories'];
+        this.searchResult?.resultCategories.forEach((cat) => {
+            this.subCategoryOptions = [
+                ...this.subCategoryOptions,
+                ...cat.subCategories,
+            ];
+        });
     }
     getAllBrands() {
-        this.brandsOptions = this.selectedCategory.value['brands'];
+        this.searchResult?.resultCategories.forEach((cat) => {
+            this.brandsOptions = [...this.brandsOptions, ...cat.brands];
+        });
     }
     getAllSearchRes(params: {
         searchParam?: string;
@@ -155,8 +164,11 @@ export class SearchDetailsComponent {
                 pageSize: params.pageSize,
             })
             .subscribe({
-                next: (data) => {
+                next: (data: Brand) => {
                     this.searchResult = data;
+                    this.getAllCat();
+                    this.getAllSubcategory();
+                    this.getAllBrands();
                 },
             });
     }
@@ -169,60 +181,30 @@ export class SearchDetailsComponent {
         this.rangeValues.setValue(newRange);
     }
 
-    addToFav(product: any, event: Event) {
-        event.stopPropagation();
-        console.log(this.isAuthanciated);
-        if (this.isAuthanciated) {
-            this.Userid = this.authServ.GetUserData().uid;
-            if (
-                this.authServ.GetUserData().roles.includes('Admin') ||
-                this.authServ.GetUserData().roles.includes('SuperAdmin')
-            ) {
-                // this.messageService.add({
-                //     severity: 'error',
-                //     summary: '',
-                //     detail: `you are not User`,
-                //     life: 3000,
-                // });
-                return;
-            }
-            this.usersService
-                .AddFavouriteProduct(this.Userid, product)
-                .subscribe({
-                    next: (data) => {
-                        console.log(data);
-                        if (data === 'Already Exists') {
-                            // this.messageService.add({
-                            //     severity: 'error',
-                            //     summary: '',
-                            //     detail: `${data}`,
-                            //     life: 3000,
-                            // });
-                        } else {
-                            // this.messageService.add({
-                            //     severity: 'success',
-                            //     summary: 'Successful',
-                            //     detail: `${data}`,
-                            //     life: 3000,
-                            // });
-                            product.isFavorite = true;
-                            console.log(product.isFavorite);
-                            //this.updateFavIcon(product);
-                        }
-                    },
-                    error: (err) => {
-                        // this.messageService.add({
-                        //     severity: 'error',
-                        //     summary: 'error',
-                        //     detail: `${err.message}`,
-                        //     life: 3000,
-                        // });
-                        // console.log(err);
-                    },
-                });
-        } else {
-            this.router.navigate([`login`]);
-        }
+    addToFav(productId: number, event: any) {
+        event.target.classList.remove('pi-heart');
+        event.target.classList.add('pi-heart-fill');
+        this.favoriteServ.addToFavorite(productId, this.Userid).subscribe({
+            next: (v) => {
+                this.getAllFav();
+                console.log('added to favorie', v);
+            },
+            error: (e) => {
+                if (e == 'Added Successfully') {
+                    this.messageService.add({
+                        severity: 'success',
+                        summary: 'Success',
+                        detail: 'Added Successfully',
+                    });
+                } else {
+                    this.messageService.add({
+                        severity: 'error',
+                        summary: 'Error',
+                        detail: e,
+                    });
+                }
+            },
+        });
     }
 
     onPageChange(event: any) {
@@ -246,19 +228,15 @@ export class SearchDetailsComponent {
             pageSize: 10,
         });
     }
-    updateFavIcon(product: any) {
-        if (product.isFavorite) {
-            this.favIcon.nativeElement.classList.add(
-                'pi-heart-fill',
-                'text-red'
-            );
-            this.favIcon.nativeElement.classList.remove('pi-heart');
-        } else {
-            this.favIcon.nativeElement.classList.add('pi-heart');
-            this.favIcon.nativeElement.classList.remove(
-                'pi-heart-fill',
-                'text-red'
-            );
-        }
+    getAllFav() {
+        this.favoriteServ.getFavorites(this.Userid).subscribe({
+            next: (d: any) => {
+                this.FavoriteItems = d;
+            },
+        });
+    }
+
+    isFavorite(prodId: number): boolean {
+        return this.FavoriteItems.some((item) => item.productId == prodId);
     }
 }

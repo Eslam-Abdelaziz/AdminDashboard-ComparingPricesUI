@@ -11,6 +11,8 @@ import { Category, SubCategory } from '../../models/category';
 import { MenubarModule } from 'primeng/menubar';
 import { AuthService } from 'src/app/services/auth.service';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { MenuModule } from 'primeng/menu';
+import { ButtonModule } from 'primeng/button';
 
 @Component({
     selector: 'app-header',
@@ -22,7 +24,9 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
         InputTextModule,
         MenubarModule,
         RouterLink,
-        TranslateModule
+        TranslateModule,
+        MenuModule,
+        ButtonModule
     ],
 
     templateUrl: './header.component.html',
