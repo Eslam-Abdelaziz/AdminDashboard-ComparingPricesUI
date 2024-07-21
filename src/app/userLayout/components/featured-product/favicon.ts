@@ -8,7 +8,9 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class FavIconPipe implements PipeTransform {
     transform(link: string): string {
         const url = new URL(link);
-        const domainName = 'https://' + url.hostname + '/favicon.ico';
-        return domainName;
+        const domain = url.hostname;
+        const size = 96; // specify the desired size of the favicon
+        const faviconUrl = `https://www.google.com/s2/favicons?domain=${domain}&sz=${size}`;
+        return faviconUrl;
     }
 }
