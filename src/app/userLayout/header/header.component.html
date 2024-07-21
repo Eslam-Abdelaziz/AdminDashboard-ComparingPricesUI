@@ -85,7 +85,9 @@
                             </ul>
                         </div>
                         <!-- language -->
-                        <button class="btn mx-2 btn-outline-primary"  (click)="switchLanguage()">  {{ currentLang == "en" ? "عربي" : "EN" }}</button>
+                        <!-- <button class="btn mx-2 btn-outline-primary"  (click)="switchLanguage()">  {{ currentLang == "en" ? "عربي" : "EN" }}</button> -->
+                        <p-menu #menu [model]="['AR','EN']" [popup]="true" />
+                        <p-button (onClick)="menu.toggle($event)" icon="pi pi-ellipsis-v"/>
                         <!-- country -->
                         <div class="header__action">
                             <div class="header__lang">

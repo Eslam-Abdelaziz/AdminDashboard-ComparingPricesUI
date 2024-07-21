@@ -111,12 +111,12 @@ export class HomeProductComponent implements OnInit {
                         this.messageService.add({ severity: 'success', summary: 'Successful', detail: `${data}`, life: 3000 });
                         product.isFavorite = true;
                         console.log(product.isFavorite)
-                        //this.updateFavIcon(product);
+                        this.updateFavIcon(product);
                     }
                 },
                 error: (err) => {
                     this.messageService.add({ severity: 'error', summary: 'error', detail: `${err.message}`, life: 3000 });
-                    // console.log(err);
+                    console.log(err);
                 },
             });
         } else {
