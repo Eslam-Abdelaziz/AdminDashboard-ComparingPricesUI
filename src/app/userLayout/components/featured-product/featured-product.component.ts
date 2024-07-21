@@ -8,7 +8,8 @@ import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
 import { TranslateModule } from '@ngx-translate/core';
 import { PaidAd } from 'src/app/models/paidAd';
-
+import { DomainNamePipe } from './link';
+import { FavIconPipe } from './favicon';
 @Component({
     selector: 'featured-product',
     templateUrl: './featured-product.component.html',
@@ -21,49 +22,51 @@ import { PaidAd } from 'src/app/models/paidAd';
         CarouselModule,
         ButtonModule,
         ToastModule,
-        TranslateModule
-    ]
+        TranslateModule,
+        DomainNamePipe,
+        FavIconPipe,
+    ],
 })
 export class FeaturedProductComponent implements OnInit {
-
     products: PaidAd[] = [];
 
     @ViewChild('favIcon', { static: false }) favIcon!: ElementRef;
-    isAuthanciated: boolean = false
+    isAuthanciated: boolean = false;
     Userid: string = '';
     carouselResponsiveOptions: any[] = [
         {
             breakpoint: '1024px',
             numVisible: 3,
-            numScroll: 3
+            numScroll: 3,
         },
         {
             breakpoint: '768px',
             numVisible: 2,
-            numScroll: 2
+            numScroll: 2,
         },
         {
             breakpoint: '560px',
             numVisible: 1,
-            numScroll: 1
-        }
+            numScroll: 1,
+        },
     ];
 
-    constructor(private productService: FeaturedProductService) { }
+    constructor(private productService: FeaturedProductService) {}
 
     ngOnInit() {
-        this.isAuthanciated = localStorage.getItem('UserToken') != null ? true : false
+        this.isAuthanciated =
+            localStorage.getItem('UserToken') != null ? true : false;
         this.productService.getProducts().subscribe((data: PaidAd[]) => {
             this.products = data;
         });
     }
 
     onImageError(event: Event) {
-        (event.target as HTMLImageElement).src = './assets/layout/images/default-product-image.png';
+        (event.target as HTMLImageElement).src =
+            './assets/layout/images/default-product-image.png';
     }
 
     getDetails(productLink: string) {
         window.open(productLink, '_blank');
     }
-
 }

@@ -19,9 +19,9 @@
                         <div>
                             <h5 class="mb-1">{{product.productName}}</h5>
                             <h6 class="mt-0 mb-2 price">SAR {{product.productPrice}}</h6>
-                            <img [src]="product.domainLogo" [alt]="product.domainName" class="logo" />
+                            <img [src]="product.productLink | FavIcon" [alt]="product.productLink | domainName" class="logo" />
                             <div class="link-info">
-                                <h6 class="domain-name my-0">{{product.domainName}}</h6>
+                                <h6 class="domain-name my-0">{{product.productLink | domainName}}</h6>
                             </div>
                         </div>
                     </div>
