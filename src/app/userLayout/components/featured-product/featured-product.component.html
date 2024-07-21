@@ -10,17 +10,17 @@
                 <ng-template let-product pTemplate="item" [height]="300">
                     <div class="border-round m-2 text-center p-2"
                         style="border: 1px solid var(--surface-d); cursor: pointer;"
-                        (click)="getDetails(product.productLink)"  > 
+                        (click)="getDetails(product.productLink)"  >
                         <div class="my-3">
                             <img [src]="product.productImage || './assets/layout/images/default-product-image.png' "
                                 [alt]="product.productName" class="product-img shadow-4" [width]="150" [height]="150"
                                 (error)="onImageError($event)" />
                         </div>
-                        <div>
+                        <div >
                             <h5 class="mb-1">{{product.productName}}</h5>
                             <h6 class="mt-0 mb-2 price">SAR {{product.productPrice}}</h6>
-                            <img [src]="product.productLink | FavIcon" [alt]="product.productLink | domainName" class="logo" />
-                            <div class="link-info">
+                            <div class="link-row">
+                                <img [src]="product.productLink | FavIcon" [alt]="product.productLink | domainName" class="logo" />
                                 <h6 class="domain-name my-0">{{product.productLink | domainName}}</h6>
                             </div>
                         </div>
