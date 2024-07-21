@@ -7,13 +7,13 @@
             </div>
             <p-carousel [value]="products" [numVisible]="5" [numScroll]="3" [circular]="false"
                 [responsiveOptions]="carouselResponsiveOptions">
-                <ng-template let-product pTemplate="item">
+                <ng-template let-product pTemplate="item" [height]="300">
                     <div class="border-round m-2 text-center p-2"
                         style="border: 1px solid var(--surface-d); cursor: pointer;"
-                        (click)="getDetails(product.productLink)">
+                        (click)="getDetails(product.productLink)"  > 
                         <div class="my-3">
                             <img [src]="product.productImage || './assets/layout/images/default-product-image.png' "
-                                [alt]="product.productName" class="product-img shadow-4" width="50%"
+                                [alt]="product.productName" class="product-img shadow-4" [width]="150" [height]="150"
                                 (error)="onImageError($event)" />
                         </div>
                         <div>
