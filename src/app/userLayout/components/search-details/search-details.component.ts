@@ -191,6 +191,7 @@ export class SearchDetailsComponent implements OnInit {
                 console.log('added to favorie', v);
             },
             error: (e) => {
+                this.getAllFav();
                 if (e == 'Added Successfully') {
                     this.messageService.add({
                         severity: 'success',

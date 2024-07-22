@@ -135,6 +135,7 @@
                 optionLabel="name"
                 placeholder="Sort By"
                 (onChange)="
+                
                         getAllSearchRes({
                             searchParam: searchValue,
                             isFeatured: isSponserChecked?sponser:null,
@@ -190,6 +191,7 @@
                         !rangeValues.value[0] || !rangeValues.value[1]
                     "
                     (click)="
+
                 getAllSearchRes({
                     searchParam: searchValue,
                 isFeatured: isSponserChecked?sponser:null,
