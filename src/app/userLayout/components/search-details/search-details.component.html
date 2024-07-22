@@ -135,7 +135,7 @@
                 optionLabel="name"
                 placeholder="Sort By"
                 (onChange)="
-                
+
                         getAllSearchRes({
                             searchParam: searchValue,
                             isFeatured: isSponserChecked?sponser:null,
@@ -187,9 +187,7 @@
                 </div>
                 <button
                     class="btn btn-sm btn-outline-success flex-grow-1 d-block w-75"
-                    [disabled]="
-                        !rangeValues.value[0] || !rangeValues.value[1]
-                    "
+                    [disabled]="!rangeValues.value[0] || !rangeValues.value[1]"
                     (click)="
 
                 getAllSearchRes({
@@ -410,9 +408,11 @@
                     [formControl]="rangeValues"
                     [range]="true"
                     styleClass="m-2"
-                    min="0"
+                    min=0
                     [max]="searchResult?.mostMaxPrice"
+
                 />
+                <p-divider></p-divider>
                 <div
                     class="d-flex mt-3 justify-content-between gap-2 align-items-center flex-column"
                 >
@@ -421,17 +421,20 @@
                             type="text"
                             class="w-100"
                             type="number"
-                            [(ngModel)]="rangeValues.value[0]"
+                            [(ngModel)]="rangeValues?.value[0]"
                             (ngModelChange)="updateSlider($event, 0)"
                             placeholder="min price"
+                           min="0"
+
                         />
                         <input
+                        [value]="searchResult?.mostMaxPrice"
                             type="text"
                             [max]="searchResult?.mostMaxPrice"
                             class="w-100"
                             type="number"
                             placeholder="max price"
-                            [(ngModel)]="rangeValues.value[1]"
+                            [(ngModel)]="rangeValues?.value[1]"
                             (ngModelChange)="updateSlider($event, 1)"
                         />
                     </div>
@@ -457,12 +460,13 @@
                     })
                 "
                     >
-                        <p class="d-inline-block m-0 fs-5">Search</p>
+                        <p class="d-inline-block m-0 fs-5">filter by price</p>
                         <i
                             class="pi pi-search"
                             style="font-size: 1.3rem; cursor: pointer"
                         ></i>
                     </button>
+<button class="btn btn-danger" (click)="resetFilter()">Reset</button>
                 </div>
             </div>
             <p-divider />
@@ -519,10 +523,13 @@
                 @defer{
 
                 <i
-                    class="pi  position-absolute end-0 text-end d-inline-block cursor-pointer"
-                    (click)="addToFav(item.product_Id,$event)"
+                    class="pi position-absolute end-0 text-end d-inline-block cursor-pointer"
+                    (click)="addToFav(item.product_Id, $event)"
                     style="font-size: 1.5rem; top: -15px"
-                    [ngClass]="{'pi-heart-fill':isFavorite(item.product_Id)==true,'pi-heart':isFavorite(item.product_Id)==false}"
+                    [ngClass]="{
+                        'pi-heart-fill': isFavorite(item.product_Id) == true,
+                        'pi-heart': isFavorite(item.product_Id) == false
+                    }"
                 ></i>
 
                 <div class="row align-items-center g-2 justify-content-between">
@@ -541,10 +548,17 @@
                                 <p
                                     class="fs-5"
                                     tooltipEvent="hover"
-                                    [pTooltip]="lang == 'en' ?item.product_Name_Global:item.product_Name_Local"
+                                    [pTooltip]="
+                                        lang == 'en'
+                                            ? item.product_Name_Global
+                                            : item.product_Name_Local
+                                    "
                                 >
                                     {{
-                                     lang=='en'? item.product_Name_Global:item.product_Name_Local | truncate : 10
+                                        lang == "en"
+                                            ? item.product_Name_Global
+                                            : (item.product_Name_Local
+                                              | truncate : 10)
                                     }}
                                 </p>
                                 <p-rating
@@ -556,9 +570,12 @@
                                     item.averageRating | number : "1.0-1"
                                 }}</span>
                                 <p class="fs-4 text-primary fw-medium">
-                                  <span class="fs-6 fw-light text-black-50">Minimum</span> {{ item.mostMinimumPrice }} SAR
+                                    <span class="fs-6 fw-light text-black-50"
+                                        >Minimum</span
+                                    >
+                                    {{ item.mostMinimumPrice }} SAR
                                 </p>
-                                <p>{{item.productLinkDTOs?.length}} stores</p>
+                                <p>{{ item.productLinkDTOs?.length }} stores</p>
                             </div>
                         </div>
                     </div>
