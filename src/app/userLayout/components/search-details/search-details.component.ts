@@ -25,6 +25,7 @@ import { MessageService } from 'primeng/api';
 import { UsersService } from 'src/app/services/users.service';
 import { ToastModule } from 'primeng/toast';
 import { FavoriteService } from 'src/app/services/favorite.service';
+
 @Component({
     selector: 'app-search-details',
     standalone: true,
@@ -51,10 +52,12 @@ import { FavoriteService } from 'src/app/services/favorite.service';
         notfoundComponent,
     ],
     templateUrl: './search-details.component.html',
-    styleUrl: './search-details.component.scss',
+    styleUrls: ['./search-details.component.scss'],
 })
 export class SearchDetailsComponent implements OnInit {
-    lang = localStorage.getItem('language')??'en';
+
+    lang = localStorage.getItem('language') ?? 'en';
+    searchResult: Brand;
     pageNumber: number;
     first: number = 1;
     rows: number = 10;
@@ -65,11 +68,11 @@ export class SearchDetailsComponent implements OnInit {
     domainOptions = [];
     sortOptions = [
         { name: 'None', value: 0 },
-        { name: 'Hight to Low', value: 1 },
+        { name: 'High to Low', value: 1 },
         { name: 'Low to High', value: 2 },
         { name: 'Most Viewed', value: 3 },
         { name: 'Most Popular', value: 4 },
-        { name: 'Most  Favorite', value: 5 },
+        { name: 'Most Favorite', value: 5 },
         { name: 'Newest', value: 6 },
         { name: 'Oldest', value: 7 },
     ];
@@ -77,15 +80,16 @@ export class SearchDetailsComponent implements OnInit {
     isSponserChecked: boolean = false;
     sidebarVisible: boolean = false;
     selectedSort = new FormControl('');
-    rangeValues = new FormControl([,]);
+    rangeValues: FormControl;
     selectedBrand = new FormControl('');
     selectedSubCategory = new FormControl('');
     selectedCategory = new FormControl('');
     selectedDomain = new FormControl('');
-    searchResult: Brand;
+
     searchValue: string = '';
     isAuthanciated: boolean = false;
     Userid: string = '';
+
     constructor(
         private authServ: AuthService,
         private search: SearchService,
@@ -94,6 +98,7 @@ export class SearchDetailsComponent implements OnInit {
         private messageService: MessageService,
         private favoriteServ: FavoriteService
     ) {}
+
     ngOnInit() {
         this.Userid = this.authServ.GetUserData().uid;
         this.getAllFav();
@@ -107,13 +112,13 @@ export class SearchDetailsComponent implements OnInit {
                 this.getAllSearchRes({ searchParam: this.searchValue });
             }
         });
+
         this.getAllDomains();
 
-        this.getAllBrands();
-        this.getAllSubcategory();
         this.isAuthanciated =
             localStorage.getItem('UserToken') != null ? true : false;
     }
+
     getAllDomains() {
         this.search.gatDomains().subscribe({
             next: (data: any) => {
@@ -121,22 +126,23 @@ export class SearchDetailsComponent implements OnInit {
             },
         });
     }
+
     getAllCat() {
         this.categoryOptions = this.searchResult?.resultCategories;
     }
+
     getAllSubcategory() {
         this.searchResult?.resultCategories.forEach((cat) => {
-            this.subCategoryOptions = [
-
-                ...cat.subCategories,
-            ];
+            this.subCategoryOptions = [...cat.subCategories];
         });
     }
+
     getAllBrands() {
         this.searchResult?.resultCategories.forEach((cat) => {
-            this.brandsOptions = [ ...cat.brands];
+            this.brandsOptions = [...cat.brands];
         });
     }
+
     getAllSearchRes(params: {
         searchParam?: string;
         minPrice?: number;
@@ -167,12 +173,14 @@ export class SearchDetailsComponent implements OnInit {
             .subscribe({
                 next: (data: Brand) => {
                     this.searchResult = data;
+                    this.rangeValues = new FormControl([0, this.searchResult.mostMaxPrice]);
                     this.getAllCat();
                     this.getAllSubcategory();
                     this.getAllBrands();
                 },
             });
     }
+
     updateSlider(event: any, index: number) {
         const newValue = parseFloat(event);
 
@@ -188,9 +196,10 @@ export class SearchDetailsComponent implements OnInit {
         this.favoriteServ.addToFavorite(productId, this.Userid).subscribe({
             next: (v) => {
                 this.getAllFav();
-                console.log('added to favorie', v);
+                console.log('added to favorite', v);
             },
             error: (e) => {
+                this.getAllFav();
                 if (e == 'Added Successfully') {
                     this.messageService.add({
                         severity: 'success',
@@ -229,6 +238,7 @@ export class SearchDetailsComponent implements OnInit {
             pageSize: 10,
         });
     }
+
     getAllFav() {
         this.favoriteServ.getFavorites(this.Userid).subscribe({
             next: (d: any) => {
@@ -240,4 +250,7 @@ export class SearchDetailsComponent implements OnInit {
     isFavorite(prodId: number): boolean {
         return this.FavoriteItems.some((item) => item.productId == prodId);
     }
+    resetFilter() {
+       window.location.reload();
+        }
 }
