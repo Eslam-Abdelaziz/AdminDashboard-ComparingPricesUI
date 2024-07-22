@@ -54,6 +54,7 @@ import { FavoriteService } from 'src/app/services/favorite.service';
     styleUrl: './search-details.component.scss',
 })
 export class SearchDetailsComponent implements OnInit {
+    lang = localStorage.getItem('language')??'en';
     pageNumber: number;
     first: number = 1;
     rows: number = 10;
@@ -126,14 +127,14 @@ export class SearchDetailsComponent implements OnInit {
     getAllSubcategory() {
         this.searchResult?.resultCategories.forEach((cat) => {
             this.subCategoryOptions = [
-                ...this.subCategoryOptions,
+
                 ...cat.subCategories,
             ];
         });
     }
     getAllBrands() {
         this.searchResult?.resultCategories.forEach((cat) => {
-            this.brandsOptions = [...this.brandsOptions, ...cat.brands];
+            this.brandsOptions = [ ...cat.brands];
         });
     }
     getAllSearchRes(params: {

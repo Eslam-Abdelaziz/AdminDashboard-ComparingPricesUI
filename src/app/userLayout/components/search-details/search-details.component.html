@@ -539,10 +539,10 @@
                                 <p
                                     class="fs-5"
                                     tooltipEvent="hover"
-                                    [pTooltip]="item.product_Name_Global"
+                                    [pTooltip]="lang == 'en' ?item.product_Name_Global:item.product_Name_Local"
                                 >
                                     {{
-                                        item.product_Name_Global | truncate : 10
+                                     lang=='en'? item.product_Name_Global:item.product_Name_Local | truncate : 10
                                     }}
                                 </p>
                                 <p-rating
