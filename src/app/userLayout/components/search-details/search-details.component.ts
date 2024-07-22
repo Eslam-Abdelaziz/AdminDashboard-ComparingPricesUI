@@ -55,7 +55,7 @@ import { FavoriteService } from 'src/app/services/favorite.service';
     styleUrls: ['./search-details.component.scss'],
 })
 export class SearchDetailsComponent implements OnInit {
-
+    notFound:boolean=false;
     lang = localStorage.getItem('language') ?? 'en';
     searchResult: Brand;
     pageNumber: number;
@@ -80,7 +80,7 @@ export class SearchDetailsComponent implements OnInit {
     isSponserChecked: boolean = false;
     sidebarVisible: boolean = false;
     selectedSort = new FormControl('');
-    rangeValues: FormControl;
+    rangeValues=new FormControl([0,0]);
     selectedBrand = new FormControl('');
     selectedSubCategory = new FormControl('');
     selectedCategory = new FormControl('');
@@ -156,6 +156,7 @@ export class SearchDetailsComponent implements OnInit {
         pageNum?: number;
         pageSize?: number;
     }) {
+        this.notFound=false;
         this.search
             .getSearchData({
                 searchQuery: params.searchParam,
@@ -173,11 +174,19 @@ export class SearchDetailsComponent implements OnInit {
             .subscribe({
                 next: (data: Brand) => {
                     this.searchResult = data;
-                    this.rangeValues = new FormControl([0, this.searchResult.mostMaxPrice]);
+                    this.rangeValues.setValue([0, this.searchResult.mostMaxPrice]);
                     this.getAllCat();
                     this.getAllSubcategory();
                     this.getAllBrands();
-                },
+                },error:(e)=>{
+                    console.log(e);
+                    this.notFound=true;
+                    this.messageService.add({
+                        severity: 'error',
+                        summary: 'Error',
+                        detail: e,
+                    });
+                }
             });
     }
 
