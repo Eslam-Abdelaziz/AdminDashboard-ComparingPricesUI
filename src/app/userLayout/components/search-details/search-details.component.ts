@@ -55,7 +55,7 @@ import { FavoriteService } from 'src/app/services/favorite.service';
     styleUrls: ['./search-details.component.scss'],
 })
 export class SearchDetailsComponent implements OnInit {
-    notFound:boolean=false;
+    notFound: boolean = false;
     lang = localStorage.getItem('language') ?? 'en';
     searchResult: Brand;
     pageNumber: number;
@@ -80,7 +80,7 @@ export class SearchDetailsComponent implements OnInit {
     isSponserChecked: boolean = false;
     sidebarVisible: boolean = false;
     selectedSort = new FormControl('');
-    rangeValues=new FormControl([0,0]);
+    rangeValues = new FormControl([0, 0]);
     selectedBrand = new FormControl('');
     selectedSubCategory = new FormControl('');
     selectedCategory = new FormControl('');
@@ -102,7 +102,7 @@ export class SearchDetailsComponent implements OnInit {
     ngOnInit() {
         this.Userid = this.authServ.GetUserData().uid;
         this.getAllFav();
-        console.log(this.Userid);
+
         this.searchValue = this.activatedRoute.snapshot.queryParams['q'];
         this.pageNumber = +this.activatedRoute.snapshot.queryParams['page'];
         this.getAllSearchRes({ searchParam: this.searchValue });
@@ -156,7 +156,7 @@ export class SearchDetailsComponent implements OnInit {
         pageNum?: number;
         pageSize?: number;
     }) {
-        this.notFound=false;
+        this.notFound = false;
         this.search
             .getSearchData({
                 searchQuery: params.searchParam,
@@ -174,19 +174,23 @@ export class SearchDetailsComponent implements OnInit {
             .subscribe({
                 next: (data: Brand) => {
                     this.searchResult = data;
-                    this.rangeValues.setValue([0, this.searchResult.mostMaxPrice]);
+                    this.rangeValues.setValue([
+                        0,
+                        this.searchResult.mostMaxPrice,
+                    ]);
                     this.getAllCat();
                     this.getAllSubcategory();
                     this.getAllBrands();
-                },error:(e)=>{
+                },
+                error: (e) => {
                     console.log(e);
-                    this.notFound=true;
+                    this.notFound = true;
                     this.messageService.add({
                         severity: 'error',
                         summary: 'Error',
                         detail: e,
                     });
-                }
+                },
             });
     }
 
@@ -199,16 +203,31 @@ export class SearchDetailsComponent implements OnInit {
         this.rangeValues.setValue(newRange);
     }
 
+    toggleFavorite(productId: number, event: any) {
+        if (event.target.classList.contains('pi-heart-fill')) {
+            this.deleteFromFav(productId, event);
+        } else {
+            this.addToFav(productId, event);
+        }
+    }
+    getAllFav() {
+        this.favoriteServ.getFavorites(this.Userid).subscribe({
+            next: (d: any) => {
+                this.FavoriteItems = d;
+            },
+        });
+    }
+    isFavorite(prodId: number): boolean {
+        return this.FavoriteItems.some((item) => item.productId == prodId);
+    }
     addToFav(productId: number, event: any) {
         event.target.classList.remove('pi-heart');
         event.target.classList.add('pi-heart-fill');
         this.favoriteServ.addToFavorite(productId, this.Userid).subscribe({
             next: (v) => {
-                this.getAllFav();
                 console.log('added to favorite', v);
             },
             error: (e) => {
-                this.getAllFav();
                 if (e == 'Added Successfully') {
                     this.messageService.add({
                         severity: 'success',
@@ -222,6 +241,24 @@ export class SearchDetailsComponent implements OnInit {
                         detail: e,
                     });
                 }
+            },
+        });
+    }
+
+    deleteFromFav(productId: number, event: any) {
+        event.target.classList.remove('pi-heart-fill');
+        event.target.classList.add('pi-heart');
+        this.favoriteServ.deleteFavorite(productId, this.Userid).subscribe({
+            next: (v) => {
+                console.log('deleted from favorite', v);
+                this.messageService.add({
+                    severity: 'success',
+                    summary: 'Success',
+                    detail: 'Deleted Successfully',
+                });
+            },
+            error: (e) => {
+                console.log('error', e);
             },
         });
     }
@@ -248,18 +285,9 @@ export class SearchDetailsComponent implements OnInit {
         });
     }
 
-    getAllFav() {
-        this.favoriteServ.getFavorites(this.Userid).subscribe({
-            next: (d: any) => {
-                this.FavoriteItems = d;
-            },
-        });
-    }
-
-    isFavorite(prodId: number): boolean {
-        return this.FavoriteItems.some((item) => item.productId == prodId);
-    }
     resetFilter() {
-       window.location.reload();
-        }
+        this.searchValue = '';
+        this.search.updateSearchQuery('');
+        window.location.reload();
+    }
 }

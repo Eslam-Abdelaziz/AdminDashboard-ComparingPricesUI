@@ -529,10 +529,9 @@
                     @for(item of searchResult?.resultPaginated;track item){
                     <div class="search-result p-2 position-relative">
                         @defer{
-
                         <i
                             class="pi position-absolute end-0 text-end d-inline-block cursor-pointer"
-                            (click)="addToFav(item.product_Id, $event)"
+                            (click)="toggleFavorite(item.product_Id,$event)"
                             style="font-size: 1.5rem; top: -15px"
                             [ngClass]="{
                                 'pi-heart-fill': isFavorite(item.product_Id) == true,
@@ -540,7 +539,7 @@
                             }"
                         ></i>
 
-                        <div class="row align-items-center g-2 justify-content-between">
+                        <div class="row align-items-center g-2 justify-content-between cursor-pointer">
                             <div class="col-12 col-md-5 text-center text-md-start">
                                 <div
                                     class="d-flex align-items-center gap-2 justify-content-between"
