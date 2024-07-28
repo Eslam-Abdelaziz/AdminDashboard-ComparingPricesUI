@@ -527,11 +527,11 @@
                         from {{ searchResult?.resultPaginated?.length }} stores
                     </p>
                     @for(item of searchResult?.resultPaginated;track item){
-                    <div class="search-result p-2 position-relative">
+                    <div class="search-result p-2 position-relative" (click)="getDetails(item.product_Id)">
                         @defer{
                         <i
                             class="pi position-absolute end-0 text-end d-inline-block cursor-pointer"
-                            (click)="toggleFavorite(item.product_Id,$event)"
+                            (click)=" toggleFavorite(item.product_Id,$event)"
                             style="font-size: 1.5rem; top: -15px"
                             [ngClass]="{
                                 'pi-heart-fill': isFavorite(item.product_Id) == true,

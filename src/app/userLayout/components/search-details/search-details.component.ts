@@ -25,6 +25,7 @@ import { MessageService } from 'primeng/api';
 import { UsersService } from 'src/app/services/users.service';
 import { ToastModule } from 'primeng/toast';
 import { FavoriteService } from 'src/app/services/favorite.service';
+import { a } from '@fullcalendar/core/internal-common';
 
 @Component({
     selector: 'app-search-details',
@@ -132,15 +133,25 @@ export class SearchDetailsComponent implements OnInit {
     }
 
     getAllSubcategory() {
-        this.searchResult?.resultCategories.forEach((cat) => {
-            this.subCategoryOptions = [...cat.subCategories];
+        const subCategoriesSet = new Set();
+        this.searchResult?.resultCategories.forEach((item) => {
+            item.subCategories.forEach(cat=>{
+                subCategoriesSet.add(cat)
+            })
         });
+        this.subCategoryOptions = Array.from(subCategoriesSet);
     }
 
     getAllBrands() {
-        this.searchResult?.resultCategories.forEach((cat) => {
-            this.brandsOptions = [...cat.brands];
+        const brandsSet = new Set(); // Use a Set to avoid duplicates
+
+    this.searchResult?.resultCategories.forEach((item) => {
+        item.brands.forEach((cat) => {
+            brandsSet.add(cat);
         });
+    });
+
+    this.brandsOptions = Array.from(brandsSet);
     }
 
     getAllSearchRes(params: {
@@ -204,6 +215,7 @@ export class SearchDetailsComponent implements OnInit {
     }
 
     toggleFavorite(productId: number, event: any) {
+        event.stopPropagation();
         if (event.target.classList.contains('pi-heart-fill')) {
             this.deleteFromFav(productId, event);
         } else {
@@ -290,4 +302,12 @@ export class SearchDetailsComponent implements OnInit {
         this.search.updateSearchQuery('');
         window.location.reload();
     }
+    getDetails(productID: number) {
+        // if(this.authServ.GetUserData().roles.includes("Admin")||this.authServ.GetUserData().roles.includes("SuperAdmin")){
+        //     return
+        // }
+        this.router.navigate([`productDetails/${productID}`]);
+
+    }
+
 }
