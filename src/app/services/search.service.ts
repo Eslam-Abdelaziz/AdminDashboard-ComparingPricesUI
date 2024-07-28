@@ -34,12 +34,10 @@ export class SearchService {
         pageNum?: number;
         pageSize?: number;
     }): Observable<Brand> {
-
         let params = new HttpParams();
         if (param.searchQuery) {
             params = params.set('searchValue', param.searchQuery);
         }
-
 
         if (param.catId != null) {
             params = params.set('categoryID', param.catId);
@@ -86,7 +84,7 @@ export class SearchService {
                 take(1),
                 catchError((e) => {
                     console.log(e);
-                    return throwError(() => new Error('Error in API request'));
+                    return throwError(() => e.error.title);
                 })
             );
     }

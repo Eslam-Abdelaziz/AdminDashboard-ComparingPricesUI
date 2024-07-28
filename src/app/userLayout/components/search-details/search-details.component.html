@@ -86,7 +86,7 @@
                 optionLabel="name_Global"
                 showHeader="false"
                 (onChange)="getAllSearchRes({
-                            searchParam: searchValue,
+                          searchParam: searchValue,
                             isFeatured: isSponserChecked?sponser:null,
                             minPrice: rangeValues?.value?.[0] ?? null ,
                             maxPrice: rangeValues?.value?.[1] ?? null,
@@ -135,7 +135,6 @@
                 optionLabel="name"
                 placeholder="Sort By"
                 (onChange)="
-
                         getAllSearchRes({
                             searchParam: searchValue,
                             isFeatured: isSponserChecked?sponser:null,
@@ -160,9 +159,11 @@
                 [formControl]="rangeValues"
                 [range]="true"
                 styleClass="m-2"
-                min="0"
+                min=0
                 [max]="searchResult?.mostMaxPrice"
+
             />
+            <p-divider></p-divider>
             <div
                 class="d-flex mt-3 justify-content-between gap-2 align-items-center flex-column"
             >
@@ -171,25 +172,29 @@
                         type="text"
                         class="w-100"
                         type="number"
-                        [(ngModel)]="rangeValues.value[0]"
+                        [(ngModel)]="rangeValues?.value[0]"
                         (ngModelChange)="updateSlider($event, 0)"
                         placeholder="min price"
+                       min="0"
+
                     />
                     <input
+                    [value]="searchResult?.mostMaxPrice"
                         type="text"
                         [max]="searchResult?.mostMaxPrice"
                         class="w-100"
                         type="number"
                         placeholder="max price"
-                        [(ngModel)]="rangeValues.value[1]"
+                        [(ngModel)]="rangeValues?.value[1]"
                         (ngModelChange)="updateSlider($event, 1)"
                     />
                 </div>
                 <button
                     class="btn btn-sm btn-outline-success flex-grow-1 d-block w-75"
-                    [disabled]="!rangeValues.value[0] || !rangeValues.value[1]"
+                    [disabled]="
+                        !rangeValues.value[0] || !rangeValues.value[1]
+                    "
                     (click)="
-
                 getAllSearchRes({
                     searchParam: searchValue,
                 isFeatured: isSponserChecked?sponser:null,
@@ -206,12 +211,13 @@
                 })
             "
                 >
-                    <p class="d-inline-block m-0 fs-5">Search</p>
+                    <p class="d-inline-block m-0 fs-5">filter by price</p>
                     <i
                         class="pi pi-search"
                         style="font-size: 1.3rem; cursor: pointer"
                     ></i>
                 </button>
+<button class="btn btn-danger" (click)="resetFilter()">Reset</button>
             </div>
         </div>
         <p-divider />
@@ -514,118 +520,127 @@
                     />
                 </div>
             </div>
-            <p class="ms-3 text-decoration-underline">
-                <span class="fw-bold fs-5">{{ searchValue }}</span> | results
-                from {{ searchResult?.resultPaginated?.length }} stores
-            </p>
-            @for(item of searchResult?.resultPaginated;track item){
-            <div class="search-result p-2 position-relative">
-                @defer{
+            @if(!notFound){
+                <div >
+                    <p class="ms-3 text-decoration-underline">
+                        <span class="fw-bold fs-5">{{ searchValue }}</span> | results
+                        from {{ searchResult?.resultPaginated?.length }} stores
+                    </p>
+                    @for(item of searchResult?.resultPaginated;track item){
+                    <div class="search-result p-2 position-relative" (click)="getDetails(item.product_Id)">
+                        @defer{
+                        <i
+                            class="pi position-absolute end-0 text-end d-inline-block cursor-pointer"
+                            (click)=" toggleFavorite(item.product_Id,$event)"
+                            style="font-size: 1.5rem; top: -15px"
+                            [ngClass]="{
+                                'pi-heart-fill': isFavorite(item.product_Id) == true,
+                                'pi-heart': isFavorite(item.product_Id) == false
+                            }"
+                        ></i>
 
-                <i
-                    class="pi position-absolute end-0 text-end d-inline-block cursor-pointer"
-                    (click)="addToFav(item.product_Id, $event)"
-                    style="font-size: 1.5rem; top: -15px"
-                    [ngClass]="{
-                        'pi-heart-fill': isFavorite(item.product_Id) == true,
-                        'pi-heart': isFavorite(item.product_Id) == false
-                    }"
-                ></i>
-
-                <div class="row align-items-center g-2 justify-content-between">
-                    <div class="col-12 col-md-5 text-center text-md-start">
-                        <div
-                            class="d-flex align-items-center gap-2 justify-content-between"
-                        >
-                            <img
-                                src="{{ item.productImageDTOs[0]?.image }}"
-                                class="img-fluid"
-                                style="max-width: 140px"
-                                alt=""
-                            />
-
-                            <div class="product-info">
-                                <p
-                                    class="fs-5"
-                                    tooltipEvent="hover"
-                                    [pTooltip]="
-                                        lang == 'en'
-                                            ? item.product_Name_Global
-                                            : item.product_Name_Local
-                                    "
+                        <div class="row align-items-center g-2 justify-content-between cursor-pointer">
+                            <div class="col-12 col-md-5 text-center text-md-start">
+                                <div
+                                    class="d-flex align-items-center gap-2 justify-content-between"
                                 >
-                                    {{
-                                        lang == "en"
-                                            ? item.product_Name_Global
-                                            : (item.product_Name_Local
-                                              | truncate : 10)
-                                    }}
-                                </p>
-                                <p-rating
-                                    [(ngModel)]="item.averageRating"
-                                    readonly="true"
-                                    [cancel]="false"
-                                />
-                                <span class="ps-2 mb-3">{{
-                                    item.averageRating | number : "1.0-1"
-                                }}</span>
-                                <p class="fs-4 text-primary fw-medium">
-                                <span class="fs-6 fw-light text-black-50">Minimum</span> {{ item.mostMinimumPrice }} SAR
-                                </p>
-                                <p class="text-blue-600">compare {{item.productLinkDTOs?.length}} online shops</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12 col-md-7">
-                        <div class="d-flex flex-column align-items-end gap-3">
-                            @for(link of item.productLinkDTOs.slice(0,3);track
-                            link){
-                            <div
-                                class="d-flex gap-3 align-items-center justify-content-between"
-                            >
-                                <img
-                                    [src]="link.domainDTO?.logo"
-                                    alt=""
-                                    width="60px"
-                                />
-                                <div>
-                                    <p
-                                        style="font-size: 11px"
-                                        class="text-black-50 fw-bold m-0"
-                                    >
-                                        {{ link.domainDTO.name_Global }}
-                                    </p>
-                                    <span class="text-primary"
-                                        >{{ link.productDet_Price }} SAR</span
-                                    >
+                                    <img
+                                        src="{{ item.productImageDTOs[0]?.image }}"
+                                        class="img-fluid"
+                                        style="max-width: 140px"
+                                        alt=""
+                                    />
+
+                                    <div class="product-info">
+                                        <p
+                                            class="fs-5"
+                                            tooltipEvent="hover"
+                                            [pTooltip]="
+                                                lang == 'en'
+                                                    ? item.product_Name_Global
+                                                    : item.product_Name_Local
+                                            "
+                                        >
+                                            {{
+                                                lang == "en"
+                                                    ? item.product_Name_Global
+                                                    : (item.product_Name_Local
+                                                      | truncate : 10)
+                                            }}
+                                        </p>
+                                        <p-rating
+                                            [(ngModel)]="item.averageRating"
+                                            readonly="true"
+                                            [cancel]="false"
+                                        />
+                                        <span class="ps-2 mb-3">{{
+                                            item.averageRating | number : "1.0-1"
+                                        }}</span>
+                                        <p class="fs-4 text-primary fw-medium">
+                                            <span class="fs-6 fw-light text-black-50"
+                                                >Minimum</span
+                                            >
+                                            {{ item.mostMinimumPrice }} SAR
+                                        </p>
+                                        <p class="text-blue-600">compare {{item.productLinkDTOs?.length}} online shops</p>
+                                    </div>
                                 </div>
-                                <a
-                                    target="_blank"
-                                    [href]="link.productLink"
-                                    class="btn text-white text-nowrap"
-                                    style="background-color: #71bf44"
-                                >
-                                    Go to Shop
-                                    <i
-                                        class="pi pi-angle-right"
-                                        style="font-size: 1rem"
-                                    ></i>
-                                </a>
                             </div>
-                            }
+                            <div class="col-12 col-md-7">
+                                <div class="d-flex flex-column align-items-end gap-3">
+                                    @for(link of item.productLinkDTOs.slice(0,3);track
+                                    link){
+                                    <div
+                                        class="d-flex gap-3 align-items-center justify-content-between"
+                                    >
+                                        <img
+                                            [src]="link.domainDTO?.logo"
+                                            alt=""
+                                            width="60px"
+                                        />
+                                        <div>
+                                            <p
+                                                style="font-size: 11px"
+                                                class="text-black-50 fw-bold m-0"
+                                            >
+                                                {{ link.domainDTO.name_Global }}
+                                            </p>
+                                            <span class="text-primary"
+                                                >{{ link.productDet_Price }} SAR</span
+                                            >
+                                        </div>
+                                        <a
+                                            target="_blank"
+                                            [href]="link.productLink"
+                                            class="btn text-white text-nowrap"
+                                            style="background-color: #71bf44"
+                                        >
+                                            Go to Shop
+                                            <i
+                                                class="pi pi-angle-right"
+                                                style="font-size: 1rem"
+                                            ></i>
+                                        </a>
+                                    </div>
+                                    }
+                                </div>
+                            </div>
                         </div>
+
+                        }@placeholder(minimum 1s) {
+                        <p-skeleton width="100%" height="160px" />
+
+                        }@loading {
+
+                        <p-skeleton width="100%" height="160px" />
+                        }
+                        <p-divider />
                     </div>
+                    }
                 </div>
-
-                }@placeholder(minimum 1s) {
-                <p-skeleton width="100%" height="160px" />
-
-                }@loading {
-
-                <p-skeleton width="100%" height="160px" />
-                }
-                <p-divider />
-            </div>
+            }
+            @else {
+                <p class="display-2">NOT FOUND</p>
             }
             <p-paginator
                 (onPageChange)="onPageChange($event)"

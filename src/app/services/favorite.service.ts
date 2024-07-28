@@ -21,7 +21,7 @@ export class FavoriteService {
             .pipe(
                 catchError((e) => {
                     console.log(e);
-                    return throwError(() => (e.error.text));
+                    return throwError(() => e.error.text);
                 })
             );
     }
@@ -40,15 +40,14 @@ export class FavoriteService {
             );
     }
 
-    deleteFavorite(prdId: number, userId: number) {
+    deleteFavorite(prdId: number, userId: string) {
         let params = new HttpParams().set('id', prdId).set('Userid', userId);
         return this.http
             .delete(`${this.baseUrl}/User/DeleteFavProduct`, { params })
             .pipe(
                 catchError((e) => {
-                    return throwError(
-                        () => new Error('Error in API request', { cause: e })
-                    );
+                    console.log(e);
+                    return throwError(() => e);
                 })
             );
     }
