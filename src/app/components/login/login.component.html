@@ -1,49 +1,49 @@
-<div class="container-fluid text-center">
-    <div class="d-flex justify-content-center align-items-center vh-100 row">
-        <div class="col-md-4 d-none d-md-flex justify-content-center align-items-center flex-column" style="height: 60vh;">
-            <img src="../../../assets/layout/images/Capture.JPG" alt="Scales image" class="img-fluid" style="height: calc(60vh - 2rem);">
-            <div class="startcompare mt-4" style="height: 2rem;">
-                <p class="text-center" #animate>Let's start comparing!</p>
+<div class="container-fluid d-flex justify-content-center align-items-center min-vh-100">
+    <section class="signup align-content-center">
+        <div class="container">
+            <div class="signup-content">
+                <div class="signup-form">
+                    <!-- Add the site logo here -->
+                    <div class="logo-container">
+                        <a routerLink="/home">
+                            <img src="../../../assets/layout/images/logo-dark.svg" alt="Site Logo" class="site-logo">
+                        </a>
+                    </div>
+                    <h2 class="form-title">Log in to PriceBee</h2>
+                    <form class="register-form" id="register-form" [formGroup]="loginForm" (ngSubmit)="handleForm()">
+                        <div class="form-group">
+                            <label for="email" class="label-icon"><i class="fas fa-envelope"></i></label>
+                            <input type="text" name="email" id="email" placeholder="Email address" formControlName="email" />
+                        </div>
+                        <div class="text-danger mt-2 fade-in" *ngIf="loginForm.get('email')?.errors && (loginForm.get('email')?.touched || loginForm.get('email')?.dirty)">
+                            <p *ngIf="loginForm.get('email')?.getError('required')" class="text-danger">Email is required</p>
+                            <p *ngIf="loginForm.get('email')?.getError('email')" class="text-danger">Email is invalid</p>
+                        </div>
+                        <div class="form-group mt-4">
+                            <div class="input-group">
+                                <label for="password" class="label-icon"><i class="fas fa-lock"></i></label>
+                                <input type="password" name="password" id="password" placeholder="Password" formControlName="password" class="form-control" [type]="show ? 'text' : 'password'" />
+                                <div class="input-group-append">
+                                    <span class="input-group-text show-password-icon h-100" (click)="show = !show">
+                                        <i class="fa" [ngClass]="{'fa-eye-slash': show, 'fa-eye': !show}"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-danger mt-2 fade-in" *ngIf="loginForm.get('password')?.errors && loginForm.get('password')?.touched">
+                            <p *ngIf="loginForm.get('password')?.getError('required')" class="text-danger">Password is required</p>
+                        </div>
+                        <div class="form-group form-button">
+                            <input type="submit" name="signup" id="signup" class="form-submit" value="Login" />
+                        </div>
+                        <p *ngIf="messageError" class="alert alert-danger mt-2 fade-in text-center">{{ messageError }}</p>
+                    </form>
+                </div>
+                <div class="signup-image">
+                    <figure><img src="../../../assets/layout/images/Capture.JPG" alt="Scales image"></figure>
+                    <a routerLink="/register" class="signup-image-link">Create new account</a>
+                </div>
             </div>
         </div>
-        <section class="bg-main-light p-4 rounded my-3 col-md-4 col-sm-8 col-12 d-flex flex-column justify-content-center" style="border: 1px solid #ddd; height: 60vh; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
-            <p class="text-center" style="font-size: 1.25rem; font-weight: bold; margin-bottom: 20px;">Log in to PriceBee</p>
-            <form [formGroup]="loginForm" class="form-group" (ngSubmit)="handleForm()">
-                <div class="mb-3">
-                    <label for="email" class="form-label sr-only">Email address</label>
-                    <input formControlName="email" type="email" id="email" class="form-control" placeholder="Email address">
-                    <div class="alert alert-danger mt-2" *ngIf="loginForm.get('email')?.errors && (loginForm.get('email')?.touched || loginForm.get('email')?.dirty)">
-                        <p *ngIf="loginForm.get('email')?.getError('required')">Email is required</p>
-                        <p *ngIf="loginForm.get('email')?.getError('email')">Email is invalid</p>
-                    </div>
-                </div>
-
-                <div class="mb-3">
-                    <label for="password" class="form-label sr-only">Password</label>
-                    <div class="input-group">
-                        <input formControlName="password" [type]="show ? 'text' : 'password'" id="password" class="form-control" placeholder=" password">
-                        <div class="input-group-append">
-                            <span class="input-group-text show-password-icon" (click)="show = !show">
-                                <i class="fa" [ngClass]="{'fa-eye-slash': show, 'fa-eye': !show}"></i>
-                            </span>
-                        </div>
-                    </div>
-                    <div class="alert alert-danger mt-2" *ngIf="loginForm.get('password')?.errors && loginForm.get('password')?.touched">
-                        <p *ngIf="loginForm.get('password')?.getError('required')">Password is required</p>
-                    </div>
-                </div>
-
-                <div class="text-center">
-                    <button type="submit" class="btn btn-primary" style="background-color: #1877f2; border-color: #1877f2; color: #fff; padding: 10px 30px; font-size: 1rem;">Log in</button>
-                    <p *ngIf="messageError" class="alert alert-danger mt-2 text-center">{{ messageError }}</p>
-                </div>
-
-                <hr class="my-3">
-
-                <div class="text-center">
-                    <a routerLink="/register" class="btn btn-success" style="background-color: #42b72a; border-color: #42b72a; color: #fff; padding: 10px 30px; font-size: 1rem;">Create new account</a>
-                </div>
-            </form>
-        </section>
-    </div>
+    </section>
 </div>
