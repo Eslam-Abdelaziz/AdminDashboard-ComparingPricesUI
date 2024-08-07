@@ -1,132 +1,163 @@
-<section class="form-container bg-main-light p-4 rounded my-3 mx-auto "
-    style="max-width:50% ;box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); border: 1px solid #ccc;">
-    <p class="text-center" style="font-size: 1.25rem; font-weight: bold; margin-bottom: 20px;">Create a new account</p>
-    <form [formGroup]="registerForm" class="form-group" (ngSubmit)="handleForm()" style="padding: 20px;">
-
-        <div class="row mb-3">
-            <div class="col-12 mb-2">
-                <input formControlName="firstName" type="text" id="firstName" class="form-control"
-                    placeholder="First name">
-                <div class="alert alert-danger mt-1"
-                    *ngIf="registerForm.get('firstName')?.errors && registerForm.get('firstName')?.touched">
-                    <p *ngIf="registerForm.get('firstName')?.getError('required')">First name is required</p>
-                    <p *ngIf="registerForm.get('firstName')?.getError('maxLength')">Max length is 20</p>
-                </div>
-            </div>
-
-            <div class="col-12 mb-2">
-                <input formControlName="lastName" type="text" id="lastName" class="form-control"
-                    placeholder="Last Name">
-                <div class="alert alert-danger mt-1"
-                    *ngIf="registerForm.get('lastName')?.errors && registerForm.get('lastName')?.touched">
-                    <p *ngIf="registerForm.get('lastName')?.getError('required')">Surname is required</p>
-                    <p *ngIf="registerForm.get('lastName')?.getError('maxLength')">Max length is 20</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="mb-3">
-            <input formControlName="userName" type="text" id="userName" class="form-control" placeholder="userName">
-            <div class="alert alert-danger mt-1"
-                *ngIf="registerForm.get('userName')?.errors && (registerForm.get('userName')?.touched || registerForm.get('userName')?.dirty)">
-                <p *ngIf="registerForm.get('userName')?.getError('required')">Email is required</p>
-                <p *ngIf="registerForm.get('userName')?.getError('userName')">Email is invalid</p>
-            </div>
-        </div>
-
-        <div class="mb-3">
-            <input formControlName="email" type="email" id="email" class="form-control" placeholder=" email address">
-            <div class="alert alert-danger mt-1"
-                *ngIf="registerForm.get('email')?.errors && (registerForm.get('email')?.touched || registerForm.get('email')?.dirty)">
-                <p *ngIf="registerForm.get('email')?.getError('required')">Email is required</p>
-                <p *ngIf="registerForm.get('email')?.getError('email')">Email is invalid</p>
-            </div>
-        </div>
-
-        <div class="mb-3">
-            <div class="input-group">
-                <input formControlName="password" [type]="show ? 'text' : 'password'" id="password" class="form-control"
-                    placeholder="New password">
-                <div class="input-group-append">
-                    <span class="input-group-text show-password-icon" (click)="password()">
-                        <i class="fa fa-eye" [ngClass]="{'fa-eye-slash': show, 'fa-eye': !show}"></i>
-                    </span>
-                </div>
-            </div>
-            <div class="alert alert-danger mt-1"
-                *ngIf="registerForm.get('password')?.errors && registerForm.get('password')?.touched">
-                <p *ngIf="registerForm.get('password')?.getError('required')">Password is required</p>
-                <p *ngIf="registerForm.get('password')?.getError('pattern')">Password must be at least 12 characters
-                    long and include uppercase, lowercase, digit, and special character</p>
-            </div>
-        </div>
-
-        <div class="mb-3">
-            <label for="dateOfBirth" class="form-label">Date of birth</label>
-            <input formControlName="dateOfBirth" type="date" id="dateOfBirth" class="form-control" [max]="minDate">
-            <div class="alert alert-danger mt-1"
-                *ngIf="registerForm.get('dateOfBirth')?.errors && registerForm.get('dateOfBirth')?.touched">
-                <p *ngIf="registerForm.get('dateOfBirth')?.getError('required')">Date of birth is required</p>
-            </div>
-        </div>
-
-        <div class="mb-3">
-            <label class="form-label">Gender</label>
-            <div class="row">
-                <div class="col">
-                    <div class="form-check">
-                        <input formControlName="gender" type="radio" id="female" value="female"
-                            class="form-check-input">
-                        <label for="female" class="form-check-label">Female</label>
+<!--new-->
+<div class="container-fluid d-flex justify-content-center align-items-center min-vh-100 mt-5">
+    <section class="signup align-content-center">
+        <div class="container">
+            <div class="signup-content">
+                <div class="signup-form">
+                    <!-- Add the site logo here -->
+                    <div class="logo-container">
+                        <a routerLink="/home">
+                            <img src="../../../assets/layout/images/logo-dark.svg" alt="Site Logo" class="site-logo">
+                        </a>
                     </div>
+                    <h2 class="form-title">Register to PriceBee</h2>
+                    <form class="register-form" id="register-form" [formGroup]="registerForm" (ngSubmit)="handleForm()">
+                        <div class="form-group">
+                            <label for="firstName" class="label-icon"><i class="fas fa-user"></i></label>
+                            <input type="text" name="firstName" id="firstName" placeholder="First name"
+                                formControlName="firstName" />
+                        </div>
+                        <div class="text-danger mt-4 fade-in"
+                            *ngIf="registerForm.get('firstName')?.errors && registerForm.get('firstName')?.touched">
+                            <p *ngIf="registerForm.get('firstName')?.getError('required')">First name is required
+                            </p>
+                            <p *ngIf="registerForm.get('firstName')?.getError('maxLength')">Max length is 20</p>
+                        </div>
+
+                        <div class="form-group mt-4">
+                            <div class="input-group">
+                                <label for="lastName" class="label-icon"><i class="fas fa-user"></i></label>
+                                <input type="lastName" name="lastName" id="lastName" placeholder="lastName"
+                                    formControlName="lastName" class="form-control" type='text' />
+                            </div>
+                        </div>
+                        <div class="text-danger mt-4 fade-in"
+                            *ngIf="registerForm.get('lastName')?.errors && registerForm.get('lastName')?.touched">
+                            <p *ngIf="registerForm.get('lastName')?.getError('required')">Last is required</p>
+                            <p *ngIf="registerForm.get('lastName')?.getError('maxLength')">Max length is 20</p>
+                        </div>
+
+                        <div class="form-group mt-4">
+                            <label for="userName" class="label-icon"><i class="fas fa-user"></i></label>
+                            <input type="text" name="userName" id="userName" placeholder="User name"
+                                formControlName="userName" />
+                        </div>
+                        <div class="text-danger mt-4 fade-in"
+                            *ngIf="registerForm.get('userName')?.errors && registerForm.get('userName')?.touched">
+                            <p *ngIf="registerForm.get('userName')?.getError('required')">User name is required</p>
+                            <p *ngIf="registerForm.get('userName')?.getError('userName')">User name is invalid</p>
+                        </div>
+                        <div class="form-group mt-4">
+                            <label for="email" class="label-icon"><i class="fas fa-envelope"></i></label>
+                            <input type="text" name="email" id="email" placeholder="Email"
+                                formControlName="email" />
+                        </div>
+                        <div class="text-danger mt-4 fade-in"
+                            *ngIf="registerForm.get('email')?.errors && registerForm.get('email')?.touched">
+                            <p *ngIf="registerForm.get('email')?.getError('required')">Email is required</p>
+                            <p *ngIf="registerForm.get('email')?.getError('email')">Email is invalid</p>
+                        </div>
+
+                        <div class="form-group mt-4">
+                            <div class="input-group">
+                                <label for="password" class="label-icon"><i class="fas fa-lock"></i></label>
+                                <input type="password" name="password" id="password" placeholder="Password" formControlName="password" class="form-control" [type]="show ? 'text' : 'password'" />
+                                <div class="input-group-append">
+                                    <span class="input-group-text show-password-icon h-100" (click)="password()">
+                                        <i class="fa fa-eye" [ngClass]="{'fa-eye-slash': show, 'fa-eye': !show}"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-danger mt-4 fade-in" *ngIf="registerForm.get('password')?.errors && registerForm.get('password')?.touched">
+                            <p *ngIf="registerForm.get('password')?.getError('required')">Password is required</p>
+                            <p *ngIf="registerForm.get('password')?.getError('pattern')">Password must be at least 12 characters
+                                long and include uppercase, lowercase, digit, and special character</p>
+                        </div>
+
+                        <div class="form-group mt-4">
+                            <label for="dateOfBirth" class="check">Date of birth</label>
+                            <input type="date" name="dateOfBirth" id="dateOfBirth" placeholder="Date of birth"
+                                formControlName="dateOfBirth" class="px-0" [max]="minDate"/>
+                        </div>
+                        <div class="text-danger mt-4 fade-in"
+                            *ngIf="registerForm.get('dateOfBirth')?.errors && registerForm.get('dateOfBirth')?.touched">
+                            <p *ngIf="registerForm.get('dateOfBirth')?.getError('required')">Date of birth is required</p>
+                        </div>
+
+                        <div class="mt-4 gender-selection">
+                            <div class="form-group">
+                                <label class="form-label check">Gender</label>
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="form-check">
+                                            <input formControlName="gender" type="radio" id="female" value="female" class="form-check-input">
+                                            <label for="female" class="form-check-label">Female</label>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-check">
+                                            <input formControlName="gender" type="radio" id="male" value="male" class="form-check-input">
+                                            <label for="male" class="form-check-label">Male</label>
+                                        </div>
+                                    </div>
+                                    <div class="col"></div>
+                                </div>
+                            </div>
+                        </div>
+                        
+
+                        <div class="mt-4 country-selection">
+                            <div class="form-group">
+                                <label for="country" class="form-label check">Country</label>
+                                <div class="custom-select-wrapper">
+                                    <select #countries class="form-control custom-select" formControlName="country" (change)="onCountrySelected(countries.value)">
+                                        <option *ngFor="let item of Counteries" [value]="item.name">{{ item.name }}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="text-danger mt-1" *ngIf="registerForm.get('country')?.errors && registerForm.get('country')?.touched">
+                                <p *ngIf="registerForm.get('country')?.getError('required')">Country is required</p>
+                            </div>
+                        </div>
+                        
+
+                        <div class="mt-4">
+                                <div class="form-group">
+                                    <label class="form-label" for="phoneCode"><i class="fas fa-plus"></i></label>
+                                    <input type="tel" name="phoneCode" id="phoneCode" placeholder="Phone Code"
+                                    [value]="countryCode"/>
+                                </div>
+                            </div>
+
+                            <div class="mt-4">
+                                <div class="form-group">
+                                    <label for="phoneNumber" class="label-icon"><i class="fas fa-phone"></i></label>
+                                    <input type="tel" name="phoneNumber" id="phoneNumber" placeholder="Phone number"
+                                        formControlName="phoneNumber" [max]="minDate"/>
+                                </div>
+                                <div class="text-danger mt-4 fade-in"
+                                    *ngIf="registerForm.get('phoneNumber')?.errors && registerForm.get('phoneNumber')?.touched">
+                                    <p *ngIf="registerForm.get('phoneNumber')?.getError('pattern')">Must be an Egyptian number</p>                                
+                                </div>
+                            </div>
+
+                        <div class="form-group form-button">
+                            <input type="submit" name="signup" id="signup" class="form-submit" value="Sign up" />
+                        </div>
+                        <p *ngIf="messageError" class="alert alert-danger mt-4 fade-in text-center">{{ messageError
+                            }}</p>
+                    </form>
                 </div>
-                <div class="col">
-                    <div class="form-check">
-                        <input formControlName="gender" type="radio" id="male" value="male" class="form-check-input">
-                        <label for="male" class="form-check-label">Male</label>
-                    </div>
+                <div class="signup-image">
+                    <figure><img src="../../../assets/layout/images/Capture.JPG" alt="Scales image"></figure>
+                    <span class="signup-image-link">Already have an account? <a routerLink="/login" class="text-primary">Login</a></span>
                 </div>
-                <div class="col"></div>
             </div>
         </div>
+    </section>
 
-        <div class="mb-3">
-            <label for="country">Country</label>
-            <select #countries class="form-control" formControlName="country"
-                (change)="onCountrySelected(countries.value)">
-                <option *ngFor="let item of Counteries" [value]="item.name">{{ item.name }}</option>
-            </select>
-            <div class="alert alert-danger mt-1"
-                *ngIf="registerForm.get('country')?.errors && registerForm.get('country')?.touched">
-                <p *ngIf="registerForm.get('country')?.getError('required')">Country is required</p>
-            </div>
-        </div>
+</div>
 
-        <div class="row mb-3">
-            <div class="col-6 mb-2">
-                <input readonly="phoneCode" type="tel" id="phoneCode" class="form-control" [value]="countryCode"
-                    placeholder="Phone Code">
-            </div>
-            <div class="col-6 mb-2">
-                <input formControlName="phoneNumber" type="tel" id="phone" class="form-control" placeholder="Phone">
-                <div class="alert alert-danger mt-1"
-                    *ngIf="registerForm.get('phoneNumber')?.errors && registerForm.get('phoneNumber')?.touched">
-                    <p *ngIf="registerForm.get('phoneNumber')?.getError('pattern')">Must be an Egyptian number</p>
-                </div>
-            </div>
-        </div>
-
-        <button type="submit" [disabled]="registerForm.invalid" class="p-2 btn btn-success btn-block"
-            style="display: block; margin: 0 auto; background-color: #42b72a; border-color: #42b72a; color: #fff; padding: 10px 0; font-size: 1rem;">Sign
-            Up</button>
-        <p *ngIf="messageError" class="alert alert-danger mt-2 text-center">{{ messageError }}</p>
-    </form>
-
-    <div class="text-center mt-3">
-        <a routerLink="/login" class="text-decoration-none" style="color: #1877f2;">Already have an account?</a>
-    </div>
-
-    <div class="animated-text mt-4">
-        <p class="text-center" #animate>Let's start comparing!</p>
-    </div>
-</section>
+<!--end new-->
