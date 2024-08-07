@@ -39,7 +39,7 @@
     }
 
     ngAfterViewInit() {
-        this.animate();
+        // this.animate();
     }
 
     handleForm() {
