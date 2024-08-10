@@ -5,23 +5,25 @@ import { CommonModule } from '@angular/common';
 import { CountryJson } from './Country';
 import { Country } from '../../models/Country';
 import { RouterLink, Router } from '@angular/router';
+import { DropdownModule } from 'primeng/dropdown';
 
 @Component({
     selector: 'app-register',
     standalone: true,
     templateUrl: './register.component.html',
     styleUrls: ['./register.component.css'],
-    imports: [ReactiveFormsModule, CommonModule, FormsModule, RouterLink]
+    imports: [ReactiveFormsModule, CommonModule, FormsModule, RouterLink, DropdownModule]
 })
 
 export class RegisterComponent implements OnInit {
-    StrongPasswordRegx: RegExp = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[^a-zA-Z0-9]).{12,}$/;
+    StrongPasswordRegx: RegExp = /^(?=.*[A-Z]).{8,}$/;
     EmailRegex: RegExp = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
     Counteries: Country[] = [];
     countryCode: string = '';
     messageError: string = ''
     show: boolean = false;
     minDate: string;
+    formNotValid: boolean = false;
 
 
 
@@ -33,8 +35,8 @@ export class RegisterComponent implements OnInit {
         email: new FormControl(null, [Validators.required, Validators.email]),
         gender: new FormControl(null, [Validators.required, Validators.maxLength(10)]),
         country: new FormControl(null, [Validators.required, Validators.maxLength(30)]),
-        phoneCode: new FormControl(null),
-        phoneNumber: new FormControl(null, [Validators.pattern(/^1[1205][0-9]{8}$/)]),
+        phoneCode: new FormControl(null, [Validators.required]),
+        phoneNumber: new FormControl(null, [Validators.required]),
         image: new FormControl(null),
         dateOfBirth: new FormControl(null)
     });
@@ -69,6 +71,8 @@ export class RegisterComponent implements OnInit {
                     this.messageError = err.error
                 }
             });
+        } else {
+            this.formNotValid = true;
         }
     }
 

@@ -15,7 +15,7 @@
                             <label for="email" class="label-icon"><i class="fas fa-envelope"></i></label>
                             <input type="text" name="email" id="email" placeholder="Email address" formControlName="email" />
                         </div>
-                        <div class="text-danger mt-2 fade-in" *ngIf="loginForm.get('email')?.errors && (loginForm.get('email')?.touched || loginForm.get('email')?.dirty)">
+                        <div class="text-danger mt-2 fade-in" *ngIf="loginForm.get('email')?.errors && (loginForm.get('email')?.touched || loginForm.get('email')?.dirty || formNotValid)">
                             <p *ngIf="loginForm.get('email')?.getError('required')" class="text-danger">Email is required</p>
                             <p *ngIf="loginForm.get('email')?.getError('email')" class="text-danger">Email is invalid</p>
                         </div>
@@ -30,7 +30,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="text-danger mt-2 fade-in" *ngIf="loginForm.get('password')?.errors && loginForm.get('password')?.touched">
+                        <div class="text-danger mt-2 fade-in" *ngIf="loginForm.get('password')?.errors && (loginForm.get('password')?.touched || formNotValid)">
                             <p *ngIf="loginForm.get('password')?.getError('required')" class="text-danger">Password is required</p>
                         </div>
                         <div class="form-group form-button">

@@ -1,74 +1,104 @@
-<div class="container-fluid">
-    <div class="row">
-        <div>
-            <p-toast />
-
+<!--start new design-->
+<section class="product row">
+    <!-- Google Ads Div -->
+    <div class="ads-sm col-md-4 col-lg-3 col-12">
+        <div class="card">
+            <div class="d-flex justify-content-between">
+                <h5>Google Ads</h5>
+            </div>
+            <div class="p-fluid">
+                <ins class="adsbygoogle" style="display: block" data-ad-client="ca-pub-3940256099942544"
+                    data-ad-slot="8320222746" data-ad-format="auto" data-full-width-responsive="true"></ins>
+                <img src="https://images.raidboxes.io/raidboxes.io/uploads/2021/01/Google-Kampagne-raidboxes.png"
+                    alt="Google Ads" class="p-1" style="
+                            width: 100%;
+                            height: 300px;
+                            display: block;
+                        " />
+            </div>
         </div>
-        <div class="product-image col-12 col-md-3">
-            <div class="container-fluid mt-5">
-                <div class="row">
-                    <div class="col-md-8">
-                        <div class="main-image-container p-2">
-                            <img [src]="mainImage" class="main-image" alt="Main Image">
-                        </div>
-                        <div class="row">
-                            <div *ngFor="let image of product.images" class="thumbnail col-6 col-sm-4 col-md-3 p-2">
-                                <img [src]="image" (mouseenter)="updateMainImage(image)" class="boximage"
-                                    alt="Thumbnail">
-                            </div>
-                        </div>
+    </div>
+    <div class="product__photo col-12 col-lg-5 col-md-4">
+        <div class="photo-container">
+            <div class="photo-main">
+                <div class="controls">
+                    <i class="material-icons">share</i>
+                    <i class="fa-regular fa-heart fs-3" (click)="addToFav(product.productId)"></i>
+                </div>
+                <img [src]="mainImage" class="main-image" alt="Main Image">
+            </div>
+            <div class="photo-album">
+                <ul class="p-0">
+                    <div *ngFor="let image of product.images">
+                        <img [src]="image" (mouseenter)="updateMainImage(image)" alt="Thumbnail">
                     </div>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="product__info col-12 col-lg-4 col-md-4">
+        <div class="title">
+            <h1>{{product.productName_Global}}</h1>
+            <span>by <span class="text-primary">{{product.brandName}}</span></span>
+        </div>
+        <div class="description">
+            <h3>Category</h3>
+            {{product.subCategoryName}}
+        </div>
+        <div class="description">
+            <h3 class="description">Best price from {{count}} online shops</h3>
+            <div class="price">
+                SAR <span>{{product.minPrice}}</span>
+                <div>
+                    <span class="pe-5 text-alert d-flex align-items-center">
+                        <i class="fa-regular fa-bell" (click)="addAlert(product.productId)"></i>
+                        <span class="alert-text h5 mb-0">Set Price Alert</span>
+                    </span>
                 </div>
             </div>
         </div>
 
-        <div class="col-12 col-md-9">
-            <div class="product-details">
-                <div class="product-info text-start px-3">
-                    <h1 class="productName">{{product.productName_Global}}</h1>
-                    <p class="text-shops">by <span class="text-primary brandname">{{product.brandName}}</span></p>
-                    <hr class="thick-hr">
-                    <div class="text-primary price">
-                        <p class="h6 bestPrice">
-                            <span class="fa-stack">
-                                <i class="pi pi-verified"></i>
-                            </span>
-                            Best price <span class="text-shops">from {{count}} online shops</span>
-                        </p>
-                        <span class="fw-bold">SAR {{product.minPrice}}</span>
-                        <div class="alert-container d-flex justify-content-start align-items-center">
-                            <span class="pe-5">
-                                <i class="fa-regular fa-bell" (click)="addAlert(product.productId)"></i>
-                                <span class="alert-text h5  pl-3">Set Price Alert</span>
-                            </span>
-                            <span class="px-5">
-                                <i class="fa-regular fa-heart" (click)="addToFav(product.productId)"></i>
-                                <span class="alert-text h5  pl-3">Add to Favourite</span>
-                            </span>
-                        </div>
-                    </div>
-                    <hr class="thick-hr">
-                </div>
+        <div class="description">
+            <h3>DESCRIPTION</h3>
+            {{product.productDescription_Global}}
+        </div>
+        <!-- <button class="buy--btn">ADD TO CART</button> -->
+    </div>
+    <div class="ads-md col-md-4 col-lg-3 col-12">
+        <div class="card">
+            <div class="d-flex justify-content-between">
+                <h5>Google Ads</h5>
             </div>
+            <div class="p-fluid">
+                <ins class="adsbygoogle" style="display: block" data-ad-client="ca-pub-3940256099942544"
+                    data-ad-slot="8320222746" data-ad-format="auto" data-full-width-responsive="true"></ins>
+                <img src="https://images.raidboxes.io/raidboxes.io/uploads/2021/01/Google-Kampagne-raidboxes.png"
+                    alt="Google Ads" class="p-1" style="
+                            width: 100%;
+                            height: 300px;
+                            display: block;
+                        " />
+            </div>
+        </div>
+    </div>
+</section>
+<!--end new design-->
 
-            <div class="row d-flex justify-content-between align-items-start LinkContainer col-8"
-                *ngFor="let link of product.links">
-                <div class="col-4">
-                    <h5>{{product.productName_Global}}</h5>
-                    <img [src]="link.domainLogo" width="150px">
-                </div>
+<div class="container-fluid  product-comparison">
+    <div class="row product-card" *ngFor="let link of product.links">
+        <div class="col-4 product-info">
+            <img [src]="link.domainLogo" class="shop-logo">
+            <div>
+                <h5 class="product-name">{{product.productName_Global}}</h5>
+                <p class="shop-name">{{link.domainName}}</p>
+            </div>
+        </div>
 
-
-                <div class="col-4 ms-0">
-                    <div class="text-primary">SAR
-                        <span class="fw-bold h3">{{link.price}}</span>
-                    </div>
-                    <a [href]="link.productLink" target="_blank" class="btn btn-success">Go to Shop</a>
-                    <span class="py-2 d-inline-block" style="min-width: 10rem;"><p-rating [ngModel]="link.rating"
-                            [readonly]="true" [cancel]="false"></p-rating></span>
-
-                </div>
-
+        <div class="col-4 price-info">
+            <div class="price">SAR {{link.price}}</div>
+            <a [href]="link.productLink" target="_blank" class="btn btn-success go-to-shop">Go to Shop</a>
+            <div class="mt-2">
+                <p-rating [ngModel]="link.rating" [readonly]="true" [cancel]="false"></p-rating>
             </div>
         </div>
     </div>

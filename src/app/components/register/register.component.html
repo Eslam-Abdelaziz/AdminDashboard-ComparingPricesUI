@@ -17,8 +17,8 @@
                             <input type="text" name="firstName" id="firstName" placeholder="First name"
                                 formControlName="firstName" />
                         </div>
-                        <div class="text-danger mt-4 fade-in"
-                            *ngIf="registerForm.get('firstName')?.errors && registerForm.get('firstName')?.touched">
+                        <div class="text-danger mt-2 fade-in"
+                            *ngIf="registerForm.get('firstName')?.errors && (registerForm.get('firstName')?.touched || formNotValid)">
                             <p *ngIf="registerForm.get('firstName')?.getError('required')">First name is required
                             </p>
                             <p *ngIf="registerForm.get('firstName')?.getError('maxLength')">Max length is 20</p>
@@ -31,8 +31,8 @@
                                     formControlName="lastName" class="form-control" type='text' />
                             </div>
                         </div>
-                        <div class="text-danger mt-4 fade-in"
-                            *ngIf="registerForm.get('lastName')?.errors && registerForm.get('lastName')?.touched">
+                        <div class="text-danger mt-2 fade-in"
+                            *ngIf="registerForm.get('lastName')?.errors && (registerForm.get('lastName')?.touched || formNotValid)">
                             <p *ngIf="registerForm.get('lastName')?.getError('required')">Last is required</p>
                             <p *ngIf="registerForm.get('lastName')?.getError('maxLength')">Max length is 20</p>
                         </div>
@@ -42,18 +42,17 @@
                             <input type="text" name="userName" id="userName" placeholder="User name"
                                 formControlName="userName" />
                         </div>
-                        <div class="text-danger mt-4 fade-in"
-                            *ngIf="registerForm.get('userName')?.errors && registerForm.get('userName')?.touched">
+                        <div class="text-danger mt-2 fade-in"
+                            *ngIf="registerForm.get('userName')?.errors && (registerForm.get('userName')?.touched || formNotValid)">
                             <p *ngIf="registerForm.get('userName')?.getError('required')">User name is required</p>
                             <p *ngIf="registerForm.get('userName')?.getError('userName')">User name is invalid</p>
                         </div>
                         <div class="form-group mt-4">
                             <label for="email" class="label-icon"><i class="fas fa-envelope"></i></label>
-                            <input type="text" name="email" id="email" placeholder="Email"
-                                formControlName="email" />
+                            <input type="text" name="email" id="email" placeholder="Email" formControlName="email" />
                         </div>
-                        <div class="text-danger mt-4 fade-in"
-                            *ngIf="registerForm.get('email')?.errors && registerForm.get('email')?.touched">
+                        <div class="text-danger mt-2 fade-in"
+                            *ngIf="registerForm.get('email')?.errors && (registerForm.get('email')?.touched || formNotValid)">
                             <p *ngIf="registerForm.get('email')?.getError('required')">Email is required</p>
                             <p *ngIf="registerForm.get('email')?.getError('email')">Email is invalid</p>
                         </div>
@@ -61,7 +60,9 @@
                         <div class="form-group mt-4">
                             <div class="input-group">
                                 <label for="password" class="label-icon"><i class="fas fa-lock"></i></label>
-                                <input type="password" name="password" id="password" placeholder="Password" formControlName="password" class="form-control" [type]="show ? 'text' : 'password'" />
+                                <input type="password" name="password" id="password" placeholder="Password"
+                                    formControlName="password" class="form-control"
+                                    [type]="show ? 'text' : 'password'" />
                                 <div class="input-group-append">
                                     <span class="input-group-text show-password-icon h-100" (click)="password()">
                                         <i class="fa fa-eye" [ngClass]="{'fa-eye-slash': show, 'fa-eye': !show}"></i>
@@ -69,20 +70,22 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="text-danger mt-4 fade-in" *ngIf="registerForm.get('password')?.errors && registerForm.get('password')?.touched">
+                        <div class="text-danger mt-2 fade-in"
+                            *ngIf="registerForm.get('password')?.errors && (registerForm.get('password')?.touched || formNotValid)">
                             <p *ngIf="registerForm.get('password')?.getError('required')">Password is required</p>
-                            <p *ngIf="registerForm.get('password')?.getError('pattern')">Password must be at least 12 characters
-                                long and include uppercase, lowercase, digit, and special character</p>
+                            <p *ngIf="registerForm.get('password')?.getError('pattern')">Password must be at least 8
+                                characters and have a capital letter at least</p>
                         </div>
 
                         <div class="form-group mt-4">
                             <label for="dateOfBirth" class="check">Date of birth</label>
                             <input type="date" name="dateOfBirth" id="dateOfBirth" placeholder="Date of birth"
-                                formControlName="dateOfBirth" class="px-0" [max]="minDate"/>
+                                formControlName="dateOfBirth" class="px-0" [max]="minDate" />
                         </div>
-                        <div class="text-danger mt-4 fade-in"
-                            *ngIf="registerForm.get('dateOfBirth')?.errors && registerForm.get('dateOfBirth')?.touched">
-                            <p *ngIf="registerForm.get('dateOfBirth')?.getError('required')">Date of birth is required</p>
+                        <div class="text-danger mt-2"
+                            *ngIf="registerForm.get('dateOfBirth')?.errors && (registerForm.get('dateOfBirth')?.touched || formNotValid)">
+                            <p *ngIf="registerForm.get('dateOfBirth')?.getError('required')">Date of birth is required
+                            </p>
                         </div>
 
                         <div class="mt-4 gender-selection">
@@ -91,57 +94,72 @@
                                 <div class="row">
                                     <div class="col">
                                         <div class="form-check">
-                                            <input formControlName="gender" type="radio" id="female" value="female" class="form-check-input">
+                                            <input formControlName="gender" type="radio" id="female" value="female"
+                                                class="form-check-input">
                                             <label for="female" class="form-check-label">Female</label>
                                         </div>
                                     </div>
                                     <div class="col">
                                         <div class="form-check">
-                                            <input formControlName="gender" type="radio" id="male" value="male" class="form-check-input">
+                                            <input formControlName="gender" type="radio" id="male" value="male"
+                                                class="form-check-input">
                                             <label for="male" class="form-check-label">Male</label>
                                         </div>
                                     </div>
-                                    <div class="col"></div>
                                 </div>
+                            </div>
+                            <div class="text-danger mt-0"
+                                *ngIf="registerForm.get('gender')?.errors && (registerForm.get('gender')?.touched || formNotValid)">
+                                <p *ngIf="registerForm.get('gender')?.getError('required')">Gender is required</p>
                             </div>
                         </div>
-                        
+
 
                         <div class="mt-4 country-selection">
-                            <div class="form-group">
+                            <div class="form-group" style="overflow: visible;">
                                 <label for="country" class="form-label check">Country</label>
                                 <div class="custom-select-wrapper">
-                                    <select #countries class="form-control custom-select" formControlName="country" (change)="onCountrySelected(countries.value)">
-                                        <option *ngFor="let item of Counteries" [value]="item.name">{{ item.name }}</option>
-                                    </select>
+                                    <p-dropdown #countries formControlName="country" [options]="Counteries" optionLabel="name" optionValue="name"
+                                        placeholder="Select a country" (onChange)="onCountrySelected(countries.value)"/>
+                                    <!-- <select #countries class="form-control custom-select" formControlName="country"
+                                        (change)="onCountrySelected(countries.value)">
+                                        <option *ngFor="let item of Counteries" [value]="item.name">{{ item.name }}
+                                        </option>
+                                    </select> -->
                                 </div>
                             </div>
-                            
-                            <div class="text-danger mt-1" *ngIf="registerForm.get('country')?.errors && registerForm.get('country')?.touched">
+
+                            <div class="text-danger mt-2"
+                                *ngIf="registerForm.get('country')?.errors && (registerForm.get('country')?.touched || formNotValid)">
                                 <p *ngIf="registerForm.get('country')?.getError('required')">Country is required</p>
                             </div>
                         </div>
-                        
+
 
                         <div class="mt-4">
-                                <div class="form-group">
-                                    <label class="form-label" for="phoneCode"><i class="fas fa-plus"></i></label>
-                                    <input type="tel" name="phoneCode" id="phoneCode" placeholder="Phone Code"
-                                    [value]="countryCode"/>
-                                </div>
+                            <div class="form-group">
+                                <label class="form-label" for="phoneCode"><i class="fas fa-plus"></i></label>
+                                <input type="tel" name="phoneCode" id="phoneCode" placeholder="Phone Code"
+                                    [value]="countryCode" />
                             </div>
+                            <div class="text-danger mt-2"
+                                *ngIf="registerForm.get('phoneCode')?.errors && (registerForm.get('phoneCode')?.touched || formNotValid)">
+                                <p *ngIf="registerForm.get('phoneCode')?.getError('required')">Phnoe code is required
+                                </p>
+                            </div>
+                        </div>
 
-                            <div class="mt-4">
-                                <div class="form-group">
-                                    <label for="phoneNumber" class="label-icon"><i class="fas fa-phone"></i></label>
-                                    <input type="tel" name="phoneNumber" id="phoneNumber" placeholder="Phone number"
-                                        formControlName="phoneNumber" [max]="minDate"/>
-                                </div>
-                                <div class="text-danger mt-4 fade-in"
-                                    *ngIf="registerForm.get('phoneNumber')?.errors && registerForm.get('phoneNumber')?.touched">
-                                    <p *ngIf="registerForm.get('phoneNumber')?.getError('pattern')">Must be an Egyptian number</p>                                
-                                </div>
+                        <div class="mt-4">
+                            <div class="form-group">
+                                <label for="phoneNumber" class="label-icon"><i class="fas fa-phone"></i></label>
+                                <input type="tel" name="phoneNumber" id="phoneNumber" placeholder="Phone number"
+                                    formControlName="phoneNumber" [max]="minDate" />
                             </div>
+                            <div class="text-danger mt-2"
+                                *ngIf="registerForm.get('phoneNumber')?.errors && (registerForm.get('phoneNumber')?.touched || formNotValid)">
+                                <p *ngIf="registerForm.get('phoneNumber')?.getError('required')">Number is required</p>
+                            </div>
+                        </div>
 
                         <div class="form-group form-button">
                             <input type="submit" name="signup" id="signup" class="form-submit" value="Sign up" />
@@ -152,7 +170,8 @@
                 </div>
                 <div class="signup-image">
                     <figure><img src="../../../assets/layout/images/Capture.JPG" alt="Scales image"></figure>
-                    <span class="signup-image-link">Already have an account? <a routerLink="/login" class="text-primary">Login</a></span>
+                    <span class="signup-image-link">Already have an account? <a routerLink="/login"
+                            class="text-primary">Login</a></span>
                 </div>
             </div>
         </div>

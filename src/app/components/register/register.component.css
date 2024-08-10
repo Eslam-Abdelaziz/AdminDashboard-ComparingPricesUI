@@ -717,71 +717,13 @@ label.valid {
   transform: translateY(-50%) scale(1);
 }
 
-/*select*/
-.country-selection {
-  padding: 20px;
-  background: #f8f9fa;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  font-family: 'Arial', sans-serif;
-}
-
-.country-selection .form-label {
-  font-size: 1.2rem;
-  font-weight: bold;
-  color: #333;
-  margin-bottom: 10px;
-  display: block;
-}
-
-.custom-select-wrapper {
-  position: relative;
-  display: inline-block;
+/*select dropdown*/
+::ng-deep .p-dropdown {
   width: 100%;
 }
 
-.country-selection .form-control.custom-select {
-  appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  width: 100%;
-  padding: 10px;
-  font-size: 1rem;
-  color: #555;
-  background-color: #fff;
-  border: 1px solid #ced4da;
-  border-radius: 4px;
-  transition: border-color 0.3s, box-shadow 0.3s;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-  background-image: url('data:image/svg+xml;base64,PHN2ZyBmaWxsPSIjNzk3OTc5IiBoZWlnaHQ9IjM0IiB2aWV3Qm94PSIwIDAgMjQgMjQiIHdpZHRoPSIzNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNMTIgMTcuNTlMMi4xMiA3LjY5Yy0uNDItLjQyLS40Mi0xLjEuMDItMS41MmEuOTg2Ljk4NiAwIDAgMSAxLjI5LS4wM2wuMDMuMDNsOS41OSA5LjU5IDkuNTktOS41OWEuOTg2Ljk4NiAwIDAgMSAxLjI5LS4wMy4xLjEuMTAgMCAwIDEgLjAzIDEuNDFMMTIsMTcuNTl6Ij48L3BhdGg+PC9zdmc+');
-  background-repeat: no-repeat;
-  background-position: right 10px center;
-  background-size: 20px;
+::ng-deep .p-component {
+  width: 100% !important; /* Forces the dropdown list to match the width of the select field */
 }
 
-.country-selection .form-control.custom-select:focus {
-  border-color: #007bff;
-  box-shadow: 0 0 5px rgba(0, 123, 255, 0.25);
-  outline: none;
-}
-
-.country-selection .form-control.custom-select option {
-  background: #fff;
-  color: #333;
-  padding: 10px;
-}
-
-.country-selection .alert {
-  padding: 10px;
-  margin-top: 10px;
-  border-radius: 4px;
-  color: #fff !important;
-  background-color: #dc3545;
-  border: none;
-  font-size: 0.9rem;
-}
-
-.country-selection .alert p {
-  margin: 0;
-}
 
