@@ -44,6 +44,7 @@ export class LoginComponent implements AfterViewInit {
     }
 
     handleForm() {
+        debugger
         if (this.loginForm.valid) {
             this.authService.Login(this.loginForm.value).subscribe({
                 next: (response: any) => {

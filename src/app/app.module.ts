@@ -19,7 +19,8 @@ import {
     LocationStrategy,
     PathLocationStrategy,
 } from '@angular/common';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
+import { MyHttpInterceptor } from './Intercetor/my-http.interceptor';
 
 function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http);
@@ -44,6 +45,11 @@ function HttpLoaderFactory(http: HttpClient) {
     ],
     providers: [
         { provide: LocationStrategy, useClass: HashLocationStrategy },
+          {
+            provide: HTTP_INTERCEPTORS,
+            useClass: MyHttpInterceptor,
+            multi: true, // This is important to allow multiple interceptors
+          }
         // CountryService, CustomerService, EventService, IconService, NodeService,
         // PhotoService, ProductService
     ],
