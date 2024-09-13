@@ -9,7 +9,7 @@ import { environment } from 'src/environments/environment';
     providedIn: 'root'
 })
 export class MostPopularService {
-    apiUrl : string = environment.api + '/CombinedProduct/MostPopular';
+    apiUrl : string = environment.api + '/CombinedProduct/MOstPopular';
 
     constructor(private http: HttpClient) {}
 

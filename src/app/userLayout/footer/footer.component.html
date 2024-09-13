@@ -42,8 +42,8 @@
                     </div>
                     <div class="col-6">
                         <div class="footer__nav">
-                            <a asp-controller="Cars" asp-action="index">{{"Footer.EG"| translate}}</a>
-                            <a asp-controller="Cars" asp-action="index">{{"Footer.SA"| translate}}</a>
+                            <a asp-controller="Cars" (click)="changeTenant('1')" asp-action="index">{{"Footer.EG"| translate}}</a>
+                            <a asp-controller="Cars" (click)="changeTenant('2')" asp-action="index">{{"Footer.SA"| translate}}</a>
                         </div>
                     </div>
 

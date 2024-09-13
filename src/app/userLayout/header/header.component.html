@@ -103,15 +103,22 @@
                             </ul>
                         </div>
                         <!-- language -->
-                        <button class="btn mx-3 btn-outline-primary p-2" (click)="switchLanguage()"> {{ currentLang == "en"
+                        <button class="btn mx-3 btn-outline-primary p-2" (click)="switchLanguage()"> {{ currentLang ==
+                            "en"
                             ? "عربي" : "EN" }}</button>
                         <!-- country -->
                         <div class="header__action mx-0">
                             <div class="header__lang">
                                 <a class="header__lang-btn" href="#" role="button" data-bs-toggle="dropdown"
                                     aria-expanded="false">
+                                    @if(tenant == "1"){
                                     <img src="../../../assets/flags/EG.svg" alt="" />
                                     <span>EG</span>
+
+                                    } @else {
+                                    <img src="../../../assets/flags/SA.svg" alt="" />
+                                    <span>SA</span>
+                                    }
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                                         <path
                                             d="M17,9.17a1,1,0,0,0-1.41,0L12,12.71,8.46,9.17a1,1,0,0,0-1.41,0,1,1,0,0,0,0,1.42l4.24,4.24a1,1,0,0,0,1.42,0L17,10.59A1,1,0,0,0,17,9.17Z">
@@ -120,7 +127,15 @@
                                 </a>
                                 <ul class="dropdown-menu header__lang-dropdown">
                                     <li>
-                                        <a href="#"><img src="../../../assets/flags/SA.svg" alt="" /><span>SA</span></a>
+                                        @if (tenant == "1") {
+                                        <a (click)="changeTenant('2')"><img src="../../../assets/flags/SA.svg"
+                                                alt="" /><span>SA</span></a>
+                                        } @else {
+                                        <a (click)="changeTenant('1')">
+                                            <img src="../../../assets/flags/EG.svg" alt="" />
+                                            <span>EG</span>
+                                        </a>
+                                        }
                                     </li>
                                 </ul>
                             </div>
@@ -137,7 +152,7 @@
             </div>
         </div>
 
-        <!-- <div class="row justify-content-center">
+        <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="header__menu">
                     <ul class="header__nav">
@@ -165,6 +180,6 @@
                     </ul>
                 </div>
             </div>
-        </div> -->
+        </div>
     </div>
 </header>

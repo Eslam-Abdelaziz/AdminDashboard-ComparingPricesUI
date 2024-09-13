@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 export class MyHttpInterceptor implements HttpInterceptor {
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         let token = localStorage.getItem("UserToken");
-        let tenantId = '1'; // Replace this with the actual tenant logic
+        let tenantId = localStorage.getItem("Tenant");
 
         let clonedRequest = req;
 
